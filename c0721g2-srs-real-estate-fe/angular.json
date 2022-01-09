@@ -121,6 +121,10 @@
               "devServerTarget": "srs-real-estate:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
