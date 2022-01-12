@@ -11,6 +11,7 @@ export interface RealEstateNew {
   kindOfNew: string;
   price: number;
   title: string;
+  status: string;
   customer: Customer;
   direction: Direction;
   realEstateType: RealEstateType;
