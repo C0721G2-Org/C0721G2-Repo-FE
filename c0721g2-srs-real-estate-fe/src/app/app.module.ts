@@ -21,6 +21,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireFunctionsModule} from '@angular/fire/functions';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ShareModule} from "./component/share/share.module";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
     AngularFireStorageModule,
     AngularFireMessagingModule,
     AngularFireDatabaseModule,
-    AngularFireFunctionsModule
+    AngularFireFunctionsModule,
+    ShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]
