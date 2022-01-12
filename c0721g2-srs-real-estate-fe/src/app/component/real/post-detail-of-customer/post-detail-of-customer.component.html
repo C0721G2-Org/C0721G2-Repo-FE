@@ -1,1 +1,656 @@
-<p>post-detail-of-customer works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bất động sản</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">
+  <style>
+    * {
+      font-family: Arial;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+      margin-top: 0;
+    / / remove the gap so it doesn 't close
+    }
+
+    .trans-nav:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 0;
+      background: black;
+    }
+
+    .trans-nav:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: red;
+      transition: all 0.3s ease 0s;
+      -webkit-transition: all 0.3s ease 0s;
+    }
+
+    .trans-nav:hover {
+      color: red;
+    }
+
+    .trans-nav:hover:after {
+      width: 100%;
+    }
+
+    .main-bg {
+      background-color: #ffcc33
+    }
+
+    .main-color {
+      color: #ffcc33
+    }
+
+    .dropdown-menu {
+      margin-right: -800px;
+    }
+
+    .dropdown-menu li {
+      display: inline-block;
+    }
+
+    .btn-post-custom {
+      background-color: #FE9900;
+    }
+
+    .btn.btn-post-custom:hover {
+      background-color: green;
+    }
+
+    /* Float */
+    .hvr-float {
+      display: inline-block;
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+
+    .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+      -webkit-transform: translateY(-8px);
+      transform: translateY(-8px);
+      background-color: #ffcc33;
+      color: white;
+    }
+
+    /* Sweep To Right */
+    .hvr-sweep-to-right {
+      /*display: inline-block;*/
+      vertical-align: middle;
+      -webkit-transform: perspective(1px) translateZ(0);
+      transform: perspective(1px) translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      position: relative;
+      -webkit-transition-property: color;
+      transition-property: color;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+    }
+
+    .hvr-sweep-to-right:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: gray;
+      -webkit-transform: scaleX(0);
+      transform: scaleX(0);
+      -webkit-transform-origin: 0 50%;
+      transform-origin: 0 50%;
+      -webkit-transition-property: transform;
+      transition-property: transform;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-out;
+      transition-timing-function: ease-out;
+    }
+
+    .hvr-sweep-to-right:hover, .hvr-sweep-to-right:focus, .hvr-sweep-to-right:active {
+      color: white;
+    }
+
+    .hvr-sweep-to-right:hover:before, .hvr-sweep-to-right:focus:before, .hvr-sweep-to-right:active:before {
+      -webkit-transform: scaleX(1);
+      transform: scaleX(1);
+    }
+
+    .pleft0 {
+      padding-left: 0;
+    }
+
+    /*openSideBar*/
+    /*closeSideBar*/
+    .Main-agile {
+      background: url(img/b1.jpg) no-repeat 0px 0px;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      -moz-background-size: cover;
+      min-height: 794px;
+    }
+
+    .pull-left {
+      float: left !important;
+    }
+
+    .pull-right {
+      float: right !important
+    }
+
+    .overflow {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .content2line {
+      height: 47px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /*.card:hover {*/
+    /*    cursor: pointer;*/
+    /*    transform: scale(1.05);*/
+    /*    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);*/
+    /*}*/
+
+    .slide {
+      display: block;
+      vertical-align: middle;
+      position: relative;
+
+    }
+
+    .carousel-caption-center {
+      position: absolute;
+      right: 15%;
+      top: 30%;
+      left: 15%;
+      text-align: center
+    }
+
+    .slider-content {
+      position: absolute;
+      top: 20%;
+      text-align: center;
+      color: #FFF;
+      width: 100%;
+    }
+
+    /*Modal*/
+    .modal-dialog {
+
+      width: 480px;
+
+    }
+
+    .modal-header {
+
+
+      background-color: #337AB7;
+
+      padding: 16px 16px;
+
+      color: #FFF;
+
+      border-bottom: 2px dashed #337AB7;
+
+    }
+  </style>
+
+</head>
+<body class="mat-typography">
+<nav class="navbar navbar-expand-lg navbar-light fs-6 pb-3 pt-3 main-bg sbt">
+  <div class="container-fluid">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " href="asset/img/Untitled-2.png">
+      <img class="navbar-brand" width="90%" src="asset/img/final1.png" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown ">
+          <a class="navbar-brand trans-nav fw-bold" href="#" id="saleList" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Nhà đất bán
+          </a>
+          <ul class="dropdown-menu main-bg border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán nhà </a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán đất nền dự án</a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán loại bất động sản khác</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown fw-bold">
+          <a class="navbar-brand trans-nav" href="#" id="buyList" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Nhà đất cho thuê
+          </a>
+          <ul class="dropdown-menu main-bg border-0 pb-0 " aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê nhà</a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê đất nền</a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê loại bất động sản khác</a></li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown fw-bold">
+          <a class="navbar-brand trans-nav" href="#" id="order" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false">
+            Cần mua - Cần thuê
+          </a>
+          <ul class="dropdown-menu main-bg border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Nhà đất cần mua</a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" href="#">Nhà đất cần thuê</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="d-flex navbar-nav  mb-2 mb-lg-0 fw-bold">
+        <li class="nav-item d-flex ">
+          <a class="navbar-brand hvr-float" href="#">Đăng nhập</a>
+        </li>
+        <li class="nav-item d-flex fw-bold">
+          <a class="navbar-brand hvr-float " href="#">Đăng ký</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <button class=" navbar-brand btn btn-success text-white" type="submit">Đăng tin</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!-- End of nav bar -->
+
+<main class="container-fluid mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-9">
+      <div class="row justify-content-center">
+        <section class="col-md-9">
+          <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+                <img src="https://afamilycdn.com/150157425591193600/2020/12/30/img8364-1609294761580567149569.jpg"
+                     height="450px" class="d-block w-100" alt="...">
+                <div class="carousel-caption">
+                  <!--                                    <p>Some representative placeholder content for the first slide.</p>-->
+                </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <img src="https://afamilycdn.com/150157425591193600/2020/12/30/img8365-1609294761552846128591.jpg"
+                     height="450px" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://afamilycdn.com/150157425591193600/2020/12/30/img8367-16092947615111574432457.jpg"
+                     height="450px" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="https://afamilycdn.com/150157425591193600/2020/12/30/img8368-16092947614111605414365.jpg"
+                     height="450px" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"
+                    data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <div class="mt-3">
+            <!--                        Title field-->
+            <h5 class="fw-bolder text-danger">
+              {{realEstate.title}}
+            </h5>
+
+            <!--                        Address field-->
+            <p>Địa chỉ: {{realEstate.address}}</p>
+
+          </div>
+          <div class="row ms-2">
+            <div class="col-md-6">
+              <table>
+                <tr>
+                  <!--                        Price field-->
+                  <td style="width: 15rem">Mức Giá</td>
+                  <!--                        Area field-->
+                  <td style="width: 15rem">Diện tích</td>
+                  <!--                                    CHỉ hiển thị khi có Number of bedroom field-->
+                  <td style="width: 15rem">Hướng</td>
+                </tr>
+                <tr>
+                  <td class="fw-bolder">{{realEstate.address}}</td>
+                  <td class="fw-bolder">{{realEstate.area}}</td>
+                  <td class="fw-bolder">{{realEstate.direction}}</td>
+                </tr>
+              </table>
+            </div>
+            <div class=" col-md-3  mt-auto fs-6 float-end">
+              <a class=" btn btn-outline text-success" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green"
+                     class="bi bi-share" viewBox="0 0 16 16">
+                  <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                </svg>
+                Chia sẻ
+              </a>
+            </div>
+            <div class=" col-md-3 mt-auto fs-6 float-end">
+              <a class="btn btn-outline text-success btn-hover mt-auto" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green"
+                     class="bi bi-suit-heart" viewBox="0 0 16 16">
+                  <path d="m8 6.236-.894-1.789c-.222-.443-.607-1.08-1.152-1.595C5.418 2.345 4.776 2 4 2 2.324 2 1 3.326 1 4.92c0 1.211.554 2.066 1.868 3.37.337.334.721.695 1.146 1.093C5.122 10.423 6.5 11.717 8 13.447c1.5-1.73 2.878-3.024 3.986-4.064.425-.398.81-.76 1.146-1.093C14.446 6.986 15 6.131 15 4.92 15 3.326 13.676 2 12 2c-.777 0-1.418.345-1.954.852-.545.515-.93 1.152-1.152 1.595L8 6.236zm.392 8.292a.513.513 0 0 1-.784 0c-1.601-1.902-3.05-3.262-4.243-4.381C1.3 8.208 0 6.989 0 4.92 0 2.755 1.79 1 4 1c1.6 0 2.719 1.05 3.404 2.008.26.365.458.716.596.992a7.55 7.55 0 0 1 .596-.992C9.281 2.049 10.4 1 12 1c2.21 0 4 1.755 4 3.92 0 2.069-1.3 3.288-3.365 5.227-1.193 1.12-2.642 2.48-4.243 4.38z"/>
+                </svg>
+                Lưu tin
+              </a>
+            </div>
+          </div>
+          <div class="mt-3">
+            <h5 class="fw-bolder">Thông tin mô tả</h5>
+            <p class="mt-3 mb-3" align="justify">
+              {{realEstate.description}}
+            </p>
+
+          </div>
+          <div>
+            <h5 class="fw-bolder">Đặc điểm bất động sản</h5>
+
+          </div>
+          <div class="mt-3">
+            <table class="table table-default border">
+              <tr>
+                <th style="width: 15rem">Loại tin đăng</th>
+                <td>{{realEstate.kindOfNews}}</td>
+              </tr>
+              <tr>
+                <th>Địa chỉ</th>
+                <td>{{realEstate.address}}</td>
+              </tr>
+              <tr>
+                <th>Giá tiền</th>
+                <td>{{realEstate.price}}</td>
+              </tr>
+              <tr>
+                <th>Hướng</th>
+                <td>{{realEstate.direction}}</td>
+              </tr>
+              <tr>
+                <th>Diện tích</th>
+                <td>{{realEstate.area}}</td>
+              </tr>
+              <tr>
+                <th>Tình trạng</th>
+                <td>{{realEstate.status}}</td>
+              </tr>
+            </table>
+
+          </div>
+        </section>
+        <aside class="col-md-3">
+          <div class="card" style="width: 15rem;">
+            <div class="text-center mt-4">
+              <img class="rounded-circle" width="60" height="60"
+                   src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                   data-holder-rendered="true">
+            </div>
+
+            <div class="card-body text-center">
+              <h5 class="card-title">{{realEstate.customer.name}}</h5>
+              <p class=" ms-2 mb-3 text-center">
+                Số bài đăng<span class="badge text-dark">4</span>
+              </p>
+            </div>
+            <button class="btn btn-success btn-lg ms-3 me-3 mb-4">{{realEstate.customer.phone}} | pipe  Hiện số</button>
+            <!--                        <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"> Email</button>-->
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Email
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header bg-success text-light">
+                    <h5 class="modal-title" id="exampleModalLabel">Nhập thông tin liên hệ của
+                      bạn </h5>
+                  </div>
+                  <div class="modal-body">
+                    <form class="">
+                      <div class="row mb-3">
+                        <label for="inputEmail3" class="col-md-3 col-form-label">Họ và tên</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" id="inputEmail3">
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="inputPassword3"
+                               class="col-md-3 col-form-label">Số điện thoại</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" id="inputPassword3">
+                        </div>
+                      </div>
+                      <!--                                            <input class="form-control  me-2" type="search">-->
+                      <!--                                            <input class="form-control  me-2" type="password">-->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                          Close
+                        </button>
+                        <button type="button" class="btn btn-warning">Gửi</button>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"> Yêu cầu liên hệ lại</button>
+          </div>
+          <div class="card mt-4 bg-light" style="width: 15rem;">
+            <p class="text-center fw-bolder mt-3">Bất động sản nổi bật</p>
+            <ul class="text-decoration-none list-unstyled ms-3">
+              <li><a class="text-decoration-none text-dark" href="#">Nam Hội An</a></li>
+              <li><a class="text-decoration-none text-dark">Nam Hòa Xuân</a></li>
+              <li><a class="text-decoration-none text-dark">Hòa Minh Liên Chiểu</a></li>
+              <li><a class="text-decoration-none text-dark">Coco bay land</a></li>
+              <li><a class="text-decoration-none text-dark">Nam Việt A</a></li>
+              <li><a class="text-decoration-none text-dark">Ngũ Hành Sơn </a></li>
+              <li><a class="text-decoration-none text-dark">Khu nghĩ dưỡng Mỹ Khê</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Golden Land</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Phước Lý</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Phước Lý</a></li>
+              <li><a class="text-decoration-none text-dark">Khu nghĩ dưỡng Mỹ Khê</a></li>
+              <li><a class="text-decoration-none text-dark">Hòa Minh Liên Chiểu</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Golden Land</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Phước Lý</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Phước Lý</a></li>
+              <li><a class="text-decoration-none text-dark">Khu nghĩ dưỡng Mỹ Khê</a></li>
+              <li><a class="text-decoration-none text-dark">Hòa Minh Liên Chiểu</a></li>
+              <li><a class="text-decoration-none text-dark">Khu nghĩ dưỡng Mỹ Khê</a></li>
+              <li><a class="text-decoration-none text-dark">Khu đô thị Golden Land</a></li>
+            </ul>
+          </div>
+          <div class="card mt-4 bg-light" style="width: 15rem;">
+            <p class="text-center fw-bolder mt-3">Hõ trợ tiện ích</p>
+            <ul class="text-decoration-none list-unstyled ms-3">
+              <li><a class="text-decoration-none text-dark" href="#">Tư vấn phong thủy</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Dự tính chi phí làm nhà</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Tính lãi suất</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Xem tuổi làm nhà</a></li>
+              <li><a class="text-decoration-none text-dark" href="#">Quy trình xây nhà</a></li>
+            </ul>
+          </div>
+          <div class="card mt-4 bg-light" style="width: 15rem;">
+            <p class="text-center fw-bolder mt-3">Nhà môi giới khu vực</p>
+            <div class="text-center m-auto">
+              <img class="rounded-circle" width="60" height="60"
+                   src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
+                   data-holder-rendered="true">
+              <p>Bảo Ngọc - 0986868686</p>
+            </div>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+
+  </div>
+</main>
+<!--<footer>-->
+<div class="container-fluid main-bg">
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mr-auto my-md-4 my-0 mt-4 mb-1" align="justify">
+        <a href="#"><img
+          width="30%"
+          src="asset/img/final1.png">
+        </a>
+        <br>
+        <!-- Content -->
+        <div>
+          <span class="font-weight-bold">Trụ sở chính: </span>
+          <span>Số 23, Lô TT01, KĐT Mon City, Mỹ Đình 2, Nam Từ Liêm, Hà Nội.</span>
+        </div>
+        <div>
+          <span class="font-weight-bold">Đà Nẵng: </span>
+          <span>Tầng 10, 295 Nguyễn Tất Thành, Phường Thanh Bình, Quận Hải Châu, TP Đà Nẵng.</span>
+        </div>
+        <div>
+          <span class="font-weight-bold">Quảng Trị: </span>
+          <span>133 Lý Thường Kiệt, TP Đông Hà, Tỉnh Quảng Trị.</span>
+        </div>
+        <div>
+          <span class="font-weight-bold">Văn phòng tuyển sinh Việt Trì: </span>
+          <span>Băng 1, Đường Quang Trung, P. Dữu Lâu, TP Việt Trì, Phú Thọ.</span>
+        </div>
+        <div>
+          <span class="font-weight-bold">Văn phòng tuyển sinh Thái Nguyên: </span>
+          <span>36A Cách Mạng Tháng Tám, Phường Phan Đình Phùng.</span>
+        </div>
+        <div>
+          <span class="font-weight-bold">Văn phòng tuyển sinh Vinh: </span>
+          <span>50 Hà Huy Tập, TP Vinh, Tỉnh Nghệ An.</span>
+        </div>
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1" align="justify">
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mb-4">VỀ CHÚNG TÔI</h5>
+
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-decoration-underline">Giới thiệu</a>
+          </li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0  text-decoration-underline">Tuyển dụng</a>
+          </li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-decoration-underline">Truyền
+            thông</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-decoration-underline ">Blog</a></li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1" align="justify">
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mb-4">Liên hệ</h5>
+
+        <ul class="nav flex-column">
+
+          <li>
+            <p>
+              <i class="fas fa-envelope "></i> info@example.com</p>
+          </li>
+          <li>
+            <p>
+              <i class="fas fa-phone "></i> + 01 234 567 88</p>
+          </li>
+          <li>
+            <p>
+              <i class="fas fa-print "></i> + 01 234 567 89</p>
+          </li>
+        </ul>
+        <!-- Facebook -->
+        <a type="button" class="btn-floating btn-fb">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <!-- Twitter -->
+        <a type="button" class="btn-floating btn-tw">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <!-- Google +-->
+        <a type="button" class="btn-floating btn-gplus">
+          <i class="fab fa-google-plus-g"></i>
+        </a>
+        <!-- Dribbble -->
+        <a type="button" class="btn-floating btn-dribbble">
+          <i class="fab fa-dribbble"></i>
+        </a>
+      </div>
+    </div>
+    <!-- Grid row -->
+  </div>
+
+  <div class="text-center align-content-center py-4 my-4 border-dark border-top">
+    <div class="nav-item fs-6">Tập đoàn Hưng Thịnh, Tầng 10, 295 Nguyễn Tất Thành, Phường Thanh Bình, Quận Hải Châu,
+      TP Đà Nẵng.
+    </div>
+    <div class="nav-item fs-6">Giấy chứng nhận đăng ký doanh nghiệp số 0312120782 do Sở Kế Hoạch và Đầu Tư
+      TPHCM
+      cấp
+      ngày 11/01/2013
+    </div>
+  </div>
+</div>
+<!--</footer>-->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
