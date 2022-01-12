@@ -22,7 +22,8 @@ import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFireFunctionsModule} from '@angular/fire/functions';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {ShareModule} from './component/share/share.module';
-
+import {RealListComponent} from "./component/real/real-list/real-list.component";
+import {APP_BASE_HREF} from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +34,8 @@ import {ShareModule} from './component/share/share.module';
     EmployeeListComponent,
     EmployeeCreateComponent,
     EmployeeDeleteComponent,
-    EmployeeEditComponent
+    EmployeeEditComponent,
+    RealListComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import {ShareModule} from './component/share/share.module';
     AngularFireFunctionsModule,
     ShareModule
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
