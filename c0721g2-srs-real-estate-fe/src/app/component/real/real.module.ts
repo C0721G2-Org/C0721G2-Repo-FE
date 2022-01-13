@@ -10,21 +10,26 @@ import {DetailPostApprovalComponent} from './detail-post-approval/detail-post-ap
 import {DeletePostApprovalComponent} from './delete-post-approval/delete-post-approval.component';
 import {ListPostApprovalComponent} from './list-post-approval/list-post-approval.component';
 import {RealCreateComponent} from './real-create/real-create.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
-  declarations: [RealListComponent,
-    RealDeleteComponent,
-    RealDetailComponent,
-    HistoryPostComponent,
-    DetailPostApprovalComponent,
-    DeletePostApprovalComponent,
-    ListPostApprovalComponent,
-    RealCreateComponent],
-  imports: [
-    CommonModule,
-    RealRoutingModule
-  ]
+    declarations: [RealListComponent,
+        RealDeleteComponent,
+        RealDetailComponent,
+        HistoryPostComponent,
+        DetailPostApprovalComponent,
+        DeletePostApprovalComponent,
+        ListPostApprovalComponent,
+        RealCreateComponent],
+    exports: [
+        RealCreateComponent
+    ],
+    imports: [
+        CommonModule,
+        RealRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class RealModule {
 }
