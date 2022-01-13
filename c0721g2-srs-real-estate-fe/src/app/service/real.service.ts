@@ -12,6 +12,7 @@ export class RealService {
   private API_URL_EMAIL = ' http://localhost:8080/api/real-estate-new/email';
   private API_URL_LIST = 'http://localhost:8080/list-real-estate-new/search';
   private API_URL_REAL_ESTATE_TYPE = 'http://localhost:8080/dealEstateType';
+  private API_URL_DIRECTION = 'http://localhost:8080/direction';
 
   constructor(private httpClient: HttpClient) {
   }
@@ -29,12 +30,25 @@ export class RealService {
     return this.httpClient.get(this.API_URL_LIST);
   }
 
-  getAllRealEstatesByAdress(address: string): Observable<any> {
-    return this.httpClient.get(this.API_URL_LIST + '?address=' + address);
+  getAllRealEstatesByAdress(address: string, realEstateType: any, direction: any): Observable<any> {
+    return this.httpClient.get(this.API_URL_LIST +
+      '?address=' + address +
+      '&realEstateType=' + realEstateType +
+      '&direction=' + direction +
+      '&minPrice=' + '1300000000' +
+      '&maxPrice=' + '13000900000');
   }
 
-  getAllRealEstateTypes(): Observable<any>{
+  // getAllRealEstatesByAdress(address: string): Observable<any> {
+  //   return this.httpClient.get(this.API_URL_LIST + '?address=' + address);
+  // }
+
+  getAllRealEstateTypes(): Observable<any> {
     return this.httpClient.get(this.API_URL_REAL_ESTATE_TYPE);
+  }
+
+  getAllDirections(): Observable<any> {
+    return this.httpClient.get(this.API_URL_DIRECTION);
   }
 
 }
