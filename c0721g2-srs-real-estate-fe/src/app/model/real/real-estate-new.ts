@@ -16,6 +16,6 @@ export interface RealEstateNew {
   customer: Customer;
   direction: Direction;
   realEstateType: RealEstateType;
-  listImage: Image;
+  imageList: Image[];
 
 }

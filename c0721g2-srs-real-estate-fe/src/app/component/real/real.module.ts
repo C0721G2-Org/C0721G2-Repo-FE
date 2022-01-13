@@ -10,6 +10,7 @@ import {DetailPostApprovalComponent} from './detail-post-approval/detail-post-ap
 import {DeletePostApprovalComponent} from './delete-post-approval/delete-post-approval.component';
 import {ListPostApprovalComponent} from './list-post-approval/list-post-approval.component';
 import {RealCreateComponent} from './real-create/real-create.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {RealCreateComponent} from './real-create/real-create.component';
     RealCreateComponent],
   imports: [
     CommonModule,
-    RealRoutingModule
+    RealRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class RealModule {
