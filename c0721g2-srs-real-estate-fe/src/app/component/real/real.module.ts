@@ -13,18 +13,21 @@ import {RealCreateComponent} from './real-create/real-create.component';
 
 
 @NgModule({
-  declarations: [RealListComponent,
-    RealDeleteComponent,
-    RealDetailComponent,
-    HistoryPostComponent,
-    DetailPostApprovalComponent,
-    DeletePostApprovalComponent,
-    ListPostApprovalComponent,
-    RealCreateComponent],
-  imports: [
-    CommonModule,
-    RealRoutingModule
-  ]
+    declarations: [RealListComponent,
+        RealDeleteComponent,
+        RealDetailComponent,
+        HistoryPostComponent,
+        DetailPostApprovalComponent,
+        DeletePostApprovalComponent,
+        ListPostApprovalComponent,
+        RealCreateComponent],
+    exports: [
+        RealCreateComponent
+    ],
+    imports: [
+        CommonModule,
+        RealRoutingModule
+    ]
 })
 export class RealModule {
 }
