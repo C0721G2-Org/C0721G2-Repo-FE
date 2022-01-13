@@ -4,6 +4,7 @@ import {Customer} from '../model/customer/customer';
 import {HttpClient} from '@angular/common/http';
 
 const API = 'http://localhost:8080/customerInformation/';
+const API2 = 'http://localhost:8080/account/';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ const API = 'http://localhost:8080/customerInformation/';
 
 export class CustomerService {
 
-  private APIServeUrl = '';
+
 
   constructor(private http: HttpClient) {
   }
@@ -24,8 +25,8 @@ export class CustomerService {
     return this.http.patch<Customer>(API + `update/` + id, customer);
   }
 
-  edit(customer: Customer, id: string ): Observable<Customer> {
-    return this.http.patch<Customer>(`${this.APIServeUrl}/customerInformation/update` + '/' + id, customer);
-  }
+  // edit(customer: Customer, id: string ): Observable<Customer> {
+  //   return this.http.patch<Customer>(`${this.APIServeUrl}/customerInformation/update` + '/' + id, customer);
+  // }
 
 }

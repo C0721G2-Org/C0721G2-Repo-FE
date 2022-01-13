@@ -25,7 +25,7 @@ export class CustomerEditComponent implements OnInit {
   ngOnInit(): void {
     this.initFormEdit();
     this.activatedRoute.queryParams.subscribe(params => {
-      this.id = params['id'];
+      this.id = params[ ' id ' ];
     });
     console.log(this.id);
     // this.id = this.activatedRoute.snapshot.params.id;

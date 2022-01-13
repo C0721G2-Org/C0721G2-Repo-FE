@@ -8,6 +8,7 @@ import {CustomerDetailComponent} from './customer-detail/customer-detail.compone
 import {CustomerDeleteComponent} from './customer-delete/customer-delete.component';
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { UpdatePasswordComponent } from './update-password/update-password.component';
 
 @NgModule({
   declarations: [CustomerEditComponent,
@@ -15,6 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     CustomerDetailComponent,
     CustomerDeleteComponent,
     CustomerCreateComponent,
+    UpdatePasswordComponent,
   ],
     imports: [
         CommonModule,
