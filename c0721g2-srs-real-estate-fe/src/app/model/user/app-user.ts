@@ -1,4 +1,4 @@
-export interface UserRole {
+export interface AppUser {
   id: number;
   isEnabled: number;
   password: string;

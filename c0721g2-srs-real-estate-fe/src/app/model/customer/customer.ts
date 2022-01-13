@@ -1,4 +1,4 @@
-import {AppUser} from '../security/app-user';
+import {AppUser} from '../user/app-user';
 import {Image} from '../image/image';
 
 export interface Customer {
