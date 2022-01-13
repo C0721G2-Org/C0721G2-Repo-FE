@@ -12,8 +12,9 @@ export interface Employee {
   dateOfBirth: string;
   idCard: string;
   gender: number;
-  degree: Degree;
-  position: Positions;
+  degreeDTO: Degree;
+  positionDTO: Positions;
+  roleDTO: number;
   appUser: AppUser;
   image: Image;
 }

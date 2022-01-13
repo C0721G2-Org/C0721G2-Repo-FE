@@ -6,6 +6,7 @@ import {EmployeeCreateComponent} from './employee-create/employee-create.compone
 import {EmployeeDeleteComponent} from './employee-delete/employee-delete.component';
 import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -15,9 +16,13 @@ import {EmployeeListComponent} from './employee-list/employee-list.component';
     EmployeeEditComponent,
     EmployeeListComponent,
   ],
+  exports: [
+    EmployeeCreateComponent
+  ],
   imports: [
     CommonModule,
-    EmployeeRoutingModule
+    EmployeeRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class EmployeeModule {
