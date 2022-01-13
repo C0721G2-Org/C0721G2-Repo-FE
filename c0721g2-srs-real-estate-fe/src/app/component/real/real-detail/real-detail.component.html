@@ -9,12 +9,12 @@
                 <img src="{{img.url}}"
                      height="450px" class="d-block w-100" alt="...">
               </div>
-              <div *ngFor="let item of imgList let i = index">
-                <div class="carousel-item" data-bs-interval="2000">
-                  <img src="{{item.url}}"
-                       height="450px" class="d-block w-100" alt="...">
-                </div>
+
+              <div class="carousel-item" data-bs-interval="2000" *ngFor="let item of imgList let i = index">
+                <img src="{{item.url}}"
+                     height="450px" class="d-block w-100" alt="...">
               </div>
+
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                       data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -48,8 +48,15 @@
                     <td style="width: 15rem">Hướng</td>
                   </tr>
                   <tr>
-                    <td class="fw-bolder">{{realEstate.price}}</td>
-                    <td class="fw-bolder">{{realEstate.area}}</td>
+                    <td class="fw-bolder">
+                        <span *ngIf="realEstate.price/1000000000 != 0">
+                      {{(realEstate.price / 1000000000 + realEstate.price % 1000000000)}} tỷ
+                    </span>
+                      <span *ngIf="realEstate.price/100000000 == 0 && realEstate.price/100000">
+                      {{(realEstate.price / 1000000 + realEstate.price % 1000000)}} triệu
+                    </span>
+                    </td>
+                    <td class="fw-bolder">{{realEstate.area}} m²</td>
                     <td class="fw-bolder">{{realEstate.direction.name}}</td>
                   </tr>
                 </table>
@@ -90,7 +97,7 @@
               <table class="table-light">
                 <tr>
                   <th style="width: 15rem">Loại tin đăng</th>
-                  <td>{{realEstate.kindOfNew}}</td>
+                  <td>{{realEstate.realEstateType.name}}</td>
                 </tr>
                 <tr>
                   <th>Địa chỉ</th>
@@ -98,7 +105,14 @@
                 </tr>
                 <tr>
                   <th>Giá tiền</th>
-                  <td>{{realEstate.price}}</td>
+                  <td>
+                    <span *ngIf="realEstate.price/1000000000 != 0">
+                      {{(realEstate.price / 1000000000 + realEstate.price % 1000000000)}} tỷ
+                    </span>
+                    <span *ngIf="realEstate.price/100000000 == 0 && realEstate.price/100000">
+                      {{(realEstate.price / 1000000 + realEstate.price % 1000000)}} triệu
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <th>Hướng</th>
@@ -106,11 +120,15 @@
                 </tr>
                 <tr>
                   <th>Diện tích</th>
-                  <td>{{realEstate.area}}</td>
+                  <td>{{realEstate.area}} m²</td>
                 </tr>
                 <tr>
                   <th>Tình trạng</th>
-                  <td>{{realEstate.status}}</td>
+                  <td>
+<!--                    <span *ngIf="realEstate.status == 1"> Có sẳn</span>-->
+<!--                    <span *ngIf="realEstate.status === 0"> Không có sẳn</span>-->
+                    Có sẵn
+                  </td>
                 </tr>
               </table>
             </div>

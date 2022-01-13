@@ -13,18 +13,17 @@ export class RealService {
 
   constructor(private httpClient: HttpClient) {
   }
-
   findRealEstateNewById(id: string): Observable<RealEstateNew> {
     return this.httpClient.get<RealEstateNew>(this.API_URL + '/' + id);
   }
 
-  findHistoryPostBySearchFieldId(customerId, title, kindOfNew, realNewType): Observable<RealEstateNew> {
-    return this.httpClient.get<RealEstateNew>
-    (this.API_URL_HISTORY_POST + '?customerId=' + customerId + '&&title=' + name + '&&kindOfNew=' + realNewType);
+  findHistoryPostBySearchFieldId(customerId, title, kindOfNew, realNewType): Observable<RealEstateNew[]> {
+    return this.httpClient.get<RealEstateNew[]>
+    (this.API_URL_HISTORY_POST + '?customerId=' + customerId + '&&title=' + title + '&&kindOfNew=' + realNewType);
   }
 
   sendMail(customerMail, name, phone): Observable<string> {
-    return this.httpClient.get<string>
-    (this.API_URL_EMAIL + '?customerMail=' + customerMail + '&&name=' + name + '&&phone=' + phone);
+    return this.httpClient.post<string>
+    (this.API_URL_EMAIL + '?customerMail=' + customerMail + '&&name=' + name + '&&phone=' + phone, '');
   }
 }

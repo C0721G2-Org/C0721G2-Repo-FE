@@ -9,7 +9,7 @@ export interface RealEstateNew {
   approval: number;
   area: number;
   description: string;
-  kindOfNew: string;
+  kindOfNews: string;
   price: number;
   title: string;
   status: string;
