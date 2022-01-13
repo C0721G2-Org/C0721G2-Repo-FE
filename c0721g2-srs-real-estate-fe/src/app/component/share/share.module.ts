@@ -8,13 +8,13 @@ import { AsideComponent } from './aside/aside.component';
 
 
 @NgModule({
-    declarations: [HeaderComponent, FooterComponent, AsideComponent],
-    exports: [
-        FooterComponent
-    ],
-    imports: [
-        CommonModule,
-        ShareRoutingModule
-    ]
+  declarations: [HeaderComponent, FooterComponent, AsideComponent],
+  exports: [
+    FooterComponent
+  ],
+  imports: [
+    CommonModule,
+    ShareRoutingModule
+  ]
 })
 export class ShareModule { }

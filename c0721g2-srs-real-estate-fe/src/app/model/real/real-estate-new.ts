@@ -1,6 +1,7 @@
+import {RealEstateType} from './real-estate-type';
 import {Customer} from '../customer/customer';
 import {Direction} from './direction';
-import {RealEstateType} from './real-estate-type';
+import {Image} from '../image/image';
 
 export interface RealEstateNew {
   id: string;
@@ -15,5 +16,6 @@ export interface RealEstateNew {
   customer: Customer;
   direction: Direction;
   realEstateType: RealEstateType;
+  listImage: Image;
 
 }
