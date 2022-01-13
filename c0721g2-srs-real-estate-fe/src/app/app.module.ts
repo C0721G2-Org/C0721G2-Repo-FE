@@ -10,6 +10,7 @@ import {RealModule} from './component/real/real.module';
 import {EmployeeModule} from './component/employee/employee.module';
 import {SecurityModule} from './component/security/security.module';
 import {ShareModule} from './component/share/share.module';
+import {CustomerDetailComponent} from './component/customer/customer-detail/customer-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
