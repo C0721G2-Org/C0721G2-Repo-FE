@@ -51,6 +51,7 @@ export class RealListComponent implements OnInit {
     this.realService.getAllRealEstates().subscribe(data => {
         this.realEstateNews = data.content;
         console.log(this.realEstateNews);
+        data.content.tota
       }
     );
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {

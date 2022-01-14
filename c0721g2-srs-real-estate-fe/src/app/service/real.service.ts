@@ -35,8 +35,8 @@ export class RealService {
       '?address=' + address +
       '&realEstateType=' + realEstateType +
       '&direction=' + direction +
-      '&minPrice=' + '1300000000' +
-      '&maxPrice=' + '13000900000');
+      '&minPrice=' + '0' +
+      '&maxPrice=' + '13000900000000');
   }
 
   // getAllRealEstatesByAdress(address: string): Observable<any> {
