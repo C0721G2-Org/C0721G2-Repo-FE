@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'delete', component: CustomerDeleteComponent},
   {path: 'create', component: CustomerCreateComponent},
   {path: 'edit', component: CustomerEditComponent},
-  {path: 'chang-password', component: UpdatePasswordComponent}
+  {path: 'change-password', component: UpdatePasswordComponent}
 ];
 
 @NgModule({

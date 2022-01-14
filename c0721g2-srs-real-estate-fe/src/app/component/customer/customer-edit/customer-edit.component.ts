@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomerService} from '../../../service/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Customer} from "../../../model/customer/customer";
+import {Customer} from '../../../model/customer/customer';
 // import {MatSnackBar} from '@angular/material/snack-bar';
 // import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -61,6 +61,4 @@ export class CustomerEditComponent implements OnInit {
       // appUserId: new FormControl('', [Validators.required])
     });
   }
-
-
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Customer} from '../model/customer/customer';
 import {HttpClient} from '@angular/common/http';
+import {AppUser} from '../model/user/app-user';
 
 const API = 'http://localhost:8080/customerInformation/';
 const API2 = 'http://localhost:8080/account/';
@@ -11,7 +12,6 @@ const API2 = 'http://localhost:8080/account/';
 })
 
 export class CustomerService {
-
 
 
   constructor(private http: HttpClient) {
@@ -24,6 +24,15 @@ export class CustomerService {
   update(id: string, customer: Customer): Observable<Customer> {
     return this.http.patch<Customer>(API + `update/` + id, customer);
   }
+
+  changepassword(username: string, appUser: AppUser): Observable<AppUser> {
+    return this.http.patch<AppUser>(API2 + `newpassword/` + username, appUser);
+  }
+
+  finduserbyusername(username: string): Observable<AppUser> {
+    return this.http.get<AppUser>(API2 + `userName/` + username);
+  }
+
 
   // edit(customer: Customer, id: string ): Observable<Customer> {
   //   return this.http.patch<Customer>(`${this.APIServeUrl}/customerInformation/update` + '/' + id, customer);
