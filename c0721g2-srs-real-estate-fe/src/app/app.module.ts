@@ -10,6 +10,11 @@ import {RealModule} from './component/real/real.module';
 import {EmployeeModule} from './component/employee/employee.module';
 import {SecurityModule} from './component/security/security.module';
 import {ShareModule} from './component/share/share.module';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+// import {ToastrModule} from 'ngx-toastr';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +30,12 @@ import {ShareModule} from './component/share/share.module';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    MatDialogModule,
+  //  thien them
+
+    // ToastrModule.forRoot()
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
