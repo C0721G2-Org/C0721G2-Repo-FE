@@ -20,6 +20,8 @@ export class RealListComponent implements OnInit {
   directionList: Direction[];
   minPrice: string;
   maxPrice: string;
+  public priceRangeList: RealEstateType[];
+
 
   constructor(
     private _formBuilder: FormBuilder,
