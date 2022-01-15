@@ -1,7 +1,6 @@
 export interface AppUser {
   id: number;
-  isEnabled: number;
   password: string;
+  newPassword: string;
   userName: string;
-  verificationCode: string;
 }

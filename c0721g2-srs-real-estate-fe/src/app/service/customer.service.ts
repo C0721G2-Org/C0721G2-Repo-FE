@@ -12,6 +12,7 @@ const API2 = 'http://localhost:8080/account/';
 })
 
 export class CustomerService {
+  private APIServeUrl: any;
 
 
   constructor(private http: HttpClient) {
@@ -25,15 +26,15 @@ export class CustomerService {
     return this.http.patch<Customer>(API + `update/` + id, customer);
   }
 
-  changepassword(username: string, appUser: AppUser): Observable<AppUser> {
-    return this.http.patch<AppUser>(API2 + `newpassword/` + username, appUser);
+  changePassword(user: any): Observable<any> {
+    return this.http.patch(API2 + `password/` , user);
   }
 
   finduserbyusername(username: string): Observable<AppUser> {
     return this.http.get<AppUser>(API2 + `userName/` + username);
   }
 
-
+  //
   // edit(customer: Customer, id: string ): Observable<Customer> {
   //   return this.http.patch<Customer>(`${this.APIServeUrl}/customerInformation/update` + '/' + id, customer);
   // }

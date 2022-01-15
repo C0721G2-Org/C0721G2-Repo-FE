@@ -25,7 +25,7 @@ export class CustomerEditComponent implements OnInit {
   ngOnInit(): void {
     this.initFormEdit();
     this.activatedRoute.queryParams.subscribe(params => {
-      this.id = params[ ' id ' ];
+      this.id = params['id'];
     });
     console.log(this.id);
     // this.id = this.activatedRoute.snapshot.params.id;
@@ -57,8 +57,9 @@ export class CustomerEditComponent implements OnInit {
       idCard: new FormControl('', [Validators.required, Validators.pattern(/^\d{9}|\d{12}$/)]),
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^(0|(\\(84\\)\\+))+([9][0-1][0-9]{7})$/)]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      address: new FormControl('', [Validators.required])
+      address: new FormControl('', [Validators.required]),
       // appUserId: new FormControl('', [Validators.required])
+      //có nó nên không show infor dc
     });
   }
 }
