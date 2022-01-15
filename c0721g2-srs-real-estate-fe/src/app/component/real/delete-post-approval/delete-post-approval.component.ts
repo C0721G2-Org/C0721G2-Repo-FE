@@ -16,7 +16,7 @@ export class DeletePostApprovalComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.data.real.id;
-    this.name = this.data.real.customer_id;
+    this.name = this.data.real.id;
   }
   cancel(): void {
     this.dialogRef.close();

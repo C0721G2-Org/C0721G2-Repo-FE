@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {RealEstateNew} from '../model/real/real-estate-new';
@@ -16,12 +16,8 @@ export class RealService {
     return this.http.get(this.API + '/list');
   }
 
-  // getSearchPostApproval(kindOfNews: string, direction: string, realEstateType: string): Observable<RealEstateNew[]> {
-  //   return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType);
-  // }
-
-  search(area: number): Observable<RealEstateNew[]> {
-    return this.http.get<RealEstateNew[]>(this.API + '/search?area=' + area);
+  search(kindOfNews: number, direction: number, realEstateType: number): Observable<RealEstateNew[]> {
+    return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType);
   }
 
   delete(id: number): Observable<any> {
@@ -31,4 +27,5 @@ export class RealService {
   getById(id): Observable<RealEstateNew[]> {
     return this.http.get<RealEstateNew[]>(this.API + '/' + id).pipe();
   }
+
 }
