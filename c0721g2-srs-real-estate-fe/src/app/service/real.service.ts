@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {RealEstateNew} from '../model/real/real-estate-new';
+import {Email} from '../model/real/email';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +14,18 @@ export class RealService {
 
   constructor(private httpClient: HttpClient) {
   }
+
   findRealEstateNewById(id: string): Observable<RealEstateNew> {
     return this.httpClient.get<RealEstateNew>(this.API_URL + '/' + id);
   }
 
-  findHistoryPostBySearchFieldId(customerId, title, kindOfNew, realNewType): Observable<RealEstateNew[]> {
-    return this.httpClient.get<RealEstateNew[]>
-    (this.API_URL_HISTORY_POST + '?customerId=' + customerId + '&&title=' + title + '&&kindOfNew=' + realNewType);
+  findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType): Observable<RealEstateNew[]> {
+    return this.httpClient.get<any>
+    (this.API_URL_HISTORY_POST + '?page=' + page + '&customerId=' + customerId +
+      '&title=' + title + '&kindOfNew=' + kindOfNew + '&realNewType=' + realNewType);
   }
 
-  sendMail(customerMail, name, phone): Observable<string> {
-    return this.httpClient.post<string>
-    (this.API_URL_EMAIL + '?customerMail=' + customerMail + '&&name=' + name + '&&phone=' + phone, '');
+  sendMail(email): Observable<Email> {
+    return this.httpClient.post<Email>(this.API_URL_EMAIL, email);
   }
 }

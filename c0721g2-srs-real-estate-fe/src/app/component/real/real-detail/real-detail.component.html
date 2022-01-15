@@ -29,7 +29,7 @@
             <div class="mt-3">
               <!--                        Title field-->
               <h5 class="fw-bolder text-danger">
-                {{realEstate.title}}
+                {{realEstate.title | uppercase}}
               </h5>
 
               <!--                        Address field-->
@@ -125,8 +125,8 @@
                 <tr>
                   <th>Tình trạng</th>
                   <td>
-<!--                    <span *ngIf="realEstate.status == 1"> Có sẳn</span>-->
-<!--                    <span *ngIf="realEstate.status === 0"> Không có sẳn</span>-->
+                    <!--                    <span *ngIf="realEstate.status == 1"> Có sẳn</span>-->
+                    <!--                    <span *ngIf="realEstate.status === 0"> Không có sẳn</span>-->
                     Có sẵn
                   </td>
                 </tr>
@@ -151,51 +151,7 @@
             <button class="btn btn-success btn-lg ms-3 me-3 mb-4">
               {{realEstate.customer.phoneNumber | slice:0:6}}*** Hiện số
             </button>
-            <!--                        <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"> Email</button>-->
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"
-                    data-bs-toggle="modal" data-bs-target="#exampleModal">
-              Email
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header bg-success text-light">
-                    <h5 class="modal-title" id="exampleModalLabel">Nhập thông tin liên hệ của
-                      bạn </h5>
-                  </div>
-                  <div class="modal-body">
-                    <form [formGroup]="searchFom" (ngSubmit)="onSearchSubmit()">
-                      <div class="row mb-3">
-                        <label for="inputEmail3" class="col-md-3 col-form-label">Họ và tên</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputEmail3">
-                        </div>
-                      </div>
-                      <div class="row mb-3">
-                        <label for="inputPassword3"
-                               class="col-md-3 col-form-label">Số điện thoại</label>
-                        <div class="col-md-9">
-                          <input type="text" class="form-control" id="inputPassword3">
-                        </div>
-                      </div>
-                      <!--                                            <input class="form-control  me-2" type="search">-->
-                      <!--                                            <input class="form-control  me-2" type="password">-->
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                          Close
-                        </button>
-                        <button type="button" class="btn btn-warning">Gửi</button>
-                      </div>
-                    </form>
-                  </div>
-
-                </div>
-              </div>
-            </div>
+            <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4" (click)="openDialog()"> Email</button>
             <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"> Yêu cầu liên hệ lại</button>
           </div>
           <div class="card mt-4 bg-light" style="width: 15rem;">

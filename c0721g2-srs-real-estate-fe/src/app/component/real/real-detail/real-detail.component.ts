@@ -4,7 +4,8 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
 import {Subscription} from 'rxjs';
 import {Image} from '../../../model/image/image';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import {EmailComponent} from '../email/email.component';
 
 @Component({
   selector: 'app-real-detail',
@@ -15,7 +16,8 @@ export class RealDetailComponent implements OnInit {
 
   constructor(private realService: RealService,
               private activatedRoute: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              public dialog: MatDialog
   ) {
   }
 
@@ -26,38 +28,17 @@ export class RealDetailComponent implements OnInit {
   imgList: Image[];
   private subscription: Subscription;
 
-  // previous(index: number) {
-  //   if (index > 0) {
-  //     this.url = this.realEstate.imageList[index - 1].url;
-  //   } else if (index === 0) {
-  //     this.url = this.realEstate.imageList[this.realEstate.imageList.length - 1].url;
-  //   }
-  // }
-  //
-  // next(index: number) {
-  //   if (index < this.realEstate.imageList.length - 1) {
-  //     this.url = this.realEstate.imageList[index + 1].url;
-  //   } else if (index === this.realEstate.imageList.length - 1) {
-  //     this.url = this.realEstate.imageList[0].url;
-  //   }
-  // }
-  searchFom = new FormGroup({
-    name: new FormControl(),
-    email: new FormControl()
-  });
-
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = paramMap.get('id');
-      console.log(this.id);
+      // console.log(this.id);
       this.subscription = this.realService.findRealEstateNewById(this.id).subscribe(data => {
           this.realEstate = data;
           this.img = this.realEstate.imageList.shift();
           this.imgList = this.realEstate.imageList;
-          console.log(this.realEstate);
-          console.log(this.imgList);
-          console.log(this.img);
-          // console.log(this.questions[2].customer_type.name);
+          // console.log(this.realEstate);
+          // console.log(this.imgList);
+          // console.log(this.img);
         }
         , error => {
           console.log(this.realEstate);
@@ -65,7 +46,21 @@ export class RealDetailComponent implements OnInit {
     });
   }
 
-  onSearchSubmit() {
-
+  openDialog() {
+    console.log('a');
+    this.realService.findRealEstateNewById(this.id).subscribe(customerData => {
+      console.log(this.id);
+      const dialogRef = this.dialog.open(EmailComponent, {
+        data: {id: this.id},
+        width: '600px',
+        panelClass: 'custom-modalbox',
+        // Khi bấm ra ngoài dialog khong bi mat di
+        disableClose: true
+      });
+      console.log('abc');
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    });
   }
 }

@@ -1,0 +1,32 @@
+<div class="modal-dialog bg-white">
+  <div class="modal-content">
+    <div class="modal-header bg-success text-light">
+      <h5 class="modal-title" id="exampleModalLabel">Nhập thông tin liên hệ của bạn </h5>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formInfo" (ngSubmit)="onSubmit()">
+        <div class="row mb-3 justify-content-center">
+          <div class="col-md-11">
+            <input type="text" class="form-control" id="inputEmail3" name="name" formControlName="name"
+                   placeholder="Nhập tên:">
+          </div>
+        </div>
+        <div class="row mb-3 justify-content-center">
+          <div class="col-md-11">
+            <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại:"
+                   formControlName="phone">
+          </div>
+          <input hidden type="text" class="form-control" name="customerMail" formControlName="customerMail"
+                 [ngModel]="customerMail"
+                 placeholder="Nhập tên:">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=" onNoClick()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-warning">Gửi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
