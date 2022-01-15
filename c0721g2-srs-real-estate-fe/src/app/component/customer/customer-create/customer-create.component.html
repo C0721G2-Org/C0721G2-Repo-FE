@@ -8,7 +8,7 @@
 <!--                  </div>-->
       <div class="modal-body">
         <!--        form-->
-        <form class="novalidate"  [formGroup]="createCustomer" (ngSubmit)="submit()">
+        <form class="has-validation" novalidate [formGroup]="createCustomer" (ngSubmit)="submit()">
           <div class="container">
             <!--                        <h4>Đăng ký tài khoản</h4>-->
             <div><h4 style="padding-top: 0px">Đăng ký</h4>
@@ -17,17 +17,18 @@
             <hr>
             <p class="fs-5">Thông tin cá nhân</p>
             <div class="input-form">
-<!--              <span class="text-error" *ngIf="createCustomer.controls.name.touched && createCustomer.controls.name?.invalid"></span>-->
-              <input type="text" placeholder="Họ và tên" class="form-control"  formControlName="name">
-<!--              <span class="text-error" *ngIf="createCustomer.controls.email.touched && createCustomer.controls.email?.invalid"></span>-->
+              <!--              <span class="text-error" *ngIf="createCustomer.controls.name.touched && createCustomer.controls.name?.invalid"></span>-->
+              <input type="text" placeholder="Họ và tên" class="form-control " formControlName="name" required>
+              <!--              <span class="text-error" *ngIf="createCustomer.controls.email.touched && createCustomer.controls.email?.invalid"></span>-->
+              <span class="text-error">{{validateError}}</span>
               <input type="email" class="form-control fs-6" placeholder="Email"
                      style="font-size: 15px;" formControlName="email">
-<!--              <span class="text-error" *ngIf="createCustomer.controls.address.touched && createCustomer.controls.address?.invalid"></span>-->
+              <!--              <span class="text-error" *ngIf="createCustomer.controls.address.touched && createCustomer.controls.address?.invalid"></span>-->
               <input type="text" class="form-control" placeholder="Địa chỉ" required formControlName="address">
-<!--              <span class="text-error" *ngIf="createCustomer.controls.idCard.touched && createCustomer.controls.idCard?.invalid"></span>-->
+              <!--              <span class="text-error" *ngIf="createCustomer.controls.idCard.touched && createCustomer.controls.idCard?.invalid"></span>-->
               <input type="text" class="form-control" placeholder="căn cước công dân" required formControlName="idCard">
               <div class="input-group">
-<!--                <span class="text-error" *ngIf="createCustomer.controls.dateOfBirth.touched && createCustomer.controls.dateOfBirth?.invalid"></span>-->
+                <!--                <span class="text-error" *ngIf="createCustomer.controls.dateOfBirth.touched && createCustomer.controls.dateOfBirth?.invalid"></span>-->
                 <input type="date" placeholder="Ngày sinh" class="form-control" required formControlName="dateOfBirth">
 <!--                <span class="text-error" *ngIf="createCustomer.controls.phoneNumber.touched && createCustomer.controls.phoneNumber?.invalid"></span>-->
                 <input type="number" placeholder="Số điện thoại" class="form-control"
@@ -35,15 +36,21 @@
                        required formControlName="phoneNumber">
               </div>
               <div>
-                <input type="radio" value="genderCustomer" name="gender" checked="checked" formControlName="gender">
+                <input type="radio" value="1" name="gender" checked="checked" formControlName="gender" [value]='1'>
                 <label>Nam</label>
-                <input type="radio" value="genderCustomer" name="gender" style="margin-left: 50px" formControlName="gender">
+                <input type="radio" value="2" name="gender" style="margin-left: 50px" formControlName="gender"
+                       [value]='2'>
                 <label>Nữ</label>
               </div>
               <br>
               <p class="fs-5">Thông tin tài khoản</p>
               <hr>
-              <input type="text" placeholder="Tên đăng nhập" required class="form-control">
+              <!--              <div class="text-error"-->
+              <!--                   *ngIf="createCustomer.controls.username.touched  && createCustomer.controls.username?.errors">-->
+              <!--                *Bạn chưa nhập mật khẩu.-->
+              <!--              </div>-->
+              <div *ngIf="validateError" class="text-error">{{validateError}}</div>
+              <input type="text" placeholder="Tên đăng nhập" required class="form-control" formControlName="userName">
               <div class="text-error"
                    *ngIf="createCustomer.controls.password.touched  && createCustomer.controls.password.hasError('required')">
                 *Bạn chưa nhập mật khẩu.

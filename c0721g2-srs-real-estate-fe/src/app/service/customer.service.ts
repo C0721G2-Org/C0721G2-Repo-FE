@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class CustomerService {
   id: any;
-  private API_URL = 'http://localhost:9090/api/customer';
+  private API_URL = 'http://localhost:8080/api/customers';
 
 
   constructor(private httpClient: HttpClient) {
@@ -22,7 +22,7 @@ export class CustomerService {
 
 
   saveCustomer(customer: Customer): Observable<Customer> {
-    return this.httpClient.post<Customer>(this.API_URL, customer);
+    return this.httpClient.post<Customer>(this.API_URL + '/create' , customer);
   }
 
   setId(id: string) {

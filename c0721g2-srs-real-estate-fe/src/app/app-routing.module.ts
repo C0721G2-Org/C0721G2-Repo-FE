@@ -10,7 +10,7 @@ import {CustomerDetailComponent} from './component/customer/customer-detail/cust
 //   {path: 'real-estate-new', loadChildren: () => import('./component/real/real.module').then(module => module.RealModule)},
 // ];
 const routes: Routes = [{
-  path: 'customer/create',
+  path: 'customers/create',
   component: CustomerCreateComponent
 },
 ];

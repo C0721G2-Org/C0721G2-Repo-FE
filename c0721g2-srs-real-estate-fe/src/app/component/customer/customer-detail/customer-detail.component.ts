@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {CustomerService} from '../../../service/customer.service';
-import {Customer} from "../../../model/customer/customer";
+import {Customer} from '../../../model/customer/customer';
 
 @Component({
   selector: 'app-customer-detail',
@@ -34,7 +34,7 @@ export class CustomerDetailComponent implements OnInit {
   // }
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
-      this.id = params['id'];
+      this.id = params.id;
       console.log(this.id);
       this.customerService.getCustomerById(this.id).subscribe(
         data => {

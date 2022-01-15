@@ -12,4 +12,5 @@ export interface Customer {
   phoneNumber?: string;
   appUser?: AppUser;
   image?: Image;
+  userName?: string;
 }

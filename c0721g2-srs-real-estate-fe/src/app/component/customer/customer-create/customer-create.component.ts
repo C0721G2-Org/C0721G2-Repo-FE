@@ -13,6 +13,9 @@ import {Router} from '@angular/router';
 export class CustomerCreateComponent implements OnInit {
   private subscription: Subscription;
   createCustomer: FormGroup = new FormGroup({});
+  validateError: string;
+ // check: string = Error.module.('app',['ngMessages']);
+
 
 
   constructor(private formBuilder: FormBuilder,
@@ -25,9 +28,10 @@ export class CustomerCreateComponent implements OnInit {
       idCard: this.formBuilder.control(''),
       dateOfBirth: this.formBuilder.control(''),
       phoneNumber: this.formBuilder.control(''),
-      gender: this.formBuilder.control(''),
+      gender: this.formBuilder.control('1'),
       password: ['', [Validators.required]],
       confirmPassword: ['', [Validators.required]],
+      userName: this.formBuilder.control('')
       // idCard: ['', Validators.required, Validators.pattern('^([0-9]{9})|([0-9]{12})$')]
     }, {
       validator: this.checkPassword('password', 'confirmPassword')
@@ -44,7 +48,12 @@ export class CustomerCreateComponent implements OnInit {
     if (this.createCustomer.valid) {
       this.customerService.saveCustomer(this.createCustomer.value).subscribe(
         data => {
+          console.log(data);
           alert('bạn đã đăng nhập thành công');
+        }, error => {
+          console.log(error.error);
+          console.log(error);
+          this.validateError = error;
         }
       );
       // this.customerService.saveCustomer(this.createCustomer.value).subscribe(

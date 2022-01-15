@@ -441,13 +441,16 @@
           </div>
           <div class="row">
             <div class="col-2"><label style="padding-top: 10px">Giới tính</label></div>
-            <div class="col-10"><input type="email" class="form-control" value="    {{customer.gender}}">
-
+            <div class="col-10" *ngIf="customer.gender=='1'">
+              <input type="email" class="form-control" value="Nam">
+            </div>
+              <div class="col-10" *ngIf="customer.gender=='2'">
+              <input type="email" class="form-control" value="Nữ">
             </div>
           </div>
           <div class="row">
             <div class="col-2"><label style="padding-top: 10px">Địa chỉ</label></div>
-            <div class="col-10"><input type="text" class="form-control" value="     {{customer.address}}">
+            <div class="col-10"><input type="text" class="form-control" value="{{customer.address}}">
 
             </div>
           </div>
@@ -526,5 +529,6 @@
   </footer>
 </div>
 </body>
+
 
 
