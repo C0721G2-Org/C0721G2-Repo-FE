@@ -8,7 +8,6 @@ import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -23,8 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     EmployeeRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule,
-    MatDialogModule
+    FormsModule
   ]
 })
 export class EmployeeModule {

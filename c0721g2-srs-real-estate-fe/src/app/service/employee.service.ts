@@ -17,11 +17,15 @@ export class EmployeeService {
     return this.http.get(this.API + '/list?page=' + index);
   }
 
+  getAllEmployeeNoPage(): Observable<any> {
+    return this.http.get(this.API);
+  }
+
   getEmployee(id: string): Observable<any> {
     return this.http.get(this.API + '/detail/' + id);
   }
 
-  search(name: string, email: string, positon: number): Observable<any> {
+  search(name: string, email: string, positon: string): Observable<any> {
     return this.http.get(this.API + '/search?name=' + name + '&email=' + email + '&position_id=' + positon);
   }
 
