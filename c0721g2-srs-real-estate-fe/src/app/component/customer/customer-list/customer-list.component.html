@@ -10,7 +10,8 @@
     <!--                    </div>-->
     <!--                </div>-->
     <div class="row mt-5 fs-5">
-      <form (ngSubmit)="showCustomer(0, customerName,customerPhone, customerEmail)" #myNgForm="ngForm" class=" mx-2  d-flex justify-content-start">
+      <form (ngSubmit)="onSubmit()" #myNgForm="ngForm"
+            class=" mx-2  d-flex justify-content-start">
         <div class="me-4">
           <label for="name" class="me-2 fw-bold form-label"> Tên khách hàng: </label>
           <input [(ngModel)]="customerName" class="form-floating" id="name" type="text" name="customerName"
@@ -23,17 +24,23 @@
         </div>
         <div class="me-4">
           <label for="email" class="me-2 fw-bold form-label">Email: </label>
-          <input [(ngModel)]="customerEmail" class="form-floating" id="email" type="email" name="customerEmail" placeholder=" Nhập email">
+          <input [(ngModel)]="customerEmail" class="form-floating" id="email" type="email" name="customerEmail"
+                 placeholder=" Nhập email">
         </div>
         <div class="me-4">
           <input class="btn btn-success" type="submit" value="Tìm kiếm">
         </div>
       </form>
-<!--      <div class="me-4">-->
-<!--        &lt;!&ndash;          <button (click)="showCustomer(0, '', '','')">Reset</button>&ndash;&gt;-->
-<!--        <button (click)=" showCustomer(0,'','','');  myNgForm.resetForm()">Reset</button>-->
-<!--      </div>-->
+      <!--      <div class="me-4">-->
+      <!--        &lt;!&ndash;          <button (click)="showCustomer(0, '', '','')">Reset</button>&ndash;&gt;-->
+      <!--        <button (click)=" showCustomer(0,'','','');  myNgForm.resetForm()">Reset</button>-->
+      <!--      </div>-->
+      <div *ngIf="message!=='1'" class="text-left row col-2 fs-5">
+        <!-- /.feature title -->
+        <h4  class="text-danger fst-italic alert-danger">{{message}}</h4>
+      </div>
     </div>
+
     <div class="row mt-5 fs-5">
 
     </div>
@@ -64,17 +71,18 @@
             <td>{{item.phoneNumber}}</td>
             <td>{{item.email}}</td>
             <td *ngIf="item.gender == 0; else blockgender">Nam</td>
-            <ng-template #blockgender><td>Nữ</td></ng-template>
+            <ng-template #blockgender>
+              <td>Nữ</td>
+            </ng-template>
             <td>
               <button class="btn btn-danger text-center" (click)="openDialog(item.id)">Xóa
               </button>
             </td>
             <td>
-              <button class="btn btn-success text-center" > Chi tiết
+              <button class="btn btn-success text-center"> Chi tiết
               </button>
             </td>
           </tr>
-
 
 
           </tbody>
@@ -82,22 +90,31 @@
       </div>
       <div class="me-5 pe-4">
         <ul class="pagination pagination-sm justify-content-end " style="margin:20px 0">
-<!--          <li class="page-item"><a class="page-link" href="#">Trước đó</a></li>-->
-<!--          <li class="page-item"><a class="page-link" href="#">1</a></li>-->
-<!--          <li class="page-item"><a class="page-link" href="#">2</a></li>-->
-<!--          <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-<!--          <li class="page-item"><a class="page-link" href="#">Tiếp theo</a></li>-->
+          <!--          <li class="page-item"><a class="page-link" href="#">Trước đó</a></li>-->
+          <!--          <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+          <!--          <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+          <!--          <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+          <!--          <li class="page-item"><a class="page-link" href="#">Tiếp theo</a></li>-->
+          <div *ngIf="this.page >0 then previous"></div>
+          <ng-template #previous>
+            <li class="page-item">
+              <button
+                (click)="previousClick(1)" class="page-link" type="button">Trước đó
+              </button>
+            </li>
+          </ng-template>
 
-          <li class="page-item"><button [disabled]="clickPage" (click)="previousClick(1)" class="page-link" type="button">Trước đó</button></li>
-          <!--    <li *ngFor='let index of pageIndexes' class="page-item" [ngClass]="active(index)">-->
-          <!--      <a (click)="getPaginationWithIndex(index)" class="page-link">-->
-          <!--        {{index + 1}}-->
-          <!--      </a>-->
-          <!--    </li>-->
-          <li class="page-item" ><a class="page-link" type="button">{{pageNumber + 1}}</a></li>
-          <li class="page-item" ><a class="page-link" type="button">/</a></li>
-          <li class="page-item" ><a class="page-link" type="button">{{totalPages}}</a></li>
-          <li class="page-item"><button [disabled]="clickPage"  (click)="nextClick(1)"  class="page-link" type="button">Tiếp theo</button></li>
+          <li class="page-item"><a class="page-link" type="button">{{pageNumber + 1}}</a></li>
+          <li class="page-item"><a class="page-link" type="button">/</a></li>
+          <li class="page-item"><a class="page-link" type="button">{{totalPages}}</a></li>
+          <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
+          <ng-template #nexts>
+            <li class="page-item">
+              <button (click)="nextClick(1)" class="page-link" type="button">Tiếp theo</button>
+            </li>
+          </ng-template>
+
+
         </ul>
 
       </div>

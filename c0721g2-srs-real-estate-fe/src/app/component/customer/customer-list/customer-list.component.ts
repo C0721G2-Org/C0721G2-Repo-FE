@@ -26,51 +26,81 @@ export class CustomerListComponent implements OnInit {
   private subscription: Subscription | undefined;
 
   page = 0;
-  customerName = "";
-  customerPhone = "";
-  customerEmail = "";
-  totalElements: number;
+  customerName = '';
+  customerPhone = '';
+  customerEmail = '';
   totalPages: number;
-  numberOfElements: number;
   pageNumber: number;
   size = 0;
+  flagSearch = false;
+  message: string;
+
 
   // showMessageNotFound(){
   //   this.toastrService.warning('Không tìm thấy', 'Max page');
   // }
-  clickPage = false;
+  clickPage1 = false;
+  clickPage2 = false;
+  buttonDisabled = false;
 
   ngOnInit(): void {
-    this.showCustomer(this.page, this.customerName, this.customerPhone, this.customerEmail);
+    this.showCustomer();
   }
 
-  showCustomer(page, customerName, customerPhone, customerEmail) {
+  onSubmit() {
+    this.flagSearch = false;
+    this.showCustomer();
+  }
 
-    // tslint:disable-next-line:triple-equals
-    if (page == this.page && customerName === this.customerName && customerPhone === this.customerPhone && customerEmail === this.customerEmail) {
-      this.subscription = this.customerService.findCustomer(this.page, this.customerName, this.customerPhone, this.customerEmail).subscribe(data => {
-        console.log(data);
-        this.customers = data.content;
-        this.totalPages = data.totalPages;
-        this.pageNumber = data.pageable.pageNumber;
-        this.size = data.size;
-      }, error => {
-        console.log(this.customers);
-      });
-    } else {
-      this.subscription = this.customerService.findCustomer(0, this.customerName, this.customerPhone, this.customerEmail).subscribe(data => {
-        // console.log(data);
-        this.customers = data.content;
-        this.totalPages = data.totalPages;
-        this.pageNumber = data.pageable.pageNumber;
-        this.size = data.size;
-
-      }, error => {
-        console.log(this.customers);
-      });
+  showCustomer() {
+    if (this.customerName === '' && this.customerPhone === '' && this.customerEmail === '') {
+      this.flagSearch = false;
+      this.getCustomer();
+    } else if (this.customerName !== '' && this.customerPhone === '' && this.customerEmail === '') {
+      this.searchCustomer();
+    } else if (this.customerName !== '' && this.customerPhone !== '' && this.customerEmail === '') {
+      this.searchCustomer();
+    } else if (this.customerName !== '' && this.customerPhone !== '' && this.customerEmail !== '') {
+      this.searchCustomer();
+    } else if (this.customerName === '' && this.customerPhone !== '' && this.customerEmail === '') {
+      this.searchCustomer();
+    } else if (this.customerName === '' && this.customerPhone !== '' && this.customerEmail !== '') {
+      this.searchCustomer();
+    } else if (this.customerName === '' && this.customerPhone === '' && this.customerEmail !== '') {
+      this.searchCustomer();
+    } else if (this.customerName !== '' && this.customerPhone === '' && this.customerEmail !== '') {
+      this.searchCustomer();
     }
   }
 
+  getCustomer() {
+    this.customerService.findCustomer(this.page, this.customerName, this.customerPhone, this.customerEmail).subscribe(data => {
+      // console.log(data);
+      if (data !== null) {
+        this.customers = data.content;
+        this.totalPages = data.totalPages;
+        this.pageNumber = data.pageable.pageNumber;
+        this.size = data.size;
+        this.page = data.pageable.pageNumber;
+        this.message = '';
+        console.log(this.message);
+      } else {
+        this.message = 'Not found !!!';
+        console.log(this.message);
+      }
+    });
+  }
+
+  searchCustomer() {
+    if (this.flagSearch === false) {
+      this.page = 0;
+      this.getCustomer();
+      this.flagSearch = true;
+    } else {
+      this.getCustomer();
+      this.flagSearch = true;
+    }
+  }
 
   openDialog(customerId) {
     this.customerService.getCustomerById(customerId).subscribe(data => {
@@ -88,43 +118,37 @@ export class CustomerListComponent implements OnInit {
   }
 
   previousClick(index) {
-
-    // if (pageNumber <= 0 ) {
+    this.page = this.page - index;
+    console.log('pre pay ' + this.page + '/' + this.totalPages + 'search:' + this.flagSearch);
+    // if (this.page === 0) {
     //   this.page = 0;
-    //   this.clickPage = true;
-    // } else {
+    //   this.clickPage1 = true;
     //
     // }
-    this.page = this.page - index;
-    console.log("pre" + this.page);
-    if (this.page <= 0) {
-      this.page = 0;
-      this.clickPage = true;
-
-    } else {
-      this.clickPage = false;
-    }
-    this.showCustomer(this.page, '', '', '');
+    //
+    // else {
+    //   this.clickPage1 = false;
+    //   // this.clickPage2 = false;
+    // }
+    this.ngOnInit();
   }
 
   nextClick(index) {
     this.page = this.page + index;
-    console.log("next" + this.page);
-    // if (this.page > this.totalPages) {
-    //   this.page = this.totalPages;
-    //   console.log(this.page)
-    //   this.showCustomer(this.page, '', '', '');
-    // } else {
-    //   this.showCustomer(this.page, '', '', '');
+    console.log('next pay ' + this.page + '/' + this.totalPages + 'search:' + this.flagSearch);
+    // if (this.page >= this.totalPages - 1)
+    // if (this.page >= this.totalPages  - 1 && this.pageNumber < this.totalPages)
+    // {
+    //   this.clickPage1 = true ;
+    //   console.log('total page ' + this.page);
+    //   // this.clickPage1 = false;
     // }
-
-    if (this.page >= this.totalPages) {
-      this.clickPage = true;
-      console.log('total page ' + this.page);
-    }else {
-      this.clickPage = false;
-    }
-    this.showCustomer(this.page, '', '', '');
+    // else {
+    //   this.clickPage1 = false;
+    //
+    // }
+    this.ngOnInit();
   }
+
 
 }
