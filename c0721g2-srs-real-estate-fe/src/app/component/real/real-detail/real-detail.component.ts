@@ -21,11 +21,13 @@ export class RealDetailComponent implements OnInit {
   ) {
   }
 
+  count = 0;
   realEstate: RealEstateNew;
   id: string;
   url: string;
   img: Image;
   imgList: Image[];
+  msg = '';
   private subscription: Subscription;
 
   ngOnInit(): void {
@@ -62,5 +64,15 @@ export class RealDetailComponent implements OnInit {
         console.log('The dialog was closed');
       });
     });
+  }
+
+  showPhone() {
+    this.count = this.count + 1
+    // tslint:disable-next-line:triple-equals
+    if ((this.count % 2) != 0) {
+      this.msg = 'showPhone';
+    } else{
+      this.msg = '';
+    }
   }
 }

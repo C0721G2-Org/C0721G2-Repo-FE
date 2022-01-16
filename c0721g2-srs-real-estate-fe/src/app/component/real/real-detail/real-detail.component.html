@@ -49,12 +49,7 @@
                   </tr>
                   <tr>
                     <td class="fw-bolder">
-                        <span *ngIf="realEstate.price/1000000000 != 0">
-                      {{(realEstate.price / 1000000000 + realEstate.price % 1000000000)}} tỷ
-                    </span>
-                      <span *ngIf="realEstate.price/100000000 == 0 && realEstate.price/100000">
-                      {{(realEstate.price / 1000000 + realEstate.price % 1000000)}} triệu
-                    </span>
+                      {{realEstate.price}}
                     </td>
                     <td class="fw-bolder">{{realEstate.area}} m²</td>
                     <td class="fw-bolder">{{realEstate.direction.name}}</td>
@@ -105,14 +100,7 @@
                 </tr>
                 <tr>
                   <th>Giá tiền</th>
-                  <td>
-                    <span *ngIf="realEstate.price/1000000000 != 0">
-                      {{(realEstate.price / 1000000000 + realEstate.price % 1000000000)}} tỷ
-                    </span>
-                    <span *ngIf="realEstate.price/100000000 == 0 && realEstate.price/100000">
-                      {{(realEstate.price / 1000000 + realEstate.price % 1000000)}} triệu
-                    </span>
-                  </td>
+                  <td>{{realEstate.price}}</td>
                 </tr>
                 <tr>
                   <th>Hướng</th>
@@ -148,9 +136,20 @@
                 Số bài đăng<span class="badge text-dark">4</span>
               </p>
             </div>
-            <button class="btn btn-success btn-lg ms-3 me-3 mb-4">
+            <button class="btn btn-success btn-lg ms-3 me-3 mb-4" (click)="showPhone()">
               {{realEstate.customer.phoneNumber | slice:0:6}}*** Hiện số
             </button>
+
+            <div class="text-center" *ngIf="msg =='showPhone'">
+              <button type="button" class="btn btn-outline-warning btn-lg ms-3 me-3 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgreen"
+                     class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd"
+                        d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"></path>
+                </svg>
+                {{realEstate.customer.phoneNumber}}
+              </button>
+            </div>
             <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4" (click)="openDialog()"> Email</button>
             <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"> Yêu cầu liên hệ lại</button>
           </div>
