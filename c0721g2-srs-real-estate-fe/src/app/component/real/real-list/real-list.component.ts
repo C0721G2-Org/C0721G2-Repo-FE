@@ -5,6 +5,7 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {RealEstateType} from '../../../model/real-estate-new/real-estate-type';
 import {Direction} from '../../../model/real-estate-new/direction';
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -19,12 +20,9 @@ export class RealListComponent implements OnInit {
   public realEstateTypeList: RealEstateType[];
   directionList: Direction[];
   page = 0;
-  pageIndex: number;
-  size = 0;
-  flag = false;
+  totalPages = null;
 
   priceRangeList = [
-    // {id: 0, minPrice: '0', maxPrice: '20000000000000000000000000', name: 'Chọn giá'},
     {id: 1, minPrice: '0', maxPrice: '100000000', name: '0-100 triệu'},
     {id: 2, minPrice: '100000000', maxPrice: '500000000', name: '100-500 triệu'},
     {id: 3, minPrice: '500000000', maxPrice: '1000000000', name: '500triệu - 1 tỷ'},
@@ -32,6 +30,15 @@ export class RealListComponent implements OnInit {
     {id: 5, minPrice: '5000000000', maxPrice: '10000000000', name: '5 - 10 tỷ'},
     {id: 6, minPrice: '10000000000', maxPrice: '20000000000000', name: '10 - 20 tỷ'},
     {id: 7, minPrice: '20000000000', maxPrice: '10000000000000000000000', name: '20 tỷ +'}]
+  ;
+
+  areaRangeList = [
+    {id: 1, minArea: '0', maxArea: '50', name: '0-50 m²'},
+    {id: 2, minArea: '50', maxArea: '100', name: '50-100 m²'},
+    {id: 3, minArea: '100', maxArea: '200', name: '100-200 m²'},
+    {id: 4, minArea: '200', maxArea: '500', name: '200-500 m²'},
+    {id: 5, minArea: '500', maxArea: '10000000000', name: '500+ m²'}
+  ]
   ;
 
   constructor(
@@ -44,67 +51,156 @@ export class RealListComponent implements OnInit {
   ngOnInit()
     :
     void {
+    // lay real estate type list
     this.realService.getAllRealEstateTypes().subscribe(data => {
         this.realEstateTypeList = data;
         console.log(this.realEstateTypeList);
+        console.log('page' + this.page);
+        console.log('total page' + this.totalPages);
       }
     );
+    // lay real direction list
     this.realService.getAllDirections().subscribe(data => {
         this.directionList = data;
         console.log(this.directionList);
       }
     );
+    // tao form search
     this.formSearch = new FormGroup({
       address: new FormControl(''),
       realEstateType: new FormControl(''),
       direction: new FormControl(''),
       priceRange: new FormControl(''),
+      areaRange: new FormControl(''),
+      minArea: new FormControl(''),
+      maxArea: new FormControl(''),
       minPrice: new FormControl(''),
       maxPrice: new FormControl(''),
     });
+    // lay real estate list ban dau khi load trang
     this.realService.getAllRealEstates().subscribe(data => {
-        this.mess = '';
-        this.realEstateNews = data.content;
-        console.log(this.realEstateNews);
+        if (!data) {
+          this.mess = 'Không có dữ liệu';
+          return;
+        }
+        // Object destructoring es6
+        const {totalPages, content} = data;
+        // Optional chaining typescript
+        if (content?.length) {
+          this.mess = '';
+          // spread operator es6
+          this.realEstateNews = [...this.mappingData([...content])];
+          console.log(this.realEstateNews);
+          this.totalPages = totalPages;
+        } else {
+          this.realEstateNews = [];
+        }
       }
     );
+    // lay message gui tu page khac ve
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.mess = paramMap.get('mess');
     });
   }
 
-  onSearch(searchInfo) {
+// method khi an button search
+  onSearch() {
+    this.page = 0;
+    this.totalPages = null;
+    this.searchEstates(this.page)
+      .subscribe(data => {
+        if (!data) {
+          this.mess = 'Nội dung bạn tìm không có';
+          this.page = -1;
+          this.totalPages = null;
+          this.realEstateNews = [];
+          return;
+        }
+        const {totalPages, content} = data;
+        if (content?.length) {
+          this.mess = '';
+          this.realEstateNews = [...content];
+          this.totalPages = totalPages;
+        } else {
+          this.realEstateNews = [];
+        }
+      });
+  }
 
-    console.log(this.formSearch.value.realEstateType);
-    console.log(this.formSearch.value.direction);
-    console.log(this.formSearch.value.priceRange);
-    console.log(this.formSearch.value.priceRange.minPrice);
-    console.log(this.formSearch.value.priceRange.maxPrice);
-    // console.log('minprice:' +this.minPrice);
-    // nếu dùng newform thì this.formSearch.Adress
-    this.realService.getAllRealEstatesByAdress(
+// method khi an "xem them+"
+  onLoadMore() {
+    this.page += 1;
+    if (this.page >= this.totalPages) {
+      return;
+    }
+    this.searchEstates(this.page)
+      .subscribe(data => {
+        if (!data) {
+          this.totalPages = 0;
+          return;
+        }
+        const {totalPages, content} = data;
+
+        if (content?.length) {
+          this.realEstateNews = [...this.realEstateNews, ...content];
+          this.totalPages = totalPages;
+
+        } else {
+          this.realEstateNews = [];
+        }
+      });
+  }
+
+// method khi nhan button scroll to top
+  onScrollToTop(e: any) {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
+// method tuong tac voi service
+  private searchEstates(page: number): Observable<any> {
+    return this.realService.getAllRealEstatesSearch(
       this.formSearch.value.address,
       this.formSearch.value.realEstateType.id,
       this.formSearch.value.direction.id,
+      this.formSearch.value.areaRange.minArea,
+      this.formSearch.value.areaRange.maxArea,
       this.formSearch.value.priceRange.minPrice,
       this.formSearch.value.priceRange.maxPrice,
-      this.formSearch.value.pageIndex
-    )
-      .subscribe(data => {
-          if (data !== null) {
-            this.mess = '';
-            this.realEstateNews = data.content;
-            console.log(this.realEstateNews);
-          } else {
-            this.mess = 'Nội dung bạn tìm không có';
-            console.log(this.mess);
-          }
-        }
-      );
+      page
+    );
+  }
+
+  private mappingData(content: any[]): any {
+    // const arr = [{a: '[1]'}, {a: '2'}];
+    //
+    // arr.forEach((item, index) => {
+    //   console.log(item)
+    //   item.a = index + 'test';
+    //   return item;
+    // });
+    //
+    // for (let i = 0; i < arr.length; i++) {
+    //   console.log(arr[i])
+    //   arr[i].a = i + 'test';
+    // }
+
+    if (!content) {
+      return [];
+    }
+    return content.map(item => {
+      if (item.price / 1000000000 >= 1) {
+        item.displayedPrice = Math.round(item.price) / 1000000000 + ' Tỷ';
+      }
+      else {
+        item.displayedPrice = Math.round(item.price) / 1000000 + ' Triệu';
+      }
+      item = {...item, ...item.displayedPrice};
+      return item;
+    });
+
   }
 
 
-  showMore() {
-    this.pageIndex = this.page + 1;
-  }
 }
+

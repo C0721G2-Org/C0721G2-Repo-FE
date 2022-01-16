@@ -5,6 +5,8 @@ import {RealDetailComponent} from './real-detail/real-detail.component';
 
 
 
+
+
 @NgModule({
   declarations: [RealDetailComponent],
   imports: [

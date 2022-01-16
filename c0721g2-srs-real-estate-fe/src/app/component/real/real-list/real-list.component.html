@@ -50,16 +50,11 @@
     type="button"
     class="btn main-bg text-white main-co btn-floating btn-lg"
     id="btn-back-to-top"
+    (click)="onScrollToTop($event)"
   >
     <i class="fas fa-arrow-up"></i>
   </button>
 </div>
-<!--<list-cards>-->
-<!--<div class="row">-->
-<!--  <div class="col-md-offset-4 col-md-4">-->
-<!--    -->
-<!--  </div>-->
-<!--</div>-->
 <div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
   <div class="container">
     <div class="row">
@@ -68,81 +63,83 @@
         <h2 class="main-color ">BẤT ĐỘNG SẢN DÀNH CHO BẠN</h2>
       </div>
     </div>
-    <form [formGroup]="formSearch" #searchInfo (ngSubmit)="onSearch(searchInfo)">
-    <div class="row pb-3">
-      <div class="text-center  page-title">
-        <div class="row mt-3">
+    <form [formGroup]="formSearch" (ngSubmit)="onSearch()">
+      <div class="row pb-3">
+        <div class="text-center  page-title">
+          <div class="row mt-3">
             <div class="col-md-3">
               <input class="form-control  me-2" type="text" placeholder="Nhập địa chỉ" formControlName="address">
             </div>
             <div class="col-md-2">
-              <select name="realEstateType" class="form-select form-control" aria-label="Default select example" formControlName="realEstateType">
+              <select name="realEstateType" class="form-select form-control" aria-label="Default select example"
+                      formControlName="realEstateType">
                 <option value=''>Loại tin</option>
-                <option *ngFor="let realEstateType of realEstateTypeList" [ngValue]="realEstateType">{{realEstateType.name}}</option>
+                <option *ngFor="let realEstateType of realEstateTypeList"
+                        [ngValue]="realEstateType">{{realEstateType.name}}</option>
               </select>
             </div>
-          <div class="col-md-2">
-            <select name="direction" class=" form-control" aria-label="Default select example" formControlName="direction">
-              <option value=''>Chọn hướng</option>
-              <option *ngFor="let direction of directionList" [ngValue]="direction">{{direction.name}}</option>
-            </select>
-          </div>
             <div class="col-md-2">
-              <select class="form-select form-control" aria-label="Default select example" >
-                <option >Chọn diện tích</option>
-<!--                <option [ngValue]="1">0-50 m²</option>-->
-<!--                <option [ngValue]="2">50-100 m²</option>-->
-<!--                <option [ngValue]="3">100-200 m²</option>-->
-<!--                <option [ngValue]="4">200-500 m²</option>-->
-<!--                <option [ngValue]="5">500+ m²</option>-->
+              <select name="direction" class=" form-control" aria-label="Default select example"
+                      formControlName="direction">
+                <option value=''>Chọn hướng</option>
+                <option *ngFor="let direction of directionList" [ngValue]="direction">{{direction.name}}</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <select class="form-select form-control" aria-label="Default select example" formControlName="areaRange">
+                <option value=''>Chọn diện tích</option>
+                <option *ngFor="let areaRange of areaRangeList"
+                        [ngValue]="{minArea: areaRange.minArea, maxArea: areaRange.maxArea}">
+                  {{areaRange.name}}
+                </option>
               </select>
             </div>
             <div class="col-md-2">
               <select class="form-select form-control" aria-label="Default select example" formControlName="priceRange">
-<!--                <option value="">Chọn giá</option>-->
-                <option [ngValue]="{minPrice: priceRange.minPrice, maxPrice: priceRange.maxPrice}" *ngFor="let priceRange of priceRangeList">
+                <option value=''>Chọn giá</option>
+                <option *ngFor="let priceRange of priceRangeList"
+                        [ngValue]="{minPrice: priceRange.minPrice, maxPrice: priceRange.maxPrice}">
                   {{priceRange.name}}
                 </option>
-<!--                <option [ngValue]="1">0-100 triệu</option>-->
-<!--                <option [ngValue]="2">100-500 triệu</option>-->
-<!--                <option [ngValue]="3">500triệu - 1 tỷ</option>-->
-<!--                <option [ngValue]="4">1-5 tỷ</option>-->
-<!--                <option [ngValue]="5">5 - 10 tỷ</option>-->
-<!--                <option [ngValue]="6">10 - 20 tỷ</option>-->
-<!--                <option [ngValue]="7">20 tỷ +</option>-->
               </select>
             </div>
             <div class="col-md-1 d-flex ">
               <button class="btn  main-bg fw-bold" type="submit">Tìm</button>
             </div>
+          </div>
         </div>
       </div>
-    </div>
     </form>
-      <div *ngIf="mess!==''" class="text-center page-title pt-5 pb-2">
-        <!-- /.feature title -->
-        <h4  class="text-danger fst-italic">{{mess}}</h4>
-      </div>
-
-    <div class="row">
-      <div class="  page-title pt-3 pb-3">
-        <a class=" btn text-decoration-none btn-hover btn-success " href="#">Tất cả</a>
-        <a class=" btn text-decoration-none btn-hover btn-success" href="#">Nhà ở</a>
-        <a class=" btn text-decoration-none btn-hover btn-success" href="#">Đất</a>
-      </div>
+    <div *ngIf="mess!==''" class="text-center page-title pt-5 pb-2">
+      <!-- /.feature title -->
+      <h4 class="text-danger fst-italic">{{mess}}</h4>
     </div>
+
+    <!--    <div class="row">-->
+    <!--      <div class="  page-title pt-3 pb-3">-->
+    <!--        <a class=" btn text-decoration-none btn-hover btn-success " href="#">Tất cả</a>-->
+    <!--        <a class=" btn text-decoration-none btn-hover btn-success" href="#">Nhà ở</a>-->
+    <!--        <a class=" btn text-decoration-none btn-hover btn-success" href="#">Đất</a>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <div *ngFor="let realEstateNew of realEstateNews">
         <div class="col">
           <div class="card card-hover h-100">
-            <img
-              src="{{realEstateNew.imageList[0].url}}"
-              class="card-img-top" alt="...">
+            <div *ngIf="realEstateNew.imageList.length != 0">
+              <img src="{{realEstateNew.imageList[0].url}}"
+                   style="height: 174px; width: 304px" class="card-img-top" alt="...">
+            </div>
+            <div *ngIf="realEstateNew.imageList.length ==0">
+              <img src="https://staticfile.batdongsan.com.vn/images/avatar/no-image-default.png"
+                   style="height: 174px; width: 304px" class="card-img-top" alt="...">
+            </div>
+
             <div class="card-body ">
               <h5 class="card-title content2line fw-bold">{{realEstateNew.title}}</h5>
               <span class="content2line text-secondary"><i class="fas fa-map-marker-alt "></i>{{realEstateNew.address}}</span>
               <div class="d-flex justify-content-between  align-items-center ">
-                <span class="pull-left text-danger fw-bold fs-4 ">{{realEstateNew.price}} tỷ</span>
+                <span class="pull-left text-danger fw-bold fs-4 ">{{realEstateNew.displayedPrice}}</span>
                 <span class="pull-right text-secondary ">{{realEstateNew.area}} m²</span>
               </div>
             </div>
@@ -150,46 +147,20 @@
               <small class="pull-left  border-end-0 text-muted">Hôm qua</small>
               <span class=" pull-right "><i class="fas fa-heart"></i></span>
             </div>
+            <a class=" stretched-link" href="real-estate-new/detail/{{realEstateNew.id}}">
+            </a>
           </div>
+
         </div>
       </div>
-
     </div>
-    <div class="row">
+    <div class="row" *ngIf="page < totalPages-1">
       <div class="text-center  pt-5">
         <!-- /.feature title -->
-        <a href="#" class="row btn main-bg  col-2 " (click)="showMore() ">Xem thêm +</a>
+        <a href="#" class="row btn main-bg  col-2" (click)="onLoadMore()">Xem thêm +</a>
       </div>
     </div>
   </div>
 </div>
 <!--</list-cards>-->
-<script>
-  //Get the button
-  let mybutton = document.getElementById("btn-back-to-top");
 
-  // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function () {
-    scrollFunction();
-  };
-
-  function scrollFunction() {
-    if (
-      document.body.scrollTop > 20 ||
-      document.documentElement.scrollTop > 20
-    ) {
-      mybutton.style.display = "block";
-    } else {
-      mybutton.style.display = "none";
-    }
-  }
-
-  // When the user clicks on the button, scroll to the top of the document
-  mybutton.addEventListener("click", backToTop);
-
-  function backToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-</script>
-<!--</script-back-to-top-button>-->
