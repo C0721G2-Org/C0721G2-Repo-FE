@@ -10,9 +10,24 @@ import {RealModule} from './component/real/real.module';
 import {EmployeeModule} from './component/employee/employee.module';
 import {SecurityModule} from './component/security/security.module';
 import {ShareModule} from './component/share/share.module';
+import {environment} from '../environments/environment';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
+import {AngularFireFunctionsModule} from '@angular/fire/functions';
+import {AngularFireModule} from '@angular/fire';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import { BottomSheetNotifyComponent } from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    BottomSheetNotifyComponent,
   ],
   imports: [
     EmployeeModule,
@@ -25,8 +40,19 @@ import {ShareModule} from './component/share/share.module';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireMessagingModule,
+    AngularFireDatabaseModule,
+    AngularFireFunctionsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatBottomSheetModule,
   ],
   providers: [],
+  entryComponents: [BottomSheetNotifyComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
