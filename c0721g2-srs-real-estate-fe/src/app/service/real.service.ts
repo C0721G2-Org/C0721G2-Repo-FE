@@ -30,13 +30,15 @@ export class RealService {
     return this.httpClient.get(this.API_URL_LIST);
   }
 
-  getAllRealEstatesByAdress(address: string, realEstateType: any, direction: any): Observable<any> {
+  getAllRealEstatesByAdress(address: string, realEstateType: any, direction: any, minPrice: string, maxPrice: string, page: number): Observable<any> {
     return this.httpClient.get(this.API_URL_LIST +
       '?address=' + address +
       '&realEstateType=' + realEstateType +
       '&direction=' + direction +
-      '&minPrice=' + '0' +
-      '&maxPrice=' + '13000900000000');
+      '&minPrice=' + minPrice +
+      '&maxPrice=' + maxPrice +
+      '&page=' + page
+    );
   }
 
   // getAllRealEstatesByAdress(address: string): Observable<any> {
@@ -50,5 +52,4 @@ export class RealService {
   getAllDirections(): Observable<any> {
     return this.httpClient.get(this.API_URL_DIRECTION);
   }
-
 }
