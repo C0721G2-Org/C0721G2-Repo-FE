@@ -1,7 +1,10 @@
 @import "~bootstrap/dist/css/bootstrap.css";
-//.custom-dialog .mat-dialog-container {
-//  position: relative;
-//  padding: 0;
-//  overflow: visible;
-//  border-radius: 20px;
-//}
+
+.custom-dialog-tai .mat-dialog-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border-radius: 40px;
+  background: none;
+  box-shadow: none;
+}

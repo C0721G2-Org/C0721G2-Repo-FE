@@ -24,8 +24,8 @@ export class RealDetailComponent implements OnInit {
   count = 0;
   realEstate: RealEstateNew;
   id: string;
-  url: string;
-  img: Image;
+  url = '';
+  img: string;
   imgList: Image[];
   msg = '';
   private subscription: Subscription;
@@ -36,9 +36,16 @@ export class RealDetailComponent implements OnInit {
       // console.log(this.id);
       this.subscription = this.realService.findRealEstateNewById(this.id).subscribe(data => {
           this.realEstate = data;
-          this.img = this.realEstate.imageList.shift();
+          if (this.realEstate.imageList.length > 0) {
+            this.img = this.realEstate.imageList.shift().url;
+          } else {
+            this.img = 'https://staticfile.batdongsan.com.vn/images/avatar/no-image-default.png';
+            // @ts-ignore
+            this.imgList = ['https://staticfile.batdongsan.com.vn/images/avatar/no-image-default.png'];
+          }
           this.imgList = this.realEstate.imageList;
-          // console.log(this.realEstate);
+          console.log(this.realEstate);
+          console.log(this.realEstate);
           // console.log(this.imgList);
           // console.log(this.img);
         }
@@ -55,7 +62,7 @@ export class RealDetailComponent implements OnInit {
       const dialogRef = this.dialog.open(EmailComponent, {
         data: {id: this.id},
         width: '600px',
-        panelClass: 'custom-modalbox',
+        panelClass: 'custom-dialog-tai',
         // Khi bấm ra ngoài dialog khong bi mat di
         disableClose: true
       });
@@ -71,7 +78,7 @@ export class RealDetailComponent implements OnInit {
     // tslint:disable-next-line:triple-equals
     if ((this.count % 2) != 0) {
       this.msg = 'showPhone';
-    } else{
+    } else {
       this.msg = '';
     }
   }

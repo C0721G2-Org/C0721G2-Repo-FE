@@ -6,14 +6,14 @@
           <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="2000">
-                <img src="{{img.url}}"
+                <img src="{{img}}"
                      height="450px" class="d-block w-100" alt="...">
               </div>
 
-              <div class="carousel-item" data-bs-interval="2000" *ngFor="let item of imgList let i = index">
-                <img src="{{item.url}}"
-                     height="450px" class="d-block w-100" alt="...">
-              </div>
+                            <div class="carousel-item" data-bs-interval="2000" *ngFor="let item of imgList let i = index">
+                              <img src="{{item.url}}"
+                                   height="450px" class="d-block w-100" alt="...">
+                            </div>
 
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                       data-bs-slide="prev">
@@ -112,10 +112,9 @@
                 </tr>
                 <tr>
                   <th>Tình trạng</th>
-                  <td>
-                    <!--                    <span *ngIf="realEstate.status == 1"> Có sẳn</span>-->
-                    <!--                    <span *ngIf="realEstate.status === 0"> Không có sẳn</span>-->
-                    Có sẵn
+                  <td >
+                    <span *ngIf="realEstate.status == '1'"> Có sẳn</span>
+                    <span *ngIf="realEstate.status == '0'"> Không có sẳn</span>
                   </td>
                 </tr>
               </table>
@@ -125,23 +124,27 @@
         <aside class="col-md-3">
           <div class="card" style="width: 15rem;">
             <div class="text-center mt-4">
-              <img class="rounded-circle" width="60" height="60"
-                   src="https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg"
-                   data-holder-rendered="true">
+              <span *ngIf="realEstate.customer.gender == '1'">
+                 <img class="rounded-circle" width="100" height="100"
+                      src="https://cdn.vectorstock.com/i/thumb-large/20/76/man-avatar-profile-vector-21372076.webp"
+                      data-holder-rendered="true">
+              </span>
+              <span *ngIf="realEstate.customer.gender == '0'">
+                 <img class="rounded-circle" width="100" height="100"
+                      src="https://cdn.vectorstock.com/i/thumb-large/20/74/woman-avatar-profile-vector-21372074.webp"
+                      data-holder-rendered="true">
+              </span>
             </div>
 
             <div class="card-body text-center">
               <h5 class="card-title">{{realEstate.customer.name}}</h5>
-              <p class=" ms-2 mb-3 text-center">
-                Số bài đăng<span class="badge text-dark">4</span>
-              </p>
             </div>
             <button class="btn btn-success btn-lg ms-3 me-3 mb-4" (click)="showPhone()">
               {{realEstate.customer.phoneNumber | slice:0:6}}*** Hiện số
             </button>
 
             <div class="text-center" *ngIf="msg =='showPhone'">
-              <button type="button" class="btn btn-outline-warning btn-lg ms-3 me-3 mb-4">
+              <button type="button" class="btn btn-light text-success  btn-lg ms-3 me-3 mb-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="lightgreen"
                      class="bi bi-telephone-fill" viewBox="0 0 16 16">
                   <path fill-rule="evenodd"
