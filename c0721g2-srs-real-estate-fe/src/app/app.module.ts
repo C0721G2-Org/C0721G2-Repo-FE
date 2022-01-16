@@ -22,6 +22,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { BottomSheetNotifyComponent } from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+// import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import { BottomSheetNotifyComponent } from './component/util/bottom-sheet-notify
     BrowserAnimationsModule,
     MatButtonModule,
     MatBottomSheetModule,
+    MatDialogModule
   ],
   providers: [],
   entryComponents: [BottomSheetNotifyComponent],
