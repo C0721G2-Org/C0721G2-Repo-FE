@@ -122,18 +122,21 @@
         <div class="row mt-4 ">
 
           <div class="col-md-12 col-sm-12 col-lg-12 d-flex justify-content-start">
-            <form class="container-fluid" [formGroup]="employeeForm" (ngSubmit)="search()">
+            <form class="container-fluid" #myNgForm="ngForm" (ngSubmit)="search()">
               <div class="row ">
                 <div class=" col-md-3 ms-sm-auto col-lg-3 fw-bold">
-                  <input type="text" id="name" formControlName="name" class="form-control" placeholder="Tên"
+                  <input type="text" id="name" [(ngModel)]="employeeName" [ngModelOptions]="{standalone: true}"
+                         class="form-control" placeholder="Tên"
                          aria-describedby="passwordHelpInline">
                 </div>
                 <div class=" col-md-3 ms-sm-auto col-lg-3 fw-bold">
-                  <input type="text" id="email" formControlName="email" class="form-control" placeholder="Email"
+                  <input type="text" id="email" [(ngModel)]="employeeEmail" [ngModelOptions]="{standalone: true}"
+                         class="form-control" placeholder="Email"
                          aria-describedby="passwordHelpInline">
                 </div>
                 <div class="col-md-3 ms-sm-auto col-lg-3 fw-bold">
-                  <select class="form-select form-control " aria-label="Default select example" formControlName="position" name="alo">
+                  <select class="form-select form-control " aria-label="Default select example"
+                          [(ngModel)]="employeePosition" [ngModelOptions]="{standalone: true}" name="alo">
                     <option value="">Chọn Chức Vụ</option>
                     <option [ngValue]="postion.id" *ngFor="let postion of positionList">
                       {{postion.name}}
@@ -141,14 +144,19 @@
                   </select>
                 </div>
                 <div class=" col-md-2 ms-sm-auto col-lg-2 ">
-                  <button type="submit" class="btn btn-success text-white">
+                  <button type="submit" (click)="onsubmit()" class="btn btn-success text-white">
                     Tìm kiếm
                   </button>
                 </div>
               </div>
             </form>
           </div>
+          <div *ngIf="message!==''" class="text-left row col-2 fs-5">
+            <!-- /.feature title -->
+            <h4 class="text-danger fst-italic alert-danger">{{message}}</h4>
+          </div>
         </div>
+
         <div class="row mt-4">
           <div class="col-md-12 ms-sm-auto col-lg-12 d-flex justify-content-start ">
             <button class="btn text-light btn-success ">
@@ -190,25 +198,120 @@
                 </td>
                 <td>
                   <button class="btn btn-sm btn-danger" (click)="openDialog(emplopyee.id)">Delete</button>
-<!--                  <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4" (click)="openDialog(emplopyee.id)">del</button>-->
+                  <!--                  <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4" (click)="openDialog(emplopyee.id)">del</button>-->
                 </td>
               </tr>
               </tbody>
             </table>
           </div>
         </div>
-        <div class="mt-3">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
+        <!--        <div class="mt-3">-->
+        <!--          <nav aria-label="Page navigation example">-->
+        <!--            <ul class="pagination">-->
 
-              <li class="page-item"><a class="page-link" (click)="firtPage()">Đầu</a></li>
-              <span  *ngFor="let page of totalPaginationArray, index as i">
-                  <li class="page-item"><a class="page-link" (click)="findPaginnation(i)" >{{page}}</a></li>
-              </span>
-              <li class="page-item"><a class="page-link" (click)="lastPage()">Cuối</a></li>
+        <!--              <li class="page-item"><a class="page-link" (click)="firtPage()">Đầu</a></li>-->
+        <!--              <span  *ngFor="let page of totalPages, index as i">-->
+        <!--                  <li class="page-item"><a class="page-link" (click)="findPaginnation(i)" >{{page}}</a></li>-->
+        <!--              </span>-->
+        <!--              <li class="page-item"><a class="page-link" (click)="lastPage()">Cuối</a></li>-->
 
-            </ul>
-          </nav>
+        <!--            </ul>-->
+        <!--          </nav>-->
+        <!--        </div>-->
+<!--        <div class="mt-3">-->
+<!--          <nav aria-label="Page navigation example">-->
+<!--            <ul class="pagination d-flex justify-content-md-end justify-content-center">-->
+<!--              <div *ngIf="this.page >0 then previous"></div>-->
+<!--              <ng-template #previous>-->
+<!--                <li class="page-item"><a class="page-link" (click)="previousClick(1)">Trang trước</a></li>-->
+<!--              </ng-template>-->
+<!--              <li class="page-item col-md-1 col-2  px-0">-->
+<!--                <div class="input-group">-->
+<!--                  <input type="number" value="1" min="1" [max]="totalPages" class="form-control text-right rounded-0"-->
+<!--                         aria-label="Username" [value]="page + 1"-->
+<!--                         aria-describedby="basic-addon1"-->
+<!--                         (change)="findPaginnation($event.target.value)">-->
+<!--                  <div class="input-group-prepend">-->
+<!--                    <span class="input-group-text" id="basic-addon1">{{page + 1}}/{{totalPages}}</span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </li>-->
+<!--              <div *ngIf="this.page  < this.totalPages - 1 then nexts "></div>-->
+<!--              <ng-template #nexts>-->
+<!--                <li class="page-item"><a class="page-link" (click)="nextClick(1)">Trang sau</a></li>-->
+<!--              </ng-template>-->
+<!--            </ul>-->
+<!--          </nav>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;        <div class="me-5 pe-4">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <ul class="pagination pagination-sm justify-content-end " style="margin:20px 0">&ndash;&gt;-->
+<!--        &lt;!&ndash;            &lt;!&ndash;          <li class="page-item"><a class="page-link" href="#">Trước đó</a></li>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;            &lt;!&ndash;          <li class="page-item"><a class="page-link" href="#">1</a></li>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;            &lt;!&ndash;          <li class="page-item"><a class="page-link" href="#">2</a></li>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;            &lt;!&ndash;          <li class="page-item"><a class="page-link" href="#">3</a></li>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;            &lt;!&ndash;          <li class="page-item"><a class="page-link" href="#">Tiếp theo</a></li>&ndash;&gt;&ndash;&gt;-->
+<!--        &lt;!&ndash;            <div *ngIf="this.page >0 then previous"></div>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <ng-template #previous>&ndash;&gt;-->
+<!--        &lt;!&ndash;              <li class="page-item">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <button&ndash;&gt;-->
+<!--        &lt;!&ndash;                  (click)="previousClick(1)" class="page-link" type="button">Trước đó&ndash;&gt;-->
+<!--        &lt;!&ndash;                </button>&ndash;&gt;-->
+<!--        &lt;!&ndash;              </li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </ng-template>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;            <li class="page-item"><a class="page-link" type="button">{{pageNumber + 1}}</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li class="page-item"><a class="page-link" type="button">/</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <li class="page-item"><a class="page-link" type="button">{{totalPages}}</a></li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <div *ngIf="this.page  < this.totalPages then nexts "></div>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <ng-template #nexts>&ndash;&gt;-->
+<!--        &lt;!&ndash;              <li class="page-item">&ndash;&gt;-->
+<!--        &lt;!&ndash;                <button (click)="nextClick(1)" class="page-link" type="button">Tiếp theo</button>&ndash;&gt;-->
+<!--        &lt;!&ndash;              </li>&ndash;&gt;-->
+<!--        &lt;!&ndash;            </ng-template>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </ul>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </div>-->
+        <div class="me-5 pe-4 ">
+          <ul class="pagination pagination-sm justify-content-end  pagination-lg" style="margin:20px 0">
+            <!--          <li class="page-item"><a class="page-link" href="#">Trước đó</a></li>-->
+            <!--          <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+            <!--          <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+            <!--          <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+            <!--          <li class="page-item"><a class="page-link" href="#">Tiếp theo</a></li>-->
+            <div *ngIf="this.page >0 then previous"></div>
+            <ng-template #previous>
+              <li class="page-item">
+                <button
+                  (click)="previousClick(1)" class="page-link" type="button">Trang trước
+                </button>
+              </li>
+            </ng-template>
+            <li class="page-item">
+              <!--            <div class="input-group">-->
+              <input class="page-link"  type="number" value="1" min="1" [max]="totalPages"
+                     placeholder="{{totalPages}}" aria-label="Username" [value]="page + 1"
+                     aria-describedby="basic-addon1"
+                     (change)="findPaginnation($event.target.value)">
+
+              <!--            </div>-->
+
+              <!--            class="form-control text-right rounded-0"-->
+            </li>
+            <li class="page-item ">
+              <!--            <div class="input-group-prepend">-->
+              <span class="input-group-text page-link" >{{page + 1}}/{{totalPages}}</span>
+              <!--            </div>-->
+            </li>
+            <!--          <li class="page-item"><a class="page-link" type="button">{{pageNumber + 1}}</a></li>-->
+            <!--          <li class="page-item"><a class="page-link" type="button">/</a></li>-->
+            <!--          <li class="page-item"><a class="page-link" type="button">{{totalPages}}</a></li>-->
+            <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
+            <ng-template #nexts>
+              <li class="page-item">
+                <button (click)="nextClick(1)" class="page-link" type="button">Trang sau</button>
+              </li>
+            </ng-template>
+          </ul>
         </div>
       </div>
     </main>
