@@ -9,6 +9,7 @@ import {Employee} from '../../../model/employee/employee';
 import {AppUser} from '../../../model/user/app-user';
 import {PositionService} from '../../../service/position.service';
 import {DegreeService} from '../../../service/degree.service';
+import {EmployeeDTO} from '../../../model/employee/employee-dto';
 
 @Component({
   selector: 'app-employee-create',
@@ -19,16 +20,16 @@ export class EmployeeCreateComponent implements OnInit {
 
   employeeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required,
-      Validators.pattern('^[a-zA-Z0-9_!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-z]{2,6}$')]),
-    phoneNumber: new FormControl('', [Validators.required,
-      Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
-    address: new FormControl('', [Validators.required,
-      Validators.pattern('')]),
+    email: new FormControl('',
+      [Validators.required, Validators.pattern('^[a-zA-Z0-9_!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-z]{2,6}$')]),
+    phoneNumber: new FormControl('',
+      [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
+    address: new FormControl('',
+      [Validators.required, Validators.pattern('')]),
     dateOfBirth: new FormControl(''),
-    // idCard: new FormControl('', [Validators.required,
-    //   Validators.pattern('^\\d{9}|\\d{12}$')]),
-    gender: new FormControl(1),
+    idCard: new FormControl('', [Validators.required,
+      Validators.pattern('^\\d{9}$|\\d{12}$')]),
+    gender: new FormControl(0),
     degreeDTO: new FormControl(null),
     positionDTO: new FormControl(null),
     roleDTO: new FormControl(2)
@@ -36,7 +37,7 @@ export class EmployeeCreateComponent implements OnInit {
   subscription: Subscription;
   positions: Positions[];
   degrees: Degree[];
-  employee: Employee;
+  employee: EmployeeDTO;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
@@ -133,5 +134,8 @@ export class EmployeeCreateComponent implements OnInit {
     }
   }
 
+  onClear() {
+    this.employeeForm.reset();
+  }
 
 }

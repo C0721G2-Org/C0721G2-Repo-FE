@@ -1,4 +1,4 @@
-ng g c
+5ng g c
 ng g i model/name-model
 ng g m package/name-module --routing
 ng h s service/name-service
