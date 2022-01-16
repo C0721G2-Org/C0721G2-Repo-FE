@@ -10,7 +10,8 @@ import { AsideComponent } from './aside/aside.component';
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, AsideComponent],
   exports: [
-    FooterComponent
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,

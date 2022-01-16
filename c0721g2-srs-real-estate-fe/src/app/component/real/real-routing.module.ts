@@ -8,6 +8,7 @@ import {RealDeleteComponent} from './real-delete/real-delete.component';
 const routes: Routes = [
   {path: 'detail/:id', component: RealDetailComponent},
   {path: 'list', component: RealListComponent},
+  {path: 'home', component: RealListComponent},
   {path: 'delete', component: RealDeleteComponent},
 ];
 
