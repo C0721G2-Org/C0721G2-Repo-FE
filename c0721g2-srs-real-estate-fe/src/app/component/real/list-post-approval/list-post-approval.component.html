@@ -118,60 +118,11 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="col-10 px-0 ps-5 ">
-        <!--        <div class="row me-2 mt-2 fs-5 ">-->
-        <!--          <div class="row col-3">-->
-        <!--            <div class="input-group">-->
-        <!--              <label class="input-group-text btn-post-custom fw-bold" for="inputGroupSelect01">Chọn loại nhu cầu</label>-->
-        <!--              <select class="form-select" id="inputGroupSelect01">-->
-        <!--                <option selected>Tất cả</option>-->
-        <!--                <option value="1">Ban</option>-->
-        <!--                <option value="2">Cho thuê</option>-->
-        <!--              </select>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--          <div class="row col-3">-->
-        <!--            <div class="input-group">-->
-        <!--              <label class="input-group-text btn-post-custom fw-bold" for="inputGroupSelect02">Chọn loại BĐS</label>-->
-        <!--              <select class="form-select" id="inputGroupSelect02">-->
-        <!--                <option selected>Tất cả</option>-->
-        <!--                <option value="1">Đất</option>-->
-        <!--                <option value="2">Nhà</option>-->
-        <!--              </select>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--          <div class="row col-3">-->
-        <!--            <div class="input-group">-->
-        <!--              <label class="input-group-text btn-post-custom fw-bold" for="inputGroupSelect03">Chọn Vị trí</label>-->
-        <!--              <select class="form-select" id="inputGroupSelect03">-->
-        <!--                <option selected>Tất cả</option>-->
-        <!--                <option value="1">Đông Bắc</option>-->
-        <!--                <option value="2">Tây</option>-->
-        <!--                <option value="2">Tây Nam</option>-->
-        <!--                <option value="2">Tây Bắc</option>-->
-        <!--                <option value="2">Nam</option>-->
-        <!--                <option value="2">Bắc</option>-->
-        <!--              </select>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--&lt;!&ndash;          <div class="row col-3 bg-primary bg-opacity-50 " >&ndash;&gt;-->
-        <!--&lt;!&ndash;            <div class="ms-auto p-2 bd-highlight">&ndash;&gt;-->
-        <!--&lt;!&ndash;              <form class="d-flex ">&ndash;&gt;-->
-        <!--&lt;!&ndash;                <input class="form-control me-3" type="text" placeholder="Nhập diện tích">&ndash;&gt;-->
-        <!--&lt;!&ndash;                <button class="btn btn-primary fw-bold" type="button">Tìm kiếm</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;              </form>&ndash;&gt;-->
-        <!--&lt;!&ndash;            </div>&ndash;&gt;-->
-        <!--&lt;!&ndash;          </div>&ndash;&gt;-->
-        <!--          <div class="row col-3 d-flex justify-content-end" style="float:right">-->
-        <!--&lt;!&ndash;            <input [(ngModel)]="search" class="form-control mr-sm-2" type="text" placeholder="Nhập diện tích" aria-label="Search">&ndash;&gt;-->
-        <!--            <button class="btn btn-outline-danger my-2 my-sm-0 mr-3" type="submit" (click)="searchArea()">Tìm kiếm</button>-->
-        <!--          </div>-->
-        <!--        </div>-->
-
         <div class="col-md-12 col-sm-12 col-lg-12 d-flex justify-content-start">
-          <form class="container-fluid" [formGroup]="realForm" (ngSubmit)="search()">
+          <form class="container-fluid" #myNgForm="ngForm" (ngSubmit)="search()">
             <div class="row ">
               <div class="col-md-3 ms-sm-auto col-lg-3 fw-bold">
-                <select class="form-select form-control " aria-label="Default select example" formControlName="kindOfNews"
+                <select class="form-select form-control " aria-label="Default select example" [(ngModel)]="kindOfNews" [ngModelOptions]="{standalone: true}"
                         name="alo">
                   <option value="">Chọn Loại nhu cầu</option>
                   <option [ngValue]="kindOfNews.id" *ngFor="let kindOfNews of kindOfNewsList">
@@ -180,7 +131,7 @@
                 </select>
               </div>
               <div class="col-md-3 ms-sm-auto col-lg-3 fw-bold">
-                <select class="form-select form-control " aria-label="Default select example" formControlName="direction"
+                <select class="form-select form-control " aria-label="Default select example" [(ngModel)]="direction" [ngModelOptions]="{standalone: true}"
                         name="alo">
                   <option value="">Chọn hướng</option>
                   <option [ngValue]="direction.id" *ngFor="let direction of directionList">
@@ -189,7 +140,7 @@
                 </select>
               </div>
               <div class="col-md-3 ms-sm-auto col-lg-3 fw-bold">
-                <select class="form-select form-control " aria-label="Default select example" formControlName="realEstatetType"
+                <select class="form-select form-control " aria-label="Default select example" [(ngModel)]="realEstateType" [ngModelOptions]="{standalone: true}"
                         name="alo">
                   <option value="">Chọn Loại BĐS</option>
                   <option [ngValue]="realEstateType.id" *ngFor="let realEstateType of realEstateTypeList">
@@ -198,7 +149,7 @@
                 </select>
               </div>
               <div class=" col-md-2 ms-sm-auto col-lg-2 ">
-                <button type="submit" class="btn btn-success text-white">
+                <button type="submit" class="btn btn-success text-white" (click)="onsubmit">
                   Tìm kiếm
                 </button>
               </div>
@@ -222,32 +173,15 @@
                   <td>{{i + 1}}</td>
                   <td>{{realOfNew.id}}</td>
                   <td>{{realOfNew.customer.id}}</td>
-                  <!--              <td>{{realOfNew.kindOfNew}}</td>-->
                   <td>
                     <span *ngIf="realOfNew.kindOfNews==1;else noMale ">Bán</span>
                     <ng-template #noMale>Cho thuê</ng-template>
                   </td>
                   <td>{{realOfNew.realEstateType.name}}</td>
-                  <!--              <td>-->
-                  <!--                <span *ngIf="realOfNew.realEstateType ==1;else noBan">Dat</span>-->
-                  <!--                <ng-template #noBan>Nha</ng-template>-->
-                  <!--              </td>-->
                   <td>{{realOfNew.direction.name}}</td>
                   <td>{{realOfNew.area}}</td>
-<!--                  <td>-->
-<!--                    &lt;!&ndash;                &lt;!&ndash; Button trigger modal &ndash;&gt;&ndash;&gt;-->
-<!--                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"-->
-<!--                            data-bs-target="#exampleModal">-->
-<!--                      <a>Chi tiết</a>-->
-<!--                    </button>-->
-<!--                    <button class="btn btn-success text-center">Duyệt</button>-->
-<!--                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"-->
-<!--                            data-bs-target="#exampleModal">-->
-<!--                      <a>Không duyệt</a>-->
-<!--                    </button>-->
-<!--                  </td>-->
                   <td>
-                    <button type="button" class="btn btn-primary" [routerLink]="['/employee/edit',realEstateNews.id]">Chi tiet</button>
+                    <button type="button" class="btn btn-primary" [routerLink]="['/employee/edit']">Chi tiet</button>
                     <button class="btn btn-success text-center" (click)="openDialog(realEstateNews.id)">Duyet</button>
                     <button class="btn btn-secondary text-center" (click)="openDialog(realEstateNews.id)">Khong duyet</button>
                   </td>
@@ -256,12 +190,31 @@
               </table>
             </div>
             <div class="me-5 pe-4 ">
-              <ul class="pagination pagination-sm justify-content-end " style="margin:20px 0">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+              <ul class="pagination pagination-sm justify-content-end  pagination-lg" style="margin:20px 0">
+                <div *ngIf="this.page >0 then previous"></div>
+                <ng-template #previous>
+                  <li class="page-item">
+                    <button
+                      (click)="previousClick(1)" class="page-link" type="button">Trang trước
+                    </button>
+                  </li>
+                </ng-template>
+                <li class="page-item">
+                  <input class="page-link"  type="number" value="1" min="1" [max]="totalPages"
+                         placeholder="{{totalPages}}" aria-label="Username" [value]="page + 1"
+                         aria-describedby="basic-addon1"
+                         (change)="findPaginnation($event.target.value)">
+                </li>
+                <li class="page-item ">
+                  <span class="input-group-text page-link" >{{page + 1}}/{{totalPages}}</span>
+                </li>
+
+                <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
+                <ng-template #nexts>
+                  <li class="page-item">
+                    <button (click)="nextClick(1)" class="page-link" type="button">Trang sau</button>
+                  </li>
+                </ng-template>
               </ul>
             </div>
           </form>
@@ -270,4 +223,3 @@
     </main>
   </div>
 </div>
-<!--<pagination-controls (pageChange)="page = $event" class="text-center"></pagination-controls>-->

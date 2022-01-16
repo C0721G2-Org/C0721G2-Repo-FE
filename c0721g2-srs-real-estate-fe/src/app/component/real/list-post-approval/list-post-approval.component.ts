@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
 import {RealService} from '../../../service/real.service';
-import {DeletePostApprovalComponent} from '../delete-post-approval/delete-post-approval.component';
 import {MatDialog} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-list-post-approval',
@@ -12,8 +12,20 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class ListPostApprovalComponent implements OnInit {
   realEstateNews: RealEstateNew[];
-  // page: number = 1;
   realForm: FormGroup;
+
+  private subscription: Subscription | undefined;
+
+  page = 0;
+  kindOfNews = '';
+  direction = '';
+  realEstateType = '';
+  totalPages: number;
+  pageNumber: number;
+  size = 0;
+  flag = false;
+  message: string;
+
 
 
   kindOfNewsList = [{id: 1, name: 'Bán'}, {id: 2, name: 'Cho thuê'}];
@@ -29,38 +41,79 @@ export class ListPostApprovalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.realService.getAllListPostApproval().subscribe(data => {
-      this.realEstateNews = data.content;
-    });
-    this.realForm = new FormGroup({
-      kindOfNews: new FormControl(''),
-      direction: new FormControl(''),
-      realEstatetType: new FormControl(''),
-    });
+    this.search();
   }
 
-
-  // delete(id: any): void {
-  //   this.realService.getById(id).subscribe(data => {
-  //     const dialogRef = this.dialog.open(DeletePostApprovalComponent, {
-  //       width: '500px',
-  //       data: {customer: data},
-  //       disableClose: true
-  //     });
-  //
-  //     dialogRef.afterClosed().subscribe(result => {
-  //       this.ngOnInit();
-  //     });
-  //   });
-  // }
-
-
   search() {
-    // tslint:disable-next-line:max-line-length
-    this.realService.search(this.realForm.value.kindOfNews, this.realForm.value.direction, this.realForm.value.realEstatetType).subscribe(data => {
-      // @ts-ignore
-      this.realEstateNews = data.content;
-      console.log(data);
-    });
+    if (this.kindOfNews === '' && this.direction === '' && this.realEstateType === '') {
+      this.flag = false;
+      this.realService.search(this.page, this.kindOfNews, this.direction, this.realEstateType).subscribe(data => {
+        console.log(data);
+        if (data !== null) {
+          this.realEstateNews = data.content;
+          this.totalPages = data.totalPages;
+          this.pageNumber = data.pageable.pageNumber;
+          this.size = data.size;
+          this.page = data.pageable.pageNumber;
+          this.message = '';
+        } else {
+          this.message = 'Not found !!!';
+        }
+      });
+    } else {
+      if (this.flag === false) {
+        this.page = 0;
+        this.realService.search(this.page, this.kindOfNews, this.direction, this.realEstateType).subscribe(data => {
+          if (data !== null) {
+            this.realEstateNews = data.content;
+            this.totalPages = data.totalPages;
+            this.pageNumber = data.pageable.pageNumber;
+            this.size = data.size;
+            this.page = data.pageable.pageNumber;
+            this.message = '';
+          } else {
+            this.message = 'Not found !!!';
+          }
+          this.flag = true;
+        });
+      } else {
+        this.realService.search(this.page, this.kindOfNews, this.direction, this.realEstateType).subscribe(data => {
+          if (data !== null) {
+            this.realEstateNews = data.content;
+            this.totalPages = data.totalPages;
+            this.pageNumber = data.pageable.pageNumber;
+            this.size = data.size;
+            this.page = data.pageable.pageNumber;
+            this.message = '';
+            console.log(this.message);
+          } else {
+            this.message = 'Not found !!!';
+          }
+          this.flag = true;
+        });
+      }
+
+    }
+  }
+
+  previousClick(index) {
+    this.page = this.page - index;
+    this.ngOnInit();
+  }
+
+  nextClick(index) {
+    this.page = this.page + index;
+    console.log('next pay ' + this.page);
+    this.ngOnInit();
+  }
+
+  findPaginnation(value: number) {
+    this.page = value - 1;
+    this.ngOnInit();
+  }
+
+  onsubmit() {
+    this.flag = false;
+    this.search();
   }
 }

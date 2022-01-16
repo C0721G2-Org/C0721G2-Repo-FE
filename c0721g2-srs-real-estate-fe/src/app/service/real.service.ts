@@ -23,8 +23,8 @@ export class RealService {
     return this.http.get(this.API + '/list');
   }
 
-  search(kindOfNews: number, direction: number, realEstateType: number): Observable<RealEstateNew[]> {
-    return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType);
+  search(page: number, kindOfNews: string, direction: string, realEstateType: string): Observable<any> {
+    return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
   }
 
   delete(id: number): Observable<any> {
