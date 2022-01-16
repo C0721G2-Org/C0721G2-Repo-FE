@@ -36,9 +36,7 @@ export class CustomerListComponent implements OnInit {
   message: string;
 
 
-  // showMessageNotFound(){
-  //   this.toastrService.warning('Không tìm thấy', 'Max page');
-  // }
+
   clickPage1 = false;
   clickPage2 = false;
   buttonDisabled = false;
@@ -120,33 +118,12 @@ export class CustomerListComponent implements OnInit {
   previousClick(index) {
     this.page = this.page - index;
     console.log('pre pay ' + this.page + '/' + this.totalPages + 'search:' + this.flagSearch);
-    // if (this.page === 0) {
-    //   this.page = 0;
-    //   this.clickPage1 = true;
-    //
-    // }
-    //
-    // else {
-    //   this.clickPage1 = false;
-    //   // this.clickPage2 = false;
-    // }
     this.ngOnInit();
   }
 
   nextClick(index) {
     this.page = this.page + index;
     console.log('next pay ' + this.page + '/' + this.totalPages + 'search:' + this.flagSearch);
-    // if (this.page >= this.totalPages - 1)
-    // if (this.page >= this.totalPages  - 1 && this.pageNumber < this.totalPages)
-    // {
-    //   this.clickPage1 = true ;
-    //   console.log('total page ' + this.page);
-    //   // this.clickPage1 = false;
-    // }
-    // else {
-    //   this.clickPage1 = false;
-    //
-    // }
     this.ngOnInit();
   }
 
