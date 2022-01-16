@@ -109,7 +109,7 @@
             <div class="col-md-12 position-relative field">
               <label for="files" class="form-label">Thêm ảnh (tối thiểu 1 ảnh)</label>
               <input type="file" multiple="multiple" class="form-control" id="files" required
-                     name="files[]" (change)="detectFiles($event)">
+                     name="files[]" (change)="detectFiles($event)" accept="image/png, image/gif, image/jpeg">
               <small *ngIf="imgMess"
                      class="fst-italic" style="color: red">{{imgMess}}</small>
               <div class="text-center row mt-4">
