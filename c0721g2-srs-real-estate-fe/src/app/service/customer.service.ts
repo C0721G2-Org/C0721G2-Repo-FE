@@ -18,6 +18,7 @@ export class CustomerService {
   constructor(private http: HttpClient) {
   }
 
+  // thiện nhỏ
   findById(id: string): Observable<Customer> {
     return this.http.get<Customer>(API + `id/` + id);
   }
@@ -27,16 +28,12 @@ export class CustomerService {
   }
 
   changePassword(user: any): Observable<any> {
-    return this.http.patch(API2 + `password/` , user);
+    return this.http.patch(API2 + `password/`, user);
   }
 
   finduserbyusername(username: string): Observable<AppUser> {
     return this.http.get<AppUser>(API2 + `userName/` + username);
   }
 
-  //
-  // edit(customer: Customer, id: string ): Observable<Customer> {
-  //   return this.http.patch<Customer>(`${this.APIServeUrl}/customerInformation/update` + '/' + id, customer);
-  // }
-
+// thiện nhỏ
 }

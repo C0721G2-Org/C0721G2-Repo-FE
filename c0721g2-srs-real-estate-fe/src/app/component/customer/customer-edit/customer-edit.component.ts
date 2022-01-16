@@ -12,7 +12,7 @@ import {Customer} from '../../../model/customer/customer';
   styleUrls: ['./customer-edit.component.scss']
 })
 export class CustomerEditComponent implements OnInit {
-
+  // imageForm: FormGroup;
   customerForm: FormGroup;
   id: string;
   customer: Customer;
@@ -32,6 +32,8 @@ export class CustomerEditComponent implements OnInit {
     this.customerService.findById(this.id).subscribe(data => {
       console.log(data);
       this.customer = data;
+      // this.imageForm.setValue(this.customer.image);
+      // console.log(this.imageForm);
       this.customerForm.setValue(this.customer);
     });
   }
@@ -59,7 +61,11 @@ export class CustomerEditComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       address: new FormControl('', [Validators.required]),
       // appUserId: new FormControl('', [Validators.required])
-      //có nó nên không show infor dc
+      // image: new FormGroup({
+      //   url: new FormControl(''),
+      //   id: new FormControl('')
+      // })
+      // có nó nên không show infor dc
     });
   }
 }
