@@ -151,4 +151,8 @@ export class CustomerListComponent implements OnInit {
   }
 
 
+  findPaginnation(value: number) {
+      this.page = value - 1;
+      this.ngOnInit();
+  }
 }

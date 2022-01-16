@@ -9,7 +9,7 @@ import {CustomerDetailComponent} from './customer-detail/customer-detail.compone
 
 const routes: Routes = [
   {path: 'customer-list', component: CustomerListComponent},
-  {path: 'detail/:id', component: CustomerDetailComponent},
+  {path: 'customer-detail/:id', component: CustomerDetailComponent},
   {path: 'customer-delete', component: CustomerDeleteComponent},
   {path: 'create', component: CustomerCreateComponent},
   {path: 'edit', component: CustomerEditComponent},

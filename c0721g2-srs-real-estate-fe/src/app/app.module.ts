@@ -32,8 +32,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AppRoutingModule,
     MatDialogModule,
   //  thien them
-
-    // ToastrModule.forRoot()
+    
 
 
   ],
