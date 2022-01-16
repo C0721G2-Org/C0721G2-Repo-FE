@@ -7,7 +7,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {CustomerModule} from './component/customer/customer.module';
 import {RealModule} from './component/real/real.module';
-import {EmployeeModule} from './component/employee/employee.module';
 import {SecurityModule} from './component/security/security.module';
 import {ShareModule} from './component/share/share.module';
 import {environment} from '../environments/environment';
@@ -23,8 +22,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { BottomSheetNotifyComponent } from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-// import {ToastrModule} from 'ngx-toastr';
-
 
 @NgModule({
   declarations: [
@@ -32,7 +29,6 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
     BottomSheetNotifyComponent,
   ],
   imports: [
-    EmployeeModule,
     CustomerModule,
     SecurityModule,
     RealModule,
@@ -41,6 +37,7 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
@@ -49,7 +46,6 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
     AngularFireMessagingModule,
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
-    BrowserAnimationsModule,
     MatButtonModule,
     MatBottomSheetModule,
     MatDialogModule

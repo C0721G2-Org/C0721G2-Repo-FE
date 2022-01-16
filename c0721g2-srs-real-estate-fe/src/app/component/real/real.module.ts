@@ -11,7 +11,7 @@ import {DeletePostApprovalComponent} from './delete-post-approval/delete-post-ap
 import {ListPostApprovalComponent} from './list-post-approval/list-post-approval.component';
 import {RealCreateComponent} from './real-create/real-create.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import {EmailComponent} from './email/email.component';
 
 @NgModule({
     declarations: [RealListComponent,
@@ -21,11 +21,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         DetailPostApprovalComponent,
         DeletePostApprovalComponent,
         ListPostApprovalComponent,
-        RealCreateComponent],
-    exports: [
         RealCreateComponent,
-        RealDeleteComponent
-    ],
+        EmailComponent],
+  exports: [
+    RealCreateComponent,
+    RealDeleteComponent,
+    RealDetailComponent
+  ],
   imports: [
     CommonModule,
     RealRoutingModule,
