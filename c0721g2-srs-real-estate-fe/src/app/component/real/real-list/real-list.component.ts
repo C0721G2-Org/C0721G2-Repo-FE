@@ -90,7 +90,6 @@ export class RealListComponent implements OnInit {
           this.mess = '';
           // spread operator es6
           this.realEstateNews = [...this.mappingData([...content])];
-          console.log(this.realEstateNews);
           this.totalPages = totalPages;
         } else {
           this.realEstateNews = [];
@@ -119,7 +118,7 @@ export class RealListComponent implements OnInit {
         const {totalPages, content} = data;
         if (content?.length) {
           this.mess = '';
-          this.realEstateNews = [...content];
+          this.realEstateNews = [...this.mappingData([...content])];;
           this.totalPages = totalPages;
         } else {
           this.realEstateNews = [];
@@ -142,7 +141,7 @@ export class RealListComponent implements OnInit {
         const {totalPages, content} = data;
 
         if (content?.length) {
-          this.realEstateNews = [...this.realEstateNews, ...content];
+          this.realEstateNews = [...this.realEstateNews, ...this.mappingData([...content])];
           this.totalPages = totalPages;
 
         } else {
@@ -171,20 +170,8 @@ export class RealListComponent implements OnInit {
     );
   }
 
+  // mapping data raw nhan duoc tu api
   private mappingData(content: any[]): any {
-    // const arr = [{a: '[1]'}, {a: '2'}];
-    //
-    // arr.forEach((item, index) => {
-    //   console.log(item)
-    //   item.a = index + 'test';
-    //   return item;
-    // });
-    //
-    // for (let i = 0; i < arr.length; i++) {
-    //   console.log(arr[i])
-    //   arr[i].a = i + 'test';
-    // }
-
     if (!content) {
       return [];
     }
@@ -198,9 +185,6 @@ export class RealListComponent implements OnInit {
       item = {...item, ...item.displayedPrice};
       return item;
     });
-
   }
-
-
 }
 
