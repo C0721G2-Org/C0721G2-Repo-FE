@@ -12,6 +12,9 @@ import {SecurityModule} from './component/security/security.module';
 import {ShareModule} from './component/share/share.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+// @ts-ignore
+// import {NgxPaginationModule} from 'ngx-pagination';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +32,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    // NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

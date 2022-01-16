@@ -9,13 +9,13 @@ export interface RealEstateNew {
   approval: number;
   area: number;
   description: string;
-  kindOfNew: string;
+  kindOfNews: string;
   price: number;
   title: string;
   status: string;
   customer: Customer;
   direction: Direction;
   realEstateType: RealEstateType;
-  listImage: Image;
+  imageList: Image[];
 
 }

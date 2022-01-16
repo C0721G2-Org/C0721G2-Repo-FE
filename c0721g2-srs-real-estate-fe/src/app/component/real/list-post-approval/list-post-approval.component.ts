@@ -58,6 +58,7 @@ export class ListPostApprovalComponent implements OnInit {
   search() {
     // tslint:disable-next-line:max-line-length
     this.realService.search(this.realForm.value.kindOfNews, this.realForm.value.direction, this.realForm.value.realEstatetType).subscribe(data => {
+      // @ts-ignore
       this.realEstateNews = data.content;
       console.log(data);
     });

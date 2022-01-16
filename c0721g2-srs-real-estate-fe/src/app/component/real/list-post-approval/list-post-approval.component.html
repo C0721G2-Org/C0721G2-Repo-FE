@@ -173,7 +173,7 @@
               <div class="col-md-3 ms-sm-auto col-lg-3 fw-bold">
                 <select class="form-select form-control " aria-label="Default select example" formControlName="kindOfNews"
                         name="alo">
-                  <option value="">Chọn</option>
+                  <option value="">Chọn Loại nhu cầu</option>
                   <option [ngValue]="kindOfNews.id" *ngFor="let kindOfNews of kindOfNewsList">
                     {{kindOfNews.name}}
                   </option>
@@ -182,7 +182,7 @@
               <div class="col-md-3 ms-sm-auto col-lg-3 fw-bold">
                 <select class="form-select form-control " aria-label="Default select example" formControlName="direction"
                         name="alo">
-                  <option value="">Chọn</option>
+                  <option value="">Chọn hướng</option>
                   <option [ngValue]="direction.id" *ngFor="let direction of directionList">
                     {{direction.name}}
                   </option>
@@ -191,7 +191,7 @@
               <div class="col-md-3 ms-sm-auto col-lg-3 fw-bold">
                 <select class="form-select form-control " aria-label="Default select example" formControlName="realEstatetType"
                         name="alo">
-                  <option value="">Chọn</option>
+                  <option value="">Chọn Loại BĐS</option>
                   <option [ngValue]="realEstateType.id" *ngFor="let realEstateType of realEstateTypeList">
                     {{realEstateType.name}}
                   </option>
@@ -224,8 +224,8 @@
                   <td>{{realOfNew.customer.id}}</td>
                   <!--              <td>{{realOfNew.kindOfNew}}</td>-->
                   <td>
-                    <span *ngIf="realOfNew.kindOfNews==1;else noMale ">Ban</span>
-                    <ng-template #noMale>Cho thue</ng-template>
+                    <span *ngIf="realOfNew.kindOfNews==1;else noMale ">Bán</span>
+                    <ng-template #noMale>Cho thuê</ng-template>
                   </td>
                   <td>{{realOfNew.realEstateType.name}}</td>
                   <!--              <td>-->
@@ -270,3 +270,4 @@
     </main>
   </div>
 </div>
+<!--<pagination-controls (pageChange)="page = $event" class="text-center"></pagination-controls>-->
