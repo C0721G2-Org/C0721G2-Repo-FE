@@ -6,6 +6,7 @@ import {EmployeeCreateComponent} from './employee-create/employee-create.compone
 import {EmployeeDeleteComponent} from './employee-delete/employee-delete.component';
 import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
+import {ShareModule} from "../share/share.module";
 
 
 @NgModule({
@@ -15,10 +16,11 @@ import {EmployeeListComponent} from './employee-list/employee-list.component';
     EmployeeEditComponent,
     EmployeeListComponent,
   ],
-  imports: [
-    CommonModule,
-    EmployeeRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        EmployeeRoutingModule,
+        ShareModule
+    ]
 })
 export class EmployeeModule {
 }

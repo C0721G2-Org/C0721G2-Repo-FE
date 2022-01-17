@@ -13,13 +13,18 @@
       <div class="col-12">
         <i class="far fa-user user-icon"></i>
         <input type="email" class="form-control input-height" id="username" formControlName="username" placeholder="Tên đăng nhập/Email">
+        <small *ngIf="userForm.get('username').touched && userForm.get('username').errors?.required"
+               class="text-danger">Tên đăng nhập không được để trống!</small>
       </div>
       <div class="mb-3 col-12">
         <i class="far fa-lock password-icon"></i>
         <input type="password" class="form-control input-height" formControlName="password" placeholder="Mật khẩu">
+        <small *ngIf="userForm.get('password').touched && userForm.get('password').errors?.required"
+               class="text-danger">Mật khẩu không được để trống!</small>
       </div>
       <div class="col-12">
-        <button type="submit" class="btn bg-gradient-info text-white shadow border-0 mb-3 w-100 p-2 border-btn-login fw-bold ">Đăng nhập</button>
+        <button type="submit" [disabled]="this.userForm.invalid" class="btn bg-gradient-info text-white shadow border-0 mb-3 w-100 p-2 border-btn-login fw-bold ">
+          Đăng nhập</button>
       </div>
       <div class="text-center mb-2 col-12">
         <small class="text-danger">{{this.errorMessage}}</small>

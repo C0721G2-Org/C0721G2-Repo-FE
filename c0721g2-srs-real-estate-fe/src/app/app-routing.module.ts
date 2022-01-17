@@ -6,7 +6,9 @@ import {AuthGuard} from './helpers/auth.guard';
 const routes: Routes = [
   {
     path: 'customer',
-    loadChildren: () => import('./component/customer/customer.module').then(module => module.CustomerModule)
+    loadChildren: () => import('./component/customer/customer.module').then(module => module.CustomerModule),
+    canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
   },
   {
     path: 'employee',

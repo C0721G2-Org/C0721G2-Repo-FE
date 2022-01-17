@@ -7,6 +7,7 @@ import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerDetailComponent} from './customer-detail/customer-detail.component';
 import {CustomerDeleteComponent} from './customer-delete/customer-delete.component';
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
+import {ShareModule} from "../share/share.module";
 
 @NgModule({
   declarations: [CustomerEditComponent,
@@ -15,9 +16,10 @@ import {CustomerCreateComponent} from './customer-create/customer-create.compone
     CustomerDeleteComponent,
     CustomerCreateComponent,
   ],
-  imports: [
-    CommonModule,
-    CustomerRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        CustomerRoutingModule,
+        ShareModule
+    ]
 })
 export class CustomerModule { }

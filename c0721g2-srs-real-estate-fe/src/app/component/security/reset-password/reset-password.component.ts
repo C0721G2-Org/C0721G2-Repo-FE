@@ -12,6 +12,7 @@ export class ResetPasswordComponent implements OnInit {
   userForm: FormGroup;
   messageSuccess: string;
   messageError: string;
+  isSubmit = false;
 
   constructor(public dialogResetPassword: MatDialogRef<ResetPasswordComponent>,
               private formBuilder: FormBuilder,
@@ -29,15 +30,19 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isSubmit = true;
     this.authService.requestResetPassword(this.userForm.value.email).subscribe(
       data => {
+        this.isSubmit = false;
         this.messageSuccess = 'Đã gửi Email xác nhận.';
         this.messageError = '';
       },
       err => {
+        this.isSubmit = false;
         // @ts-ignore
         this.messageError = 'Email của bạn không tồn tại trong hệ thống. Bạn vui lòng điền đúng Email đã đăng kí ' +
           '(hoặc liên hệ với chúng tôi để được giúp đỡ)';
+
       }
     );
   }

@@ -73,7 +73,13 @@ export class LoginComponent implements OnInit {
       console.log('token: ' + this.tokenStorageService.getUser().jwtToken);
       this.userForm.reset();
       this.dialogRef.close();
-      this.router.navigate(['/real-estate-new/list']);
+      if (this.roles.indexOf('ROLE_CUSTOMER') !== -1) {
+        this.router.navigate(['/real-estate-new/list']);
+      } else if (this.roles.indexOf('ROLE_EMPLOYEE') !== -1) {
+        this.router.navigate(['/customer/list']);
+      } else {
+        this.router.navigate(['/employee/list']);
+      }
     }, error => {
       console.log(error);
       this.authService.isLoggedIn = false;
