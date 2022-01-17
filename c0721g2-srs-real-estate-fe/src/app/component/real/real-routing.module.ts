@@ -4,6 +4,7 @@ import {RealDetailComponent} from './real-detail/real-detail.component';
 import {RealListComponent} from './real-list/real-list.component';
 import {RealDeleteComponent} from './real-delete/real-delete.component';
 import {HistoryPostComponent} from './history-post/history-post.component';
+import {RealCreateComponent} from './real-create/real-create.component';
 
 
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'list', component: RealListComponent},
   {path: 'delete', component: RealDeleteComponent},
   {path: 'post-history/:id', component: HistoryPostComponent},
+  {path: 'post', component: RealCreateComponent},
 
 ];
 
