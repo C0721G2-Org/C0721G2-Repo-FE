@@ -23,6 +23,7 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { BottomSheetNotifyComponent } from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {APP_BASE_HREF} from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import {APP_BASE_HREF} from '@angular/common';
     AngularFireFunctionsModule,
     MatButtonModule,
     MatBottomSheetModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   entryComponents: [BottomSheetNotifyComponent],

@@ -127,7 +127,7 @@
                 </button>
               </div>
               <div class="btn-group me-2 float-right">
-                <button class="btn btn-secondary customBtn" type="submit">Hủy</button>
+                <button class="btn btn-secondary customBtn" type="submit" (click)="clearAll()">Hủy</button>
               </div>
             </div>
           </form>
@@ -145,11 +145,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Bạn có muốn đăng bài?
+        Bạn có muốn đăng bài? (xác nhận sau khi ảnh được upload)
+        <div class="progress" *ngIf="uploadPercent | async as progress">
+          <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': progress + '%' }"></div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>
-        <button type="button" class="btn btn-primary" (click)="post()">Xác nhận</button>
+        <button type="button" class="btn btn-primary" (click)="post()" [disabled]="!confirm">Xác nhận</button>
       </div>
     </div>
   </div>

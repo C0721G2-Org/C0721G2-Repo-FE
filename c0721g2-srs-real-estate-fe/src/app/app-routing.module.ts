@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {RealListComponent} from "./component/real/real-list/real-list.component";
+import {RealListComponent} from './component/real/real-list/real-list.component';
 
 
 const routes: Routes = [
