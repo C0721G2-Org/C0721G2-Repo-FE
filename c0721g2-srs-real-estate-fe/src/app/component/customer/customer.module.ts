@@ -7,17 +7,30 @@ import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerDetailComponent} from './customer-detail/customer-detail.component';
 import {CustomerDeleteComponent} from './customer-delete/customer-delete.component';
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+
+
 
 @NgModule({
-  declarations: [CustomerEditComponent,
-    CustomerListComponent,
-    CustomerDetailComponent,
-    CustomerDeleteComponent,
-    CustomerCreateComponent,
-  ],
-  imports: [
-    CommonModule,
-    CustomerRoutingModule
-  ]
+    declarations: [CustomerEditComponent,
+        CustomerListComponent,
+        CustomerDetailComponent,
+        CustomerDeleteComponent,
+        CustomerCreateComponent,
+    ],
+    exports: [
+        CustomerListComponent
+    ],
+    imports: [
+        CommonModule,
+        CustomerRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+    ]
 })
 export class CustomerModule { }

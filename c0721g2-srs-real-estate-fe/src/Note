@@ -13,3 +13,18 @@ copy dán vào file angula.json
 3. Set Material
 ng add @angular/material
 b1: Import MalDialogModule vào app module
+<<<<<<< HEAD
+
+
+
+thien them vao
+ngx-toastr
+npm install ngx-toastr --save
+npm install @angular/animations --save
+
+trong angular.json:
+ "node_modules/ngx-toastr/toastr.css"
+=======
+npm install --save @angular/material @angular/cdk
+npm install --save @angular/material @angular/cdk @angular/animations
+>>>>>>> 2dcfb21a045e891c69adbac6b388d46cfe1a2f69
