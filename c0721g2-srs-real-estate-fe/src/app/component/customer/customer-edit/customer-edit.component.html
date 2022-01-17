@@ -107,6 +107,7 @@
               </div>
             </div>
           </form>
+                <span [class.alert-danger]="message" (message)="message" [textContent]="message">{{'message'}}</span>
         </div>
       </div>
     </div>

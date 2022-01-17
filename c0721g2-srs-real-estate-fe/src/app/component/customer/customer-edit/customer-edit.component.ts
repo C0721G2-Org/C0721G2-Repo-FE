@@ -16,7 +16,7 @@ export class CustomerEditComponent implements OnInit {
   customerForm: FormGroup;
   id: string;
   customer: Customer;
-
+  message = '';
   constructor(private customerService: CustomerService,
               private activatedRoute: ActivatedRoute,
               private router: Router) {
@@ -45,6 +45,10 @@ export class CustomerEditComponent implements OnInit {
   updateCustomer(): void {
     this.customerService.update(this.id, this.customerForm.value).subscribe(value => {
       this.router.navigateByUrl('customer');
+      this.message = 'đã thay đổi thông tin thành công';
+    },
+        error => {
+      this.message = 'Xảy ra lỗi, không thể thay đổi thông tin';
     });
   }
 
