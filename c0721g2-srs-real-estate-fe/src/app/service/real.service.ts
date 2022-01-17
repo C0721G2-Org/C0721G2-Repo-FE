@@ -11,10 +11,12 @@ import {RealEstateType} from '../model/real/real-estate-type';
   providedIn: 'root'
 })
 export class RealService {
+  private API = 'http://localhost:8080/real-estate-new';
   private API_URL = ' http://localhost:8080/api/real-estate-new';
   private API_URL_RELATED = 'http://localhost:8080/api/real-estate-related';
   private API_URL_HISTORY_POST = ' http://localhost:8080/api/real-estate-new/history-post';
   private API_URL_EMAIL = ' http://localhost:8080/api/real-estate-new/email';
+
   // khaipn
   private API_URL_LIST = 'http://localhost:8080/api/real-estate-new/search';
   // khaipn
@@ -50,13 +52,15 @@ export class RealService {
   sendMail(email): Observable<Email> {
     return this.http.post<Email>(this.API_URL_EMAIL, email);
   }
-// khaiPN
+  // khaiPN
   getAllRealEstates(): Observable<any> {
     return this.http.get(this.API_URL_LIST);
   }
 
-// KhaiPN
-  getAllRealEstatesSearch(address: string, realEstateType: any, direction: any, minArea: any, maxArea: any, minPrice: string, maxPrice: string, page: number = 0): Observable<any> {
+  // KhaiPN
+
+  getAllRealEstatesSearch(address: string, realEstateType: any, direction: any,
+                          minArea: any, maxArea: any, minPrice: string, maxPrice: string, page: number = 0): Observable<any> {
     const stringParam = this.buildSearchParam('?address=', address) +
       this.buildSearchParam('&realEstateType=', realEstateType) +
       this.buildSearchParam('&direction=', direction) +
@@ -87,6 +91,23 @@ export class RealService {
       return searchKey + '';
     }
     return searchKey + value.toString();
+
+  }
+
+  getAllListPostApproval(): Observable<any> {
+    return this.http.get(this.API + '/list');
+  }
+
+  search(page: number, kindOfNews: string, direction: string, realEstateType: string): Observable<any> {
+    return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
+  }
+
+  approve(id: string): Observable<any> {
+    return this.http.delete(this.API + '/approve' + id);
+  }
+
+  getById(id): Observable<RealEstateNew[]> {
+    return this.http.get<RealEstateNew[]>(this.API + '/' + id).pipe();
   }
 }
 

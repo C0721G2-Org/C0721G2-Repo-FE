@@ -1,1 +1,27 @@
-<p>detail-post-approval works!</p>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <p class="modal-title fs-4 text-center text-success">Bạn có muốn xóa nhân viên</p>
+    </div>
+    <div class="modal-body fs-6 fw-bold text-danger">
+      <table class="table">
+        <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Tên: </td>
+          <td>{{realEstateNews.id}}</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Chứng minh nhân dân: </td>
+          <td>{{realEstateNews.address}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)=" onNoClick()">Thoát</button>
+      <button type="button" class="btn btn-danger" (click)="deleteMedical()">Xoá</button>
+    </div>
+  </div>
+</div>

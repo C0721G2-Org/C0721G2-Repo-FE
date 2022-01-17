@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListPostApprovalComponent } from './list-post-approval.component';
+import { ShowModalComponent } from './show-modal.component';
 
-describe('ListPostApprovalComponent', () => {
-  let component: ListPostApprovalComponent;
-  let fixture: ComponentFixture<ListPostApprovalComponent>;
+describe('ShowModalComponent', () => {
+  let component: ShowModalComponent;
+  let fixture: ComponentFixture<ShowModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListPostApprovalComponent ]
+      declarations: [ ShowModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListPostApprovalComponent);
+    fixture = TestBed.createComponent(ShowModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

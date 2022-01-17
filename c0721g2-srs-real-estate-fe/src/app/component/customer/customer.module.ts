@@ -22,9 +22,11 @@ import {UpdatePasswordComponent} from './update-password/update-password.compone
     CustomerCreateComponent,
     UpdatePasswordComponent
   ],
-  exports: [
-    CustomerListComponent
-  ],
+    exports: [
+        CustomerListComponent,
+        CustomerDetailComponent,
+        CustomerCreateComponent
+    ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
