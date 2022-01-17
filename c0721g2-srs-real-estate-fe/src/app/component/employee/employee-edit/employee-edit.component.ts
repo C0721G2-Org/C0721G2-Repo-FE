@@ -35,20 +35,21 @@ export class EmployeeEditComponent implements OnInit {
   ngOnInit(): void {
     this.employeeForm = this.fb.group({
       id: new FormControl(''),
-      name: this.fb.control('', [Validators.required]),
+      name: this.fb.control('', [Validators.required,
+        Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
       email: this.fb.control('', [Validators.required,
         Validators.pattern('^[a-zA-Z0-9_!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-z]{2,6}$')]),
       phoneNumber: this.fb.control('', [Validators.required,
         Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
       address: this.fb.control('', [Validators.required,
         Validators.pattern('')]),
-      dateOfBirth: this.fb.control(''),
+      dateOfBirth: this.fb.control('', [Validators.required]),
       idCard: this.fb.control('',
         [Validators.required, Validators.pattern('^\\d{9}$|\\d{12}$')]),
-      gender: this.fb.control(''),
-      degreeDTO: this.fb.control(''),
-      positionDTO: this.fb.control(''),
-      roleDTO: this.fb.control('')
+      gender: this.fb.control('', [Validators.required]),
+      degreeDTO: this.fb.control('', [Validators.required]),
+      positionDTO: this.fb.control('', [Validators.required]),
+      roleDTO: this.fb.control('', [Validators.required])
     });
     this.subscription = this.positionService.getAllPosition().subscribe(data => {
       this.positions = data;

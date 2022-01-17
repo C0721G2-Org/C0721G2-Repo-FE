@@ -19,25 +19,28 @@ import {EmployeeDTO} from '../../../model/employee/employee-dto';
 export class EmployeeCreateComponent implements OnInit {
 
   employeeForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    name: new FormControl('', [Validators.required,
+      Validators.maxLength(40), Validators.minLength(6),
+      Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\s[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
     email: new FormControl('',
       [Validators.required, Validators.pattern('^[a-zA-Z0-9_!#$%&\'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+.[a-z]{2,6}$')]),
     phoneNumber: new FormControl('',
       [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
     address: new FormControl('',
       [Validators.required, Validators.pattern('')]),
-    dateOfBirth: new FormControl(''),
+    dateOfBirth: new FormControl('', [Validators.required]),
     idCard: new FormControl('', [Validators.required,
       Validators.pattern('^\\d{9}$|\\d{12}$')]),
     gender: new FormControl(0),
-    degreeDTO: new FormControl(null),
-    positionDTO: new FormControl(null),
+    degreeDTO: new FormControl(null, [Validators.required]),
+    positionDTO: new FormControl(null, [Validators.required]),
     roleDTO: new FormControl(2)
   });
   subscription: Subscription;
   positions: Positions[];
   degrees: Degree[];
   employee: EmployeeDTO;
+  validateErrorEmail: string;
 
   constructor(private employeeService: EmployeeService,
               private router: Router,
@@ -125,10 +128,10 @@ export class EmployeeCreateComponent implements OnInit {
       console.log(this.employeeForm.value);
       this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
           // console.log(this.customer);
-          alert('Tạo mới thành công');
-          this.router.navigate(['/employee']);
+          this.router.navigate(['/employee/list']);
         }
         , error => {
+          this.validateErrorEmail = error.error.errorEmail;
           console.log('Not found');
         });
     }

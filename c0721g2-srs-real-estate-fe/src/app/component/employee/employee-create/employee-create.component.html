@@ -21,6 +21,10 @@
                 trống.</small>
               <small style="color: red"
                      *ngIf="name.hasError('pattern')&& (name.dirty || name.touched)">Tên không đúng định dạng.</small>
+              <small style="color: red"
+                     *ngIf="name.hasError('minlength')&& (name.dirty || name.touched)">Tên phải từ 6 đến 40 ký tự.</small>
+              <small style="color: red"
+                     *ngIf="name.hasError('maxlength')&& (name.dirty || name.touched)">Tên phải từ 6 đến 40 ký tự.</small>
             </div>
             <div class="col-md-6 position-relative">
               <label for="date" class="form-label">Ngày sinh<span
@@ -44,6 +48,8 @@
               <small style="color: red"
                      *ngIf="email.hasError('pattern') && (email.dirty || email.touched)">Email không đúng định
                 dạng.</small>
+              <small style="color: red"
+                     *ngIf="validateErrorEmail && (email.dirty || email.touched)">Email đã tồn tại</small>
             </div>
 
             <div class="col-md-4 col-sm-4 position-relative">
@@ -146,7 +152,8 @@
             <div class=" btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
                  aria-label="Toolbar with button groups">
               <div class="btn-group me-2">
-                <button class="btn btn-success" type="submit">Lưu
+                <button class="btn btn-success" type="submit" data-bs-toggle="modal" data-bs-target="#Modal"
+                        [disabled]="employeeForm.invalid">Lưu
                 </button>
               </div>
               <div class="btn-group me-2">
@@ -159,3 +166,22 @@
     </div>
   </div>
 </main>
+
+<!--Modal của thịnh-->
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Thêm mới nhân viên thành công
+      </div>
+      <div class="modal-footer">
+        <!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>-->
+        <button type="button" class="btn btn-primary">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>
