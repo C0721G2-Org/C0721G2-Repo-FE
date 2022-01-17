@@ -11,9 +11,12 @@ import {EmployeeModule} from './component/employee/employee.module';
 import {SecurityModule} from './component/security/security.module';
 import {ShareModule} from './component/share/share.module';
 import {CustomerDetailComponent} from './component/customer/customer-detail/customer-detail.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ShowModalComponent } from './show-modal/show-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ShowModalComponent,
   ],
   imports: [
     EmployeeModule,
@@ -26,6 +29,7 @@ import {CustomerDetailComponent} from './component/customer/customer-detail/cust
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    NoopAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,11 +6,12 @@ export interface Customer {
   address?: string;
   dateOfBirth?: string;
   email?: string;
-  gender?: string;
+  gender?: number;
   name?: string;
   idCard?: string;
   phoneNumber?: string;
   appUser?: AppUser;
   image?: Image;
   userName?: string;
+  password?: string;
 }

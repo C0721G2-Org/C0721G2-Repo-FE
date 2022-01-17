@@ -13,8 +13,8 @@ import {Router} from '@angular/router';
 export class CustomerCreateComponent implements OnInit {
   private subscription: Subscription;
   createCustomer: FormGroup = new FormGroup({});
-  validateError: string;
- // check: string = Error.module.('app',['ngMessages']);
+  validateErrorEmail: string;
+  validateErrorUsername: string;
 
 
 
@@ -22,19 +22,19 @@ export class CustomerCreateComponent implements OnInit {
               private customerService: CustomerService,
               private router: Router) {
     this.createCustomer = formBuilder.group({
-      name: this.formBuilder.control(''),
-      email: this.formBuilder.control(''),
-      address: this.formBuilder.control(''),
-      idCard: this.formBuilder.control(''),
-      dateOfBirth: this.formBuilder.control(''),
-      phoneNumber: this.formBuilder.control(''),
-      gender: this.formBuilder.control('1'),
-      password: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.pattern('^([^0-9]{2,100})$')]],
+      email: ['', [Validators.required, Validators.email]],
+      address: this.formBuilder.control('', Validators.required),
+      idCard: ['', [Validators.required, Validators.pattern('^([0-9]{9,12})$')]],
+      dateOfBirth: this.formBuilder.control('', Validators.required),
+      phoneNumber: ['', [Validators.required, Validators.pattern('^([0-9]{8,12})$')]],
+      gender: [2, Validators.required],
+      password: ['', [Validators.required, Validators.min(6), Validators.max(200)]],
       confirmPassword: ['', [Validators.required]],
-      userName: this.formBuilder.control('')
-      // idCard: ['', Validators.required, Validators.pattern('^([0-9]{9})|([0-9]{12})$')]
+      userName:  ['', [Validators.required, Validators.min(2), Validators.max(100)]],
+      // , Validators.pattern('^([0-9]{9})|([0-9]{12})$')
     }, {
-      validator: this.checkPassword('password', 'confirmPassword')
+      validator: this.checkPassword('passWord', 'confirmPassword')
     });
   }
 
@@ -51,18 +51,12 @@ export class CustomerCreateComponent implements OnInit {
           console.log(data);
           alert('bạn đã đăng nhập thành công');
         }, error => {
-          console.log(error.error);
-          console.log(error);
-          this.validateError = error;
-        }
+        console.log(error.error);
+        console.log(error);
+        this.validateErrorEmail = error.error.errorEmail;
+        this.validateErrorUsername = error.error.errorUsername;
+      }
       );
-      // this.customerService.saveCustomer(this.createCustomer.value).subscribe(
-      //   data => {
-      //     alert('đã đăng nhập thành công');
-      //   }, error => {
-      //     console.log(error);
-      //   }
-      // );
     }
   }
 

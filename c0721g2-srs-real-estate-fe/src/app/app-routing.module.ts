@@ -12,7 +12,11 @@ import {CustomerDetailComponent} from './component/customer/customer-detail/cust
 const routes: Routes = [{
   path: 'customers/create',
   component: CustomerCreateComponent
-},
+}
+//   {
+//   path: 'detail/:id',
+//   component: CustomerDetailComponent
+// }
 ];
 
 @NgModule({
