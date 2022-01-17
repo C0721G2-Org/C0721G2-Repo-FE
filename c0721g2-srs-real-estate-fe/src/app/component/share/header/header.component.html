@@ -79,10 +79,12 @@
                   <span style="font-size: 85%">Thay đổi mật khẩu</span>
                 </a>
               </li>
-              <li (click)="logout()"><a class="dropdown-item hvr-float " href="#">
+              <li >
+                <a class="dropdown-item hvr-float " (click)="logout()" >
                 <i class="fas fa-sign-out-alt me-2 "></i>
                 <span style="font-size: 85%" >Đăng xuất</span>
-              </a></li>
+              </a>
+              </li>
             </ul>
           </li>
           <button class=" navbar-brand btn btn-success text-white d-flex" type="submit">Đăng tin</button>

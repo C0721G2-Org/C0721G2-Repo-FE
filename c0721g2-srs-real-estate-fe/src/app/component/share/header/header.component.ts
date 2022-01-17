@@ -13,7 +13,7 @@ import {AuthService} from '../../../service/auth.service';
 export class HeaderComponent implements OnInit {
   username: string;
   role: string;
-  urlImg = 'https://mdbootstrap.com/img/Photos/Avatars/img%20(30).jpg';
+  urlImg: string;
   isLoggedIn: boolean;
 
   constructor(public dialog: MatDialog,
@@ -44,6 +44,6 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.tokenStorageService.signOut();
     this.ngOnInit();
-    this.router.navigateByUrl('/home');
+    this.router.navigate(['/real-estate-new/list']);
   }
 }
