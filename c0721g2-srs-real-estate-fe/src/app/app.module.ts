@@ -17,12 +17,15 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireFunctionsModule} from '@angular/fire/functions';
 import {AngularFireModule} from '@angular/fire';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
-import { BottomSheetNotifyComponent } from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
+import {BottomSheetNotifyComponent} from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {APP_BASE_HREF} from '@angular/common';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+
 
 
 @NgModule({
@@ -50,7 +53,10 @@ import {APP_BASE_HREF} from '@angular/common';
     AngularFireFunctionsModule,
     MatButtonModule,
     MatBottomSheetModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   entryComponents: [BottomSheetNotifyComponent],
