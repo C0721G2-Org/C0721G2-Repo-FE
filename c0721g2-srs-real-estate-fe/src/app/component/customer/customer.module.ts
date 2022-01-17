@@ -24,6 +24,7 @@ import {UpdatePasswordComponent} from './update-password/update-password.compone
   ],
     exports: [
         CustomerListComponent,
+        CustomerDetailComponent,
         CustomerCreateComponent
     ],
   imports: [

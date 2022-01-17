@@ -34,7 +34,6 @@ import {EmployeeModule} from './component/employee/employee.module';
     BottomSheetNotifyComponent
   ],
   imports: [
-    CustomerModule,
     SecurityModule,
     RealModule,
     ShareModule,
@@ -56,9 +55,6 @@ import {EmployeeModule} from './component/employee/employee.module';
     MatDialogModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    EmployeeModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   entryComponents: [BottomSheetNotifyComponent],

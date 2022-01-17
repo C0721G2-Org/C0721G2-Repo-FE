@@ -5,7 +5,6 @@ import {HttpClient} from '@angular/common/http';
 import {AppUser} from '../model/user/app-user';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,23 +14,27 @@ export class CustomerService {
   private API = 'http://localhost:8080/api/customers';
   private API1 = 'http://localhost:8080/customerInformation/';
   private API2 = 'http://localhost:8080/account/';
+  private API_URL = 'http://localhost:8080/api/customers';
 
   constructor(
     public http: HttpClient,
   ) {
   }
+
   // thienlb
   getCustomerById(customerId): Observable<any> {
     return this.http.get(this.API + '/' + customerId);
   }
+
   // thienlb
   deleteCustomer(customerId): Observable<any> {
     return this.http.delete(this.API + '/delete-customer/' + customerId);
   }
+
   // thienlb
   findCustomer(page, customerName, customerPhone, customerEmail): Observable<any> {
     return this.http.get(this.API + '/customer-list?page=' + page + '&name=' +
-      + '&phone=' + customerPhone + '&email=' + customerEmail);
+      +'&phone=' + customerPhone + '&email=' + customerEmail);
   }
 
   // thiện nhỏ
@@ -49,5 +52,10 @@ export class CustomerService {
 
   finduserbyusername(username: string): Observable<AppUser> {
     return this.http.get<AppUser>(this.API2 + `userName/` + username);
+  }
+
+  // Tung
+  saveCustomer(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(this.API_URL + '/create', customer);
   }
 }
