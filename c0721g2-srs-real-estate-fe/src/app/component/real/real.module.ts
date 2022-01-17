@@ -13,6 +13,8 @@ import {RealCreateComponent} from './real-create/real-create.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EmailComponent} from './email/email.component';
 
+
+
 @NgModule({
     declarations: [RealListComponent,
         RealDeleteComponent,

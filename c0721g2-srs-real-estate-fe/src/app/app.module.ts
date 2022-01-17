@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {CustomerModule} from './component/customer/customer.module';
 import {RealModule} from './component/real/real.module';
 import {SecurityModule} from './component/security/security.module';
@@ -22,11 +22,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import { BottomSheetNotifyComponent } from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {APP_BASE_HREF} from '@angular/common';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    BottomSheetNotifyComponent,
+    BottomSheetNotifyComponent
   ],
   imports: [
     CustomerModule,
@@ -50,7 +52,7 @@ import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
     MatBottomSheetModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   entryComponents: [BottomSheetNotifyComponent],
   bootstrap: [AppComponent]
 })
