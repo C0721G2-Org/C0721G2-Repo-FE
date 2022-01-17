@@ -5,7 +5,7 @@ import {RealListComponent} from './real-list/real-list.component';
 import {RealDeleteComponent} from './real-delete/real-delete.component';
 import {HistoryPostComponent} from './history-post/history-post.component';
 import {RealCreateComponent} from './real-create/real-create.component';
-
+import {ListPostApprovalComponent} from './list-post-approval/list-post-approval.component';
 
 
 const routes: Routes = [
@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'delete', component: RealDeleteComponent},
   {path: 'post-history/:id', component: HistoryPostComponent},
   {path: 'post', component: RealCreateComponent},
-
+  {path: 'list-post-approval', component: ListPostApprovalComponent},
 ];
 
 @NgModule({
