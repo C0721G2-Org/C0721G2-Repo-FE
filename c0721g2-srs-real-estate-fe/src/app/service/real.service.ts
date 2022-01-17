@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {RealEstateNew} from '../model/real/real-estate-new';
 import {Email} from '../model/real/email';
@@ -23,8 +23,16 @@ export class RealService {
   private API_URL_REAL_ESTATE_TYPE = 'http://localhost:8080/dealEstateType';
   // khaipn
   private API_URL_DIRECTION = 'http://localhost:8080/direction';
+  httpOptions: any;
 
   constructor(private http: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+    };
   }
 
   getAllDirection(): Observable<Direction[]> {
@@ -52,9 +60,10 @@ export class RealService {
   sendMail(email): Observable<Email> {
     return this.http.post<Email>(this.API_URL_EMAIL, email);
   }
+
   // khaiPN
   getAllRealEstates(): Observable<any> {
-    return this.http.get(this.API_URL_LIST);
+    return this.http.get(this.API_URL_LIST, this.httpOptions);
   }
 
   // KhaiPN
@@ -71,21 +80,21 @@ export class RealService {
       this.buildSearchParam('&page=', page);
 
     return this.http.get(this.API_URL_LIST +
-      stringParam
+      stringParam, this.httpOptions
     );
   }
 
-// khaiPN
+  // khaiPN
   getAllRealEstateTypes(): Observable<any> {
     return this.http.get(this.API_URL_REAL_ESTATE_TYPE);
   }
 
-// khaiPN
+  // khaiPN
   getAllDirections(): Observable<any> {
     return this.http.get(this.API_URL_DIRECTION);
   }
 
-// khaiPN
+  // khaiPN
   private buildSearchParam(searchKey: string, value: string | number): string {
     if (!value) {
       return searchKey + '';

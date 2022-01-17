@@ -9,9 +9,9 @@ import {UpdatePasswordComponent} from './update-password/update-password.compone
 
 
 const routes: Routes = [
-  {path: 'customer-list', component: CustomerListComponent},
-  {path: 'customer-detail/:id', component: CustomerDetailComponent},
-  {path: 'customer-delete', component: CustomerDeleteComponent},
+  {path: 'list', component: CustomerListComponent},
+  {path: 'detail/:id', component: CustomerDetailComponent},
+  {path: 'delete', component: CustomerDeleteComponent},
   {path: 'create', component: CustomerCreateComponent},
   {path: 'edit', component: CustomerEditComponent},
   {path: 'change-password', component: UpdatePasswordComponent},

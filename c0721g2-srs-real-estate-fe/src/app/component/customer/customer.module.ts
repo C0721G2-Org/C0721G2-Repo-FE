@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UpdatePasswordComponent} from './update-password/update-password.component';
 
 
+
 @NgModule({
   declarations: [CustomerEditComponent,
     CustomerListComponent,

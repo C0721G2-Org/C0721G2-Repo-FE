@@ -15,28 +15,31 @@ import {EmailComponent} from './email/email.component';
 import {RealCreateComponent} from './real-create/real-create.component';
 
 
-
 @NgModule({
-    declarations: [RealListComponent,
-        RealDeleteComponent,
-        RealDetailComponent,
-        HistoryPostComponent,
-        DetailPostApprovalComponent,
-        DeletePostApprovalComponent,
-        ListPostApprovalComponent,
-        RealCreateComponent,
-        EmailComponent],
+  declarations: [RealListComponent,
+    RealDeleteComponent,
+    RealDetailComponent,
+    HistoryPostComponent,
+    DetailPostApprovalComponent,
+    DeletePostApprovalComponent,
+    ListPostApprovalComponent,
+    RealCreateComponent,
+    EmailComponent],
   exports: [
     RealCreateComponent,
     RealDeleteComponent,
-    RealDetailComponent
-  ],
+    RealDetailComponent,
+    HistoryPostComponent,
+    DetailPostApprovalComponent,
+    DeletePostApprovalComponent,
+    ListPostApprovalComponent,
+    RealCreateComponent],
   imports: [
     CommonModule,
     RealRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule]
 })
+
 export class RealModule {
 }
