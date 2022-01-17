@@ -9,6 +9,7 @@ import {CustomerModule} from './component/customer/customer.module';
 import {RealModule} from './component/real/real.module';
 import {SecurityModule} from './component/security/security.module';
 import {ShareModule} from './component/share/share.module';
+
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
@@ -24,8 +25,6 @@ import {BottomSheetNotifyComponent} from './component/util/bottom-sheet-notify/b
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {APP_BASE_HREF} from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
-
 
 
 @NgModule({
@@ -56,7 +55,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   entryComponents: [BottomSheetNotifyComponent],
