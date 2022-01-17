@@ -27,13 +27,18 @@ export class RealService {
     return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
   }
 
-  delete(id: number): Observable<any> {
-    return this.http.delete(this.API + '/' + id);
+  // delete(id: number): Observable<any> {
+  //   return this.http.delete(this.API + '/' + id);
+  // }
+
+  approve(id: string): Observable<any> {
+    return this.http.delete(this.API + '/approve' + id);
   }
 
   getById(id): Observable<RealEstateNew[]> {
     return this.http.get<RealEstateNew[]>(this.API + '/' + id).pipe();
   }
+
 
   getAllDirection(): Observable<Direction[]> {
     return this.http.get<Direction[]>(this.API_URL_RELATED + '/direction');

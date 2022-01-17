@@ -21,12 +21,12 @@ export class DeletePostApprovalComponent implements OnInit {
   cancel(): void {
     this.dialogRef.close();
   }
-  delete() {
-    this.realService.delete(this.id).subscribe(() => {
-      this.dialogRef.close();
-      this.alert();
-    });
-  }
+  // delete() {
+  //   this.realService.delete(this.id).subscribe(() => {
+  //     this.dialogRef.close();
+  //     this.alert();
+  //   });
+  // }
 
   alert() {
     console.log('Delete successfuly!!!', 'title');

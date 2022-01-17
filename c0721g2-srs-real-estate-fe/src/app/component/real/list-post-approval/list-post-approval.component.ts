@@ -4,6 +4,7 @@ import {RealService} from '../../../service/real.service';
 import {MatDialog} from '@angular/material/dialog';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
+import {DetailPostApprovalComponent} from "../detail-post-approval/detail-post-approval.component";
 
 @Component({
   selector: 'app-list-post-approval',
@@ -115,5 +116,20 @@ export class ListPostApprovalComponent implements OnInit {
   onsubmit() {
     this.flag = false;
     this.search();
+  }
+
+  openDialog(id: string) {
+    this.realService.getById(id).subscribe(approveData => {
+      const dialogRef = this.dialog.open(DetailPostApprovalComponent, {
+        width: '500px',
+        panelClass: 'custom-dialog-tai',
+        data: {approveData},
+        disableClose: true
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        this.ngOnInit();
+      });
+    });
   }
 }
