@@ -10,11 +10,12 @@ import {ListPostApprovalComponent} from './list-post-approval/list-post-approval
 
 const routes: Routes = [
   {path: 'detail/:id', component: RealDetailComponent},
-  {path: 'list', component: RealListComponent},
+  {path: 'list', redirectTo: '/home', pathMatch: 'full'},
+  {path: 'home', component: RealListComponent},
   {path: 'delete', component: RealDeleteComponent},
   {path: 'post-history/:id', component: HistoryPostComponent},
-  {path: 'post', component: RealCreateComponent},
   {path: 'list-post-approval', component: ListPostApprovalComponent},
+  {path: 'create', component: RealCreateComponent},
 ];
 
 @NgModule({
