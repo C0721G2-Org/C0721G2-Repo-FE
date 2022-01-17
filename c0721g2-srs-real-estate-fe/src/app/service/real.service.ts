@@ -28,7 +28,7 @@ export class RealService {
   }
 
   save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
-    return this.http.post<RealEstateNew>(this.API_URL, realEstateNew);
+    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
   }
 
   findRealEstateNewById(id: string): Observable<RealEstateNew> {

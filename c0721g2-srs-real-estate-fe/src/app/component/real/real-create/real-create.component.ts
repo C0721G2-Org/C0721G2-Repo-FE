@@ -8,6 +8,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
+import {log} from 'util';
 
 
 
@@ -25,7 +26,8 @@ export class RealCreateComponent implements OnInit{
   selectFiles: FileList;
   files: File[];
   urls = new Array<string>();
-  uploadUrls = new Array<string>();
+  uploadUrls = new Array();
+  urlsString = '';
   imgMess: string;
   imgdetect = false;
 
@@ -47,7 +49,8 @@ export class RealCreateComponent implements OnInit{
       direction: [null],
       status: [null],
       realEstateType: [1],
-      imageList: []
+      imageList: [],
+      urls: [],
     }
   );
 
@@ -57,15 +60,13 @@ export class RealCreateComponent implements OnInit{
               private db: AngularFireStorage, private notify: AngularFireDatabase) {
     const items: AngularFireList<any> = notify.list('/notifies');
     items.valueChanges().subscribe(
-      x => {this.notifies = x;
-            console.log(x); }
+      x => {this.notifies = x; }
     );
 
 
     this.subscription = this.realService.getAllDirection().subscribe(
       data => {
         this.directions = data;
-        console.log(data);
       }, error => {
         console.log(error);
       }
@@ -73,7 +74,6 @@ export class RealCreateComponent implements OnInit{
     this.subscription = this.realService.getAllRealEstateType().subscribe(
       data => {
         this.realTypes = data;
-        console.log(data);
       }, error => {
         console.log(error);
       }
@@ -89,24 +89,21 @@ export class RealCreateComponent implements OnInit{
     this.notify.list<any>('/notifies').push({mess, time, date});
   }
 
-  delete(item){
-    console.log(123);
-    console.log(item);
-    const db = this.notify.database.ref();
-    const query = this.notify.database.ref('/notifies').orderByKey();
-    query.once('value')
-      .then(snapshot => {
-        snapshot.forEach(childSnapshot => {
-          const pkey = childSnapshot.key;
-          const chVal = childSnapshot.val();
-          console.log(chVal);
-          if (chVal.date === item.date && chVal.mess === item.mess && chVal.time === item.time){
-            db.child('notifies/' + pkey).remove();
-            return true;
-          }
-        });
-      });
-  }
+  // delete(item){
+  //   const db = this.notify.database.ref();
+  //   const query = this.notify.database.ref('/notifies').orderByKey();
+  //   query.once('value')
+  //     .then(snapshot => {
+  //       snapshot.forEach(childSnapshot => {
+  //         const pkey = childSnapshot.key;
+  //         const chVal = childSnapshot.val();
+  //         if (chVal.date === item.date && chVal.mess === item.mess && chVal.time === item.time){
+  //           db.child('notifies/' + pkey).remove();
+  //           return true;
+  //         }
+  //       });
+  //     });
+  // }
 
   detectFiles(event) {
     this.imgdetect = true;
@@ -140,27 +137,23 @@ export class RealCreateComponent implements OnInit{
   }
 
   onSubmit() {
-    console.log(this.selectFiles);
     if (this.form.valid) {
       console.log('ok');
-
       for (let i = 0; i < this.selectFiles.length; i++) {
         this.upload(i);
       }
-      this.form.value.imageList = this.uploadUrls;
-      console.log(this.form.value);
-      this.news = this.form.value;
-      console.log(this.news);
 
-      this.send(this.form.value.title)
 
-      const templates = [JSON.stringify(this.news)];
-      console.log(templates);
+      // const templates = [JSON.stringify(this.news)];
+      // console.log(templates);
 
-      this.realService.save(this.news);
+      // this.realService.save(this.news).subscribe(data => {
+      //   console.log(data);
+      // }, error => {
+      //   console.log(error);
+      // });
     } else {
       console.log('not');
-      console.log(this.form);
       console.log(this.findInvalidControls());
     }
   }
@@ -188,5 +181,28 @@ export class RealCreateComponent implements OnInit{
         }
       )
     ).subscribe();
+  }
+
+  closeModal() {
+    this.uploadUrls.forEach(url => {
+      this.onDeleteAttachment(url);
+    });
+    this.uploadUrls = new Array();
+  }
+
+  onDeleteAttachment(downloadURL: string) {
+    this.db.storage.refFromURL(downloadURL).delete();
+  }
+
+  post() {
+    this.send(this.form.value.title);
+    const urls = this.uploadUrls.toString();
+    this.news = this.form.value;
+    this.news.urls = urls;
+    this.realService.save(this.news).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
   }
 }

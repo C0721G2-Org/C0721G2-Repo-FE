@@ -17,4 +17,5 @@ export interface RealEstateNew {
   direction: Direction;
   realEstateType: RealEstateType;
   imageList: Image[];
+  urls: string;
 }
