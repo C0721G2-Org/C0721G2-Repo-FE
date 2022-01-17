@@ -44,7 +44,6 @@ export class CustomerEditComponent implements OnInit {
 
   updateCustomer(): void {
     this.customerService.update(this.id, this.customerForm.value).subscribe(value => {
-      this.router.navigateByUrl('customer');
       this.message = 'đã thay đổi thông tin thành công';
     },
         error => {
@@ -57,7 +56,10 @@ export class CustomerEditComponent implements OnInit {
     this.customerForm = new FormGroup({
       // id: new FormControl(''),
       id: new FormControl('', [Validators.required, Validators.pattern('^KH-\\d{4}$')]),
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl('', [Validators.required,
+        Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼ" +\n' +
+        '            "ÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở" +\n' +
+        '            "ỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
       dateOfBirth: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       idCard: new FormControl('', [Validators.required, Validators.pattern(/^\d{9}|\d{12}$/)]),
