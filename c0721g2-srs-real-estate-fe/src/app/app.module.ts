@@ -1,45 +1,56 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { CustomerListComponent } from './component/customer/customer-list/customer-list.component';
-import { CustomerDeleteComponent } from './component/customer/customer-delete/customer-delete.component';
-import { CustomerDetailComponent } from './component/customer/customer-detail/customer-detail.component';
-import { CustomerCreateComponent } from './component/customer/customer-create/customer-create.component';
-import { EmployeeListComponent } from './component/employee/employee-list/employee-list.component';
-import { EmployeeCreateComponent } from './component/employee/employee-create/employee-create.component';
-import { EmployeeDeleteComponent } from './component/employee/employee-delete/employee-delete.component';
-import { EmployeeEditComponent } from './component/employee/employee-edit/employee-edit.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {CustomerModule} from './component/customer/customer.module';
+import {RealModule} from './component/real/real.module';
+import {SecurityModule} from './component/security/security.module';
+import {ShareModule} from './component/share/share.module';
+
+import {SocialLoginModule, SocialAuthServiceConfig} from 'angularx-social-login';
+import {GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import {authInterceptorProviders} from './helpers/auth.interceptor';
+import {JWT_OPTIONS, JwtHelperService} from '@auth0/angular-jwt';
 import {environment} from '../environments/environment';
-import {ReactiveFormsModule} from '@angular/forms';
-import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {AngularFireMessagingModule} from '@angular/fire/messaging';
-import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireMessagingModule} from '@angular/fire/messaging';
 import {AngularFireFunctionsModule} from '@angular/fire/functions';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {ShareModule} from './component/share/share.module';
+import {AngularFireModule} from '@angular/fire';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {BottomSheetNotifyComponent} from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {APP_BASE_HREF} from '@angular/common';
+import {EmployeeModule} from './component/employee/employee.module';
+import {HeaderComponent} from './component/share/header/header.component';
+import {FooterComponent} from './component/share/footer/footer.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerListComponent,
-    CustomerDeleteComponent,
-    CustomerDetailComponent,
-    CustomerCreateComponent,
-    EmployeeListComponent,
-    EmployeeCreateComponent,
-    EmployeeDeleteComponent,
-    EmployeeEditComponent
+    BottomSheetNotifyComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
+    CustomerModule,
+    SecurityModule,
+    RealModule,
+    ShareModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
@@ -47,9 +58,35 @@ import {ShareModule} from './component/share/share.module';
     AngularFireMessagingModule,
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
-    ShareModule
+    MatButtonModule,
+    MatBottomSheetModule,
+    MatDialogModule,
+    SocialLoginModule,
+    BrowserAnimationsModule,
+    EmployeeModule
   ],
-  providers: [],
+  providers: [{
+    provide: 'SocialAuthServiceConfig',
+    useValue: {
+      autoLogin: false,
+      providers: [
+        {
+          id: GoogleLoginProvider.PROVIDER_ID,
+          provider: new GoogleLoginProvider(
+            '298834683029-khkrl7c9u4csbtokm3vbl5ijcc5i6eun.apps.googleusercontent.com'
+          )
+        },
+        {
+          id: FacebookLoginProvider.PROVIDER_ID,
+          provider: new FacebookLoginProvider('636920287629670')
+        }
+      ]
+    } as SocialAuthServiceConfig,
+  }, authInterceptorProviders,
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    JwtHelperService, {provide: APP_BASE_HREF, useValue: '/'}],
+  entryComponents: [BottomSheetNotifyComponent],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

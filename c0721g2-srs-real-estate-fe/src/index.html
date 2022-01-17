@@ -1,18 +1,21 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
   <title>Bất động sản</title>
-
+  <meta charset="utf-8">
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <!-- Bootstrap CSS -->
-  <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    rel="stylesheet"
-  />
-<!--  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet"/>
+  <!--  <link rel="stylesheet" type="text/css" href="asset/css/bootstrap.min.css">-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
   <style>
     * {
       font-family: Arial;
@@ -212,191 +215,20 @@
       width: 100%;
     }
   </style>
-
 </head>
 <body>
-<!--<div class="container-fluid">-->
-<!-- Brand and toggle get grouped for better mobile display -->
-<nav class="navbar navbar-expand-lg navbar-light fs-6 pb-3 pt-3 main-bg sbt">
-  <div class="container-fluid">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " href="asset/img/Untitled-2.png">
-      <img class="navbar-brand" width="90%" src="asset/img/final1.png" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse " id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown ">
-          <a class="navbar-brand trans-nav fw-bold" href="#" id="saleList" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            Nhà đất bán
-          </a>
-          <ul class="dropdown-menu main-bg border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán nhà </a></li>
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán đất nền dự án</a></li>
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán loại bất động sản khác</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown fw-bold">
-          <a class="navbar-brand trans-nav" href="#" id="buyList" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            Nhà đất cho thuê
-          </a>
-          <ul class="dropdown-menu main-bg border-0 pb-0 " aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê nhà</a></li>
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê đất nền</a></li>
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê loại bất động sản khác</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown fw-bold">
-          <a class="navbar-brand trans-nav" href="#" id="order" role="button"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            Cần mua - Cần thuê
-          </a>
-          <ul class="dropdown-menu main-bg border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Nhà đất cần mua</a></li>
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Nhà đất cần thuê</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="d-flex navbar-nav  mb-2 mb-lg-0 fw-bold">
-        <li class="nav-item d-flex ">
-          <a class="navbar-brand hvr-float" href="#">Đăng nhập</a>
-        </li>
-        <li class="nav-item d-flex fw-bold">
-          <a class="navbar-brand hvr-float " href="#">Đăng ký</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <button class=" navbar-brand btn btn-success text-white" type="submit">Đăng tin</button>
-      </form>
-    </div>
-  </div>
-</nav>
-<!-- End of nav bar -->
+
   <app-root></app-root>
-<!--<footer>-->
-<div class="container-fluid main-bg">
-  <div class="container text-center text-md-left">
 
-    <!-- Grid row -->
-    <div class="row">
-
-      <!-- Grid column -->
-      <div class="col-md-6 mr-auto my-md-4 my-0 mt-4 mb-1" align="justify">
-        <a href="#"><img
-          width="30%"
-          src="asset/img/final1.png">
-        </a>
-        <br>
-        <!-- Content -->
-        <div>
-          <span class="font-weight-bold">Trụ sở chính: </span>
-          <span>Số 23, Lô TT01, KĐT Mon City, Mỹ Đình 2, Nam Từ Liêm, Hà Nội.</span>
-        </div>
-        <div>
-          <span class="font-weight-bold">Đà Nẵng: </span>
-          <span>Tầng 10, 295 Nguyễn Tất Thành, Phường Thanh Bình, Quận Hải Châu, TP Đà Nẵng.</span>
-        </div>
-        <div>
-          <span class="font-weight-bold">Quảng Trị: </span>
-          <span>133 Lý Thường Kiệt, TP Đông Hà, Tỉnh Quảng Trị.</span>
-        </div>
-        <div>
-          <span class="font-weight-bold">Văn phòng tuyển sinh Việt Trì: </span>
-          <span>Băng 1, Đường Quang Trung, P. Dữu Lâu, TP Việt Trì, Phú Thọ.</span>
-        </div>
-        <div>
-          <span class="font-weight-bold">Văn phòng tuyển sinh Thái Nguyên: </span>
-          <span>36A Cách Mạng Tháng Tám, Phường Phan Đình Phùng.</span>
-        </div>
-        <div>
-          <span class="font-weight-bold">Văn phòng tuyển sinh Vinh: </span>
-          <span>50 Hà Huy Tập, TP Vinh, Tỉnh Nghệ An.</span>
-        </div>
-      </div>
-      <!-- Grid column -->
-
-      <!-- Grid column -->
-      <div class="col-md-2 col-lg-2 mx-auto my-md-4 my-0 mt-4 mb-1" align="justify">
-        <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mb-4">VỀ CHÚNG TÔI</h5>
-
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-decoration-underline">Giới thiệu</a>
-          </li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0  text-decoration-underline">Tuyển dụng</a>
-          </li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-decoration-underline">Truyền
-            thông</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-decoration-underline ">Blog</a></li>
-        </ul>
-
-      </div>
-      <!-- Grid column -->
-
-      <hr class="clearfix w-100 d-md-none">
-
-      <div class="col-md-4 col-lg-3 mx-auto my-md-4 my-0 mt-4 mb-1" align="justify">
-        <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mb-4">Liên hệ</h5>
-
-        <ul class="nav flex-column">
-
-          <li>
-            <p>
-              <i class="fas fa-envelope "></i> info@example.com</p>
-          </li>
-          <li>
-            <p>
-              <i class="fas fa-phone "></i> + 01 234 567 88</p>
-          </li>
-          <li>
-            <p>
-              <i class="fas fa-print "></i> + 01 234 567 89</p>
-          </li>
-        </ul>
-        <!-- Facebook -->
-        <a type="button" class="btn-floating btn-fb">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <!-- Twitter -->
-        <a type="button" class="btn-floating btn-tw">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <!-- Google +-->
-        <a type="button" class="btn-floating btn-gplus">
-          <i class="fab fa-google-plus-g"></i>
-        </a>
-        <!-- Dribbble -->
-        <a type="button" class="btn-floating btn-dribbble">
-          <i class="fab fa-dribbble"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Grid row -->
-  </div>
-
-  <div class="text-center align-content-center py-4 my-4 border-dark border-top">
-    <div class="nav-item fs-6">Tập đoàn Hưng Thịnh, Tầng 10, 295 Nguyễn Tất Thành, Phường Thanh Bình, Quận Hải Châu,
-      TP Đà Nẵng.
-    </div>
-    <div class="nav-item fs-6">Giấy chứng nhận đăng ký doanh nghiệp số 0312120782 do Sở Kế Hoạch và Đầu Tư
-      TPHCM
-      cấp
-      ngày 11/01/2013
-    </div>
-  </div>
-</div>
-<!--</footer>-->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-          integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-          crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-          integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-          crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>
