@@ -6,11 +6,13 @@ import {RealDeleteComponent} from './real-delete/real-delete.component';
 import {HistoryPostComponent} from './history-post/history-post.component';
 
 
+
 const routes: Routes = [
   {path: 'detail/:id', component: RealDetailComponent},
   {path: 'list', component: RealListComponent},
   {path: 'delete', component: RealDeleteComponent},
   {path: 'post-history/:id', component: HistoryPostComponent},
+
 ];
 
 @NgModule({

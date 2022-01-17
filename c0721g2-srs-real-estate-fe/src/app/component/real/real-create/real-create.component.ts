@@ -8,7 +8,6 @@ import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
-import {log} from 'util';
 
 
 @Component({
@@ -17,7 +16,6 @@ import {log} from 'util';
   styleUrls: ['./real-create.component.scss']
 })
 export class RealCreateComponent implements OnInit {
-
   directions: Direction[];
   realTypes: RealEstateType[];
   private subscription: Subscription | undefined;
@@ -148,12 +146,13 @@ export class RealCreateComponent implements OnInit {
       this.downloadURLs = [];
       const fileList = this.selectFiles;
       const allPercentage: Observable<number>[] = [];
+      // @ts-ignore
       for (const file of fileList) {
         const filePath = `${file.name}` + new Date().getTime();
         const fileRef = this.db.ref(filePath);
         const task = this.db.upload(filePath, file);
-        const _percentage$ = task.percentageChanges();
-        allPercentage.push(_percentage$);
+        const percentage = task.percentageChanges();
+        allPercentage.push(percentage);
 
         // observe percentage changes
         this.uploadPercent = task.percentageChanges();
