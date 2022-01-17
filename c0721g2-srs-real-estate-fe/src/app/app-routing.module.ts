@@ -25,7 +25,6 @@ const routes: Routes = [
     loadChildren: () => import('./component/security/security.module').then(module => module.SecurityModule)
   },
 ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

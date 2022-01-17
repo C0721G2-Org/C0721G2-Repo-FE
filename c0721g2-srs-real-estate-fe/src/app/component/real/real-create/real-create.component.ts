@@ -4,12 +4,10 @@ import {RealEstateType} from '../../../model/real/real-estate-type';
 import {Observable, Subscription} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {RealService} from '../../../service/real.service';
-import {AngularFireStorage} from '@angular/fire/storage';
+import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
-import {log} from 'util';
-
 
 
 @Component({
@@ -17,8 +15,7 @@ import {log} from 'util';
   templateUrl: './real-create.component.html',
   styleUrls: ['./real-create.component.scss']
 })
-export class RealCreateComponent implements OnInit{
-
+export class RealCreateComponent implements OnInit {
   directions: Direction[];
   realTypes: RealEstateType[];
   private subscription: Subscription | undefined;
@@ -27,13 +24,17 @@ export class RealCreateComponent implements OnInit{
   files: File[];
   urls = new Array<string>();
   uploadUrls = new Array();
-  urlsString = '';
   imgMess: string;
   imgdetect = false;
 
   news: RealEstateNew;
 
   notifies: Observable<any>[];
+
+  uploads = [];
+  downloadURLs = [];
+  confirm = false;
+  uploadPercent: Observable<number>;
 
   form: FormGroup = this.formBuilder.group(
     {
@@ -46,23 +47,25 @@ export class RealCreateComponent implements OnInit{
       area: ['', [Validators.required, Validators.min(1), Validators.max(99999)]],
       price: ['', [Validators.required, Validators.min(1), Validators.max(1999999999)]],
       kindOfNews: [1],
-      direction: [null],
-      status: [null],
+      direction: [null, [Validators.required]],
+      status: [null, [Validators.required]],
       realEstateType: [1],
       imageList: [],
       urls: [],
     }
   );
-
-
+  private initialValues: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private realService: RealService,
               private db: AngularFireStorage, private notify: AngularFireDatabase) {
     const items: AngularFireList<any> = notify.list('/notifies');
-    items.valueChanges().subscribe(
-      x => {this.notifies = x; }
-    );
+    this.initialValues = this.form.value;
 
+    items.valueChanges().subscribe(
+      x => {
+        this.notifies = x;
+      }
+    );
 
     this.subscription = this.realService.getAllDirection().subscribe(
       data => {
@@ -123,6 +126,7 @@ export class RealCreateComponent implements OnInit{
     } else {
       const files = event.target.files;
       this.selectFiles = files;
+      console.log(this.selectFiles);
       if (files) {
         for (const file of files) {
           const reader = new FileReader();
@@ -138,22 +142,36 @@ export class RealCreateComponent implements OnInit{
 
   onSubmit() {
     if (this.form.valid) {
-      console.log('ok');
-      for (let i = 0; i < this.selectFiles.length; i++) {
-        this.upload(i);
+      this.uploads = [];
+      this.downloadURLs = [];
+      const fileList = this.selectFiles;
+      const allPercentage: Observable<number>[] = [];
+      // @ts-ignore
+      for (const file of fileList) {
+        const filePath = `${file.name}` + new Date().getTime();
+        const fileRef = this.db.ref(filePath);
+        const task = this.db.upload(filePath, file);
+        const percentage = task.percentageChanges();
+        allPercentage.push(percentage);
+
+        // observe percentage changes
+        this.uploadPercent = task.percentageChanges();
+
+        // get notified when the download URL is available
+        task.snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.downloadURLs = this.downloadURLs.concat([url]);
+              console.log(this.downloadURLs);
+              this.confirm = true;
+            });
+          })
+        ).subscribe();
+        // this.downloadURLs.push(this.downloadURL);
       }
-
-
-      // const templates = [JSON.stringify(this.news)];
-      // console.log(templates);
-
-      // this.realService.save(this.news).subscribe(data => {
-      //   console.log(data);
-      // }, error => {
-      //   console.log(error);
-      // });
+      return;
     } else {
-      console.log('not');
+      console.log('not ok');
       console.log(this.findInvalidControls());
     }
   }
@@ -169,25 +187,26 @@ export class RealCreateComponent implements OnInit{
     return invalid;
   }
 
-  upload(index: number): any {
-    const urlPath = this.selectFiles.item(index).name + new Date().getTime();
-    const fileRef = this.db.ref(urlPath);
-    this.db.upload(urlPath, this.selectFiles.item(index)).snapshotChanges().pipe(
-      finalize(
-        () => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.uploadUrls.push(url);
-          });
-        }
-      )
-    ).subscribe();
-  }
+  // async upload(index: number): Promise<any> {
+  //   const urlPath = this.selectFiles.item(index).name + new Date().getTime();
+  //   const fileRef = this.db.ref(urlPath);
+  //   this.db.upload(urlPath, this.selectFiles.item(index)).snapshotChanges().pipe(
+  //     finalize(
+  //       () => {
+  //         fileRef.getDownloadURL().subscribe((url) => {
+  //           this.uploadUrls.push(url);
+  //           console.log(url);
+  //         });
+  //       }
+  //     )
+  //   ).subscribe();
+  // }
 
   closeModal() {
-    this.uploadUrls.forEach(url => {
+    this.downloadURLs.forEach(url => {
       this.onDeleteAttachment(url);
     });
-    this.uploadUrls = new Array();
+    this.downloadURLs = [];
   }
 
   onDeleteAttachment(downloadURL: string) {
@@ -196,7 +215,7 @@ export class RealCreateComponent implements OnInit{
 
   post() {
     this.send(this.form.value.title);
-    const urls = this.uploadUrls.toString();
+    const urls = this.downloadURLs.toString();
     this.news = this.form.value;
     this.news.urls = urls;
     this.realService.save(this.news).subscribe(data => {
@@ -204,5 +223,9 @@ export class RealCreateComponent implements OnInit{
     }, error => {
       console.log(error);
     });
+  }
+
+  clearAll() {
+    this.form.reset(this.initialValues);
   }
 }

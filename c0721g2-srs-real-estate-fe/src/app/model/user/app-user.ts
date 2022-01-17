@@ -1,7 +1,7 @@
 export interface AppUser {
+  // thiện nhỏ
   id: number;
-  isEnabled: number;
   password: string;
+  newPassword: string;
   userName: string;
-  verificationCode: string;
 }

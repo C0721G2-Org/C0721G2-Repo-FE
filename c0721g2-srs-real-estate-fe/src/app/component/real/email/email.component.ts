@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RealService} from '../../../service/real.service';
 import {Subscription} from 'rxjs';
 import {Email} from '../../../model/real/email';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
 
 @Component({
@@ -42,8 +42,9 @@ export class EmailComponent implements OnInit {
       this.customerMail = dataRealEstate.customer.email;
     });
     this.formInfo = new FormGroup({
-      name: new FormControl(),
-      phone: new FormControl(),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      // tslint:disable-next-line:max-line-length
+      phone: new FormControl('', [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|89]|7[0|6-9]|8[0-6|89]|9[0-4|6-9])[0-9]{7}$')]),
       customerMail: new FormControl(this.customerMail)
     });
     console.log(this.formInfo.value);
@@ -51,15 +52,18 @@ export class EmailComponent implements OnInit {
 
   onSubmit() {
     console.log(this.formInfo.value);
-    this.subscription = this.realService.sendMail(this.formInfo.value).subscribe(data => {
-    });
-    this.dialogRef.close();
+    if (this.formInfo.valid) {
+      this.subscription = this.realService.sendMail(this.formInfo.value).subscribe(data => {
+      });
+      this.dialogRef.close();
+    }
   }
 
-  // deleteCustomer() {
-  //   this.subscription = this.customerService.deleteCustomer(this.customer.id).subscribe(data => {
-  //     this.dialogRef.close();
-  //   });
-  // }
+  get name() {
+    return this.formInfo.get('name');
+  }
 
+  get phone() {
+    return this.formInfo.get('phone');
+  }
 }

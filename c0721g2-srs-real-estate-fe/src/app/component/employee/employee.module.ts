@@ -6,7 +6,8 @@ import {EmployeeCreateComponent} from './employee-create/employee-create.compone
 import {EmployeeDeleteComponent} from './employee-delete/employee-delete.component';
 import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
-import {ShareModule} from '../share/share.module';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -16,10 +17,17 @@ import {ShareModule} from '../share/share.module';
     EmployeeEditComponent,
     EmployeeListComponent,
   ],
-    imports: [
-        CommonModule,
-        EmployeeRoutingModule
-    ]
+  exports: [
+    EmployeeCreateComponent,
+    EmployeeEditComponent
+  ],
+  imports: [
+    CommonModule,
+    EmployeeRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule
+  ]
 })
 export class EmployeeModule {
 }

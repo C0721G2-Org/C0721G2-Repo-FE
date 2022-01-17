@@ -7,10 +7,12 @@ import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerDetailComponent} from './customer-detail/customer-detail.component';
 import {CustomerDeleteComponent} from './customer-delete/customer-delete.component';
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
-import {ShareModule} from '../share/share.module';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UpdatePasswordComponent} from './update-password/update-password.component';
+
 
 
 @NgModule({
@@ -19,17 +21,20 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     CustomerDetailComponent,
     CustomerDeleteComponent,
     CustomerCreateComponent,
+    UpdatePasswordComponent
   ],
-  exports: [
-    CustomerListComponent
-  ],
+    exports: [
+        CustomerListComponent,
+        CustomerDetailComponent,
+        CustomerCreateComponent
+    ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ]
 })
 export class CustomerModule {

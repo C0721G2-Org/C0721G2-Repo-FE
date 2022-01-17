@@ -5,14 +5,16 @@ import {CustomerDeleteComponent} from './customer-delete/customer-delete.compone
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
 import {CustomerEditComponent} from './customer-edit/customer-edit.component';
 import {CustomerDetailComponent} from './customer-detail/customer-detail.component';
+import {UpdatePasswordComponent} from './update-password/update-password.component';
 
 
 const routes: Routes = [
-  {path: 'customer/list', component: CustomerListComponent},
-  {path: 'customer/detail/:id', component: CustomerDetailComponent},
-  {path: 'customer/delete', component: CustomerDeleteComponent},
-  {path: 'customer/create', component: CustomerCreateComponent},
-  {path: 'customer/edit', component: CustomerEditComponent},
+  {path: 'list', component: CustomerListComponent},
+  {path: 'detail/:id', component: CustomerDetailComponent},
+  {path: 'delete', component: CustomerDeleteComponent},
+  {path: 'create', component: CustomerCreateComponent},
+  {path: 'edit', component: CustomerEditComponent},
+  {path: 'change-password', component: UpdatePasswordComponent},
 ];
 
 @NgModule({

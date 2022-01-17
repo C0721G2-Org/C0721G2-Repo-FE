@@ -11,6 +11,7 @@ import {ShareModule} from '../share/share.module';
 
 
 
+
 @NgModule({
   declarations: [LoginComponent, ResetPasswordComponent, VerifyResetPasswordComponent, AccessDeniedComponent],
   imports: [

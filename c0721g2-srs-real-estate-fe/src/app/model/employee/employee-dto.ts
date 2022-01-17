@@ -1,9 +1,9 @@
 import {Degree} from './degree';
+import {Positions} from './positions';
 import {AppUser} from '../user/app-user';
 import {Image} from '../image/image';
-import {Positions} from './positions';
 
-export interface Employee {
+export interface EmployeeDTO {
   id: string;
   name: string;
   email: string;
@@ -12,9 +12,9 @@ export interface Employee {
   dateOfBirth: string;
   idCard: string;
   gender: number;
-  degree: Degree;
-  position: Positions;
-  role: number;
+  degreeDTO: Degree;
+  positionDTO: Positions;
+  roleDTO: number;
   appUser: AppUser;
   image: Image;
 }
