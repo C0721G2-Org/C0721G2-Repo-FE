@@ -28,6 +28,7 @@ $srs-real-estate-theme: mat-light-theme($srs-real-estate-primary, $srs-real-esta
 
 @import "~bootstrap/dist/css/bootstrap.css";
 
+
 //style nay cua Hien
 .custom-dialog .mat-dialog-container {
   position: relative;
@@ -38,3 +39,11 @@ $srs-real-estate-theme: mat-light-theme($srs-real-estate-primary, $srs-real-esta
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.custom-dialog-tai .mat-dialog-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border-radius: 40px;
+  background: none;
+  box-shadow: none;
+}

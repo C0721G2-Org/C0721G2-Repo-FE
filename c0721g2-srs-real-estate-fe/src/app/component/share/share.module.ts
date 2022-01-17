@@ -8,10 +8,8 @@ import { AsideComponent } from './aside/aside.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, AsideComponent],
+  declarations: [ AsideComponent],
   exports: [
-    FooterComponent,
-    HeaderComponent
   ],
   imports: [
     CommonModule,

@@ -10,7 +10,8 @@ import {DetailPostApprovalComponent} from './detail-post-approval/detail-post-ap
 import {DeletePostApprovalComponent} from './delete-post-approval/delete-post-approval.component';
 import {ListPostApprovalComponent} from './list-post-approval/list-post-approval.component';
 import {RealCreateComponent} from './real-create/real-create.component';
-import {ShareModule} from '../share/share.module';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {EmailComponent} from './email/email.component';
 
 
 @NgModule({
@@ -21,12 +22,23 @@ import {ShareModule} from '../share/share.module';
     DetailPostApprovalComponent,
     DeletePostApprovalComponent,
     ListPostApprovalComponent,
+    RealCreateComponent,
+    EmailComponent],
+  exports: [
+    RealCreateComponent,
+    RealDeleteComponent,
+    RealDetailComponent,
+    HistoryPostComponent,
+    DetailPostApprovalComponent,
+    DeletePostApprovalComponent,
+    ListPostApprovalComponent,
     RealCreateComponent],
-    imports: [
-        CommonModule,
-        RealRoutingModule,
-        ShareModule
-    ]
+  imports: [
+    CommonModule,
+    RealRoutingModule,
+    FormsModule,
+    ReactiveFormsModule]
 })
+
 export class RealModule {
 }

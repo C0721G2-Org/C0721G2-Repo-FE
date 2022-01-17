@@ -6,7 +6,7 @@ import {EmployeeCreateComponent} from './employee-create/employee-create.compone
 import {EmployeeDeleteComponent} from './employee-delete/employee-delete.component';
 import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
-import {ShareModule} from "../share/share.module";
+import {ShareModule} from '../share/share.module';
 
 
 @NgModule({
@@ -18,8 +18,7 @@ import {ShareModule} from "../share/share.module";
   ],
     imports: [
         CommonModule,
-        EmployeeRoutingModule,
-        ShareModule
+        EmployeeRoutingModule
     ]
 })
 export class EmployeeModule {

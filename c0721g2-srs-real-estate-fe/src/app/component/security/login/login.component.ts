@@ -7,6 +7,7 @@ import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login'
 import {AuthService} from '../../../service/auth.service';
 import {TokenStorageService} from '../../../service/token-storage.service';
 import {ResetPasswordComponent} from '../reset-password/reset-password.component';
+import {ShareService} from "../../../service/share.service";
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private shareService: ShareService
   ) {
   }
 
@@ -75,10 +77,14 @@ export class LoginComponent implements OnInit {
       this.dialogRef.close();
       if (this.roles.indexOf('ROLE_CUSTOMER') !== -1) {
         this.router.navigate(['/real-estate-new/list']);
+        this.shareService.sendClickEvent();
       } else if (this.roles.indexOf('ROLE_EMPLOYEE') !== -1) {
-        this.router.navigate(['/customer/list']);
+        this.router.navigate(['customer/list']);
+        this.shareService.sendClickEvent();
       } else {
-        this.router.navigate(['/employee/list']);
+        this.router.navigate(['employee/list']);
+        this.shareService.sendClickEvent();
+
       }
     }, error => {
       console.log(error);
@@ -119,7 +125,9 @@ export class LoginComponent implements OnInit {
             console.log('token:' + this.tokenStorageService.getToken());
             this.authService.isLoggedIn = true;
             this.dialogRef.close();
-            this.router.navigate(['/real-estate-new/list']);
+            this.router.navigate(['/home']);
+            this.shareService.sendClickEvent();
+
           },
           err => {
             console.log(err);
@@ -149,7 +157,9 @@ export class LoginComponent implements OnInit {
             console.log('token:' + this.tokenStorageService.getToken());
             this.authService.isLoggedIn = true;
             this.dialogRef.close();
-            this.router.navigate(['/real-estate-new/list']);
+            this.router.navigate(['/home']);
+            this.shareService.sendClickEvent();
+
           },
           err => {
             console.log(err);

@@ -8,11 +8,11 @@ import {CustomerDetailComponent} from './customer-detail/customer-detail.compone
 
 
 const routes: Routes = [
-  {path: 'list', component: CustomerListComponent},
-  {path: 'detail/:id', component: CustomerDetailComponent},
-  {path: 'delete', component: CustomerDeleteComponent},
-  {path: 'create', component: CustomerCreateComponent},
-  {path: 'edit', component: CustomerEditComponent},
+  {path: 'customer/list', component: CustomerListComponent},
+  {path: 'customer/detail/:id', component: CustomerDetailComponent},
+  {path: 'customer/delete', component: CustomerDeleteComponent},
+  {path: 'customer/create', component: CustomerCreateComponent},
+  {path: 'customer/edit', component: CustomerEditComponent},
 ];
 
 @NgModule({

@@ -16,8 +16,7 @@ import {ShareModule} from '../share/share.module';
   imports: [
     CommonModule,
     SecurityRoutingModule,
-    ReactiveFormsModule,
-    ShareModule]
+    ReactiveFormsModule]
 })
 export class SecurityModule {
 }

@@ -51,12 +51,9 @@
           <li class="nav-item dropdown" style="list-style: none">
             <a class="navbar-brand trans-nav" href="#" id="user" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">
-              <div *ngIf="this.urlImg then is else isnt"></div>
+              <div *ngIf="this.urlImg then is"></div>
               <ng-template #is>
                 <img class="rounded-circle" width="40px" height="40px" [src]="this.urlImg">
-              </ng-template>
-              <ng-template #isnt>
-                <i class="far fa-user"></i>
               </ng-template>
               <span class="mx-2" style="font-size: 80%">{{this.username}}</span>
             </a>

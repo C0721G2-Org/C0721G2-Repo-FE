@@ -4,6 +4,7 @@ import {TokenStorageService} from '../../../service/token-storage.service';
 import {Router} from '@angular/router';
 import {LoginComponent} from '../../security/login/login.component';
 import {AuthService} from '../../../service/auth.service';
+import {ShareService} from '../../../service/share.service';
 
 @Component({
   selector: 'app-header',
@@ -18,14 +19,26 @@ export class HeaderComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private tokenStorageService: TokenStorageService,
-              private router: Router) {
+              private router: Router,
+              private shareService: ShareService) {
+    this.shareService.getClickEvent().subscribe(() => {
+      this.loadHeader();
+    });
   }
 
   ngOnInit(): void {
+    this.loadHeader();
+  }
+
+  loadHeader(): void {
     if (this.tokenStorageService.getUser()) {
       this.role = this.tokenStorageService.getUser().roles[0];
       this.username = this.tokenStorageService.getUser().username;
       this.urlImg = this.tokenStorageService.getUser().urlImg;
+    } else {
+      this.role = null;
+      this.username = null;
+      this.urlImg = null;
     }
     this.isLoggedIn = this.username != null;
   }
@@ -43,7 +56,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.tokenStorageService.signOut();
-    this.ngOnInit();
-    this.router.navigate(['/real-estate-new/list']);
+    this.loadHeader();
+    this.router.navigate(['/home']);
+
+
   }
 }
