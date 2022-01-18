@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {RealEstateNew} from '../model/real/real-estate-new';
 import {Email} from '../model/real/email';
@@ -11,18 +11,28 @@ import {RealEstateType} from '../model/real/real-estate-type';
   providedIn: 'root'
 })
 export class RealService {
+  private API = 'http://localhost:8080/real-estate-new';
   private API_URL = ' http://localhost:8080/api/real-estate-new';
   private API_URL_RELATED = 'http://localhost:8080/api/real-estate-related';
   private API_URL_HISTORY_POST = ' http://localhost:8080/api/real-estate-new/history-post';
   private API_URL_EMAIL = ' http://localhost:8080/api/real-estate-new/email';
+
   // khaipn
   private API_URL_LIST = 'http://localhost:8080/api/real-estate-new/search';
   // khaipn
   private API_URL_REAL_ESTATE_TYPE = 'http://localhost:8080/dealEstateType';
   // khaipn
   private API_URL_DIRECTION = 'http://localhost:8080/direction';
+  httpOptions: any;
 
   constructor(private http: HttpClient) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+      'Access-Control-Allow-Origin': 'http://localhost:4200',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+    };
   }
 
   getAllDirection(): Observable<Direction[]> {
@@ -50,13 +60,16 @@ export class RealService {
   sendMail(email): Observable<Email> {
     return this.http.post<Email>(this.API_URL_EMAIL, email);
   }
-// khaiPN
+
+  // khaiPN
   getAllRealEstates(): Observable<any> {
-    return this.http.get(this.API_URL_LIST);
+    return this.http.get(this.API_URL_LIST, this.httpOptions);
   }
 
-// KhaiPN
-  getAllRealEstatesSearch(address: string, realEstateType: any, direction: any, minArea: any, maxArea: any, minPrice: string, maxPrice: string, page: number = 0): Observable<any> {
+  // KhaiPN
+
+  getAllRealEstatesSearch(address: string, realEstateType: any, direction: any,
+                          minArea: any, maxArea: any, minPrice: string, maxPrice: string, page: number = 0): Observable<any> {
     const stringParam = this.buildSearchParam('?address=', address) +
       this.buildSearchParam('&realEstateType=', realEstateType) +
       this.buildSearchParam('&direction=', direction) +
@@ -67,26 +80,43 @@ export class RealService {
       this.buildSearchParam('&page=', page);
 
     return this.http.get(this.API_URL_LIST +
-      stringParam
+      stringParam, this.httpOptions
     );
   }
 
-// khaiPN
+  // khaiPN
   getAllRealEstateTypes(): Observable<any> {
     return this.http.get(this.API_URL_REAL_ESTATE_TYPE);
   }
 
-// khaiPN
+  // khaiPN
   getAllDirections(): Observable<any> {
     return this.http.get(this.API_URL_DIRECTION);
   }
 
-// khaiPN
+  // khaiPN
   private buildSearchParam(searchKey: string, value: string | number): string {
     if (!value) {
       return searchKey + '';
     }
     return searchKey + value.toString();
+
+  }
+
+  getAllListPostApproval(): Observable<any> {
+    return this.http.get(this.API + '/list');
+  }
+
+  search(page: number, kindOfNews: string, direction: string, realEstateType: string): Observable<any> {
+    return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
+  }
+
+  approve(id: string): Observable<any> {
+    return this.http.delete(this.API + '/approve' + id);
+  }
+
+  getById(id): Observable<RealEstateNew[]> {
+    return this.http.get<RealEstateNew[]>(this.API + '/' + id).pipe();
   }
 }
 

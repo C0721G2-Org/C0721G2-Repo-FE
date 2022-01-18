@@ -94,6 +94,9 @@ export class HistoryPostComponent implements OnInit {
 
   showAll() {
     this.page = 0;
+    this.formSearch.value.title = '';
+    this.formSearch.value.kindOfNew = '';
+    this.formSearch.value.realNewType = '';
     this.ngOnInit();
   }
 
