@@ -152,9 +152,44 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>
-        <button type="button" class="btn btn-primary" (click)="post()" [disabled]="!confirm">Xác nhận</button>
+        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="post()" [disabled]="!confirm">Xác nhận</button>
       </div>
     </div>
   </div>
 </div>
-
+<!--<ng-container *ngIf="successMess">-->
+<!--  <div class="modal fade" id="ModalSuccess" tabindex="-1" aria-labelledby="exampleModalLabel">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title">Thông báo</h5>-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          Bài đăng thành công-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-primary" (click)="confirmLast()">Xác nhận</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-container>-->
+<!--<ng-container *ngIf="errorMess">-->
+<!--  <div class="modal fade" id="ModalError" tabindex="-1" aria-labelledby="exampleModalLabel">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <h5 class="modal-title">Thông báo</h5>-->
+<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          Có lỗi xảy ra trong hệ thống, vui lòng quay lại sau-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--          <button type="button" class="btn btn-primary" (click)="confirmLast()">Xác nhận</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</ng-container>-->
