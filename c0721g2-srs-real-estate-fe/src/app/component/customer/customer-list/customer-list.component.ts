@@ -18,7 +18,6 @@ export class CustomerListComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private dialog: MatDialog,
-    // private toastrService: ToastrService
   ) {
   }
 
@@ -83,10 +82,8 @@ export class CustomerListComponent implements OnInit {
         this.message = '';
         console.log(this.message);
       } else {
-        this.message = 'Không tìm thấy';
+        this.message = 'Not found !!!';
         console.log(this.message);
-        this.customers = [];
-        this.totalPages = 0;
       }
     });
   }
