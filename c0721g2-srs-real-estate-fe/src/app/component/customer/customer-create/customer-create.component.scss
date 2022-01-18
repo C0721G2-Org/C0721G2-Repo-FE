@@ -68,10 +68,6 @@ button:hover {
   opacity: 0.9;
 }
 
-.container {
-  padding: 5px;
-}
-
 /*.clearfix::after {*/
 /*  content: "";*/
 /*  clear: both;*/
@@ -82,3 +78,25 @@ button:hover {
   outline-color: red;
   border-color: red;
 }
+.dialog-register .btn-close-c, .dialog-register .close-img {
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+}
+
+.dialog-register{
+  background: rgb(248, 248, 248);
+  display: flex;
+  width: 100%;
+  height: 650px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  border-radius: 10px;
+}
+a:hover {
+  cursor: pointer;
+}
+
+
