@@ -88,8 +88,8 @@ export class RealCreateComponent implements OnInit {
       }
     );
     const id =  this.token.getUser().idCustomer;
-    const idTest = 'KH-0005';
-    this.form.controls['customer'].setValue(idTest);
+    // const idTest = 'KH-0005';
+    this.form.controls['customer'].setValue(id);
   }
 
   ngOnInit(): void {
