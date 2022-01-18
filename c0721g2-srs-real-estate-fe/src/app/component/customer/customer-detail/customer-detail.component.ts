@@ -18,20 +18,6 @@ export class CustomerDetailComponent implements OnInit {
   constructor(private customerService: CustomerService,
               private activatedRoute: ActivatedRoute) {
   }
-
-  // ngOnInit(): void {
-  //   this.activatedRoute.params.subscribe(data => {
-  //     this.id = data.id;
-  //     console.log(data.id);
-  //   });
-  //   this.customerService.getCustomerById(this.id).subscribe(data => {
-  //     this.customer.patchValue(data);
-  //     console.log(data);
-  //   }, error => {
-  //     console.log('error');
-  //   });
-  //
-  // }
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       this.id = params.id;

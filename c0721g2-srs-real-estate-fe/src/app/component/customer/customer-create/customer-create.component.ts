@@ -28,8 +28,6 @@ export class CustomerCreateComponent implements OnInit {
       phoneNumber: ['', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{9,12}$')]],
       gender: [2, Validators.required],
       userName: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
-      // this.customerService.checkUsername.bind(this.customerService)],
-      // , Validators.pattern('^([0-9]{9})|([0-9]{12})$')
       password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]],
       confirmPassword: ['', [Validators.required]],
     }, {
@@ -48,13 +46,12 @@ export class CustomerCreateComponent implements OnInit {
       this.customerService.saveCustomer(this.createCustomer.value).subscribe(
         data => {
           console.log(data);
-          alert('bạn đã đăng nhập thành công');
         }, error => {
-        console.log(error.error);
-        console.log(error);
-        this.validateErrorEmail = error.error.errorEmail;
-        this.validateErrorUsername = error.error.errorUsername;
-      }
+          console.log(error.error);
+          console.log(error);
+          this.validateErrorEmail = error.error.errorEmail;
+          this.validateErrorUsername = error.error.errorUsername;
+        }
       );
     }
   }
@@ -74,6 +71,9 @@ export class CustomerCreateComponent implements OnInit {
     };
   }
 
-  checkUsernameNotTaken(username: string) {
+  checkUsernameNotTaken() {
+    if (this.validateErrorUsername != null) {
+      console.log('123');
+    }
   }
 }
