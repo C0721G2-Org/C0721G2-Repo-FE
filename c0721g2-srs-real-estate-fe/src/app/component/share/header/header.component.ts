@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   role: string;
   urlImg: string;
   isLoggedIn: boolean;
+  idCustomer: string;
 
   constructor(public dialog: MatDialog,
               private tokenStorageService: TokenStorageService,
@@ -36,10 +37,12 @@ export class HeaderComponent implements OnInit {
       this.role = this.tokenStorageService.getUser().roles[0];
       this.username = this.tokenStorageService.getUser().username;
       this.urlImg = this.tokenStorageService.getUser().urlImg;
+      this.idCustomer = this.tokenStorageService.getUser().idCustomer;
     } else {
       this.role = null;
       this.username = null;
       this.urlImg = null;
+      this.idCustomer = null;
     }
     this.isLoggedIn = this.username != null;
   }
