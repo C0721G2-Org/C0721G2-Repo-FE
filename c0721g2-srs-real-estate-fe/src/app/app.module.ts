@@ -65,10 +65,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MatDialogModule,
     SocialLoginModule,
-    BrowserAnimationsModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

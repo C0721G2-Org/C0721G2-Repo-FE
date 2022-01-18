@@ -48,3 +48,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   box-shadow: none;
 }
 
+.custom-dialog-create-customer .mat-dialog-container {
+  position: relative;
+  top: 20px;
+  padding: 0;
+  overflow: visible;
+  border-radius: 10px;
+
+}
+

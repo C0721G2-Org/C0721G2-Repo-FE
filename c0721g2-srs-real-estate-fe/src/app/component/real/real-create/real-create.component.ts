@@ -8,6 +8,9 @@ import {AngularFireStorage, AngularFireUploadTask} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {AngularFireDatabase, AngularFireList} from '@angular/fire/database';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
+import {Router} from '@angular/router';
+import {TokenStorageService} from '../../../service/token-storage.service';
+import {Customer} from '../../../model/customer/customer';
 
 
 @Component({
@@ -18,6 +21,7 @@ import {RealEstateNew} from '../../../model/real/real-estate-new';
 export class RealCreateComponent implements OnInit {
   directions: Direction[];
   realTypes: RealEstateType[];
+  customer: Customer;
   private subscription: Subscription | undefined;
 
   selectFiles: FileList;
@@ -28,7 +32,6 @@ export class RealCreateComponent implements OnInit {
   imgdetect = false;
 
   news: RealEstateNew;
-
   notifies: Observable<any>[];
 
   uploads = [];
@@ -36,16 +39,19 @@ export class RealCreateComponent implements OnInit {
   confirm = false;
   uploadPercent: Observable<number>;
 
+  errorMess = false;
+  successMess = false;
+
   form: FormGroup = this.formBuilder.group(
     {
       id: [],
       approval: [],
-      customer: [{id: 'KH-0003'}],
+      customer: [''],
       description: ['', Validators.maxLength(256)],
-      title: ['', [Validators.required, Validators.maxLength(256)]],
-      address: ['', [Validators.required, Validators.maxLength(256)]],
-      area: ['', [Validators.required, Validators.min(1), Validators.max(99999)]],
-      price: ['', [Validators.required, Validators.min(1), Validators.max(1999999999)]],
+      title: ['123', [Validators.required, Validators.maxLength(256)]],
+      address: ['123', [Validators.required, Validators.maxLength(256)]],
+      area: ['1', [Validators.required, Validators.min(1), Validators.max(99999)]],
+      price: ['1', [Validators.required, Validators.min(1), Validators.max(1999999999)]],
       kindOfNews: [1],
       direction: [null, [Validators.required]],
       status: [null, [Validators.required]],
@@ -56,8 +62,8 @@ export class RealCreateComponent implements OnInit {
   );
   private initialValues: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private realService: RealService,
-              private db: AngularFireStorage, private notify: AngularFireDatabase) {
+  constructor(private formBuilder: FormBuilder, private realService: RealService, private router: Router,
+              private db: AngularFireStorage, private notify: AngularFireDatabase, private token: TokenStorageService) {
     const items: AngularFireList<any> = notify.list('/notifies');
     this.initialValues = this.form.value;
 
@@ -81,6 +87,9 @@ export class RealCreateComponent implements OnInit {
         console.log(error);
       }
     );
+    const id =  this.token.getUser().idCustomer;
+    // const idTest = 'KH-0005';
+    this.form.controls['customer'].setValue(id);
   }
 
   ngOnInit(): void {
@@ -92,26 +101,9 @@ export class RealCreateComponent implements OnInit {
     this.notify.list<any>('/notifies').push({mess, time, date});
   }
 
-  // delete(item){
-  //   const db = this.notify.database.ref();
-  //   const query = this.notify.database.ref('/notifies').orderByKey();
-  //   query.once('value')
-  //     .then(snapshot => {
-  //       snapshot.forEach(childSnapshot => {
-  //         const pkey = childSnapshot.key;
-  //         const chVal = childSnapshot.val();
-  //         if (chVal.date === item.date && chVal.mess === item.mess && chVal.time === item.time){
-  //           db.child('notifies/' + pkey).remove();
-  //           return true;
-  //         }
-  //       });
-  //     });
-  // }
-
   detectFiles(event) {
     this.imgdetect = true;
     this.imgMess = null;
-    // console.log(event.target.files);
     if (this.urls.length !== 0) {
       this.urls = new Array<string>();
     }
@@ -126,7 +118,6 @@ export class RealCreateComponent implements OnInit {
     } else {
       const files = event.target.files;
       this.selectFiles = files;
-      console.log(this.selectFiles);
       if (files) {
         for (const file of files) {
           const reader = new FileReader();
@@ -135,7 +126,6 @@ export class RealCreateComponent implements OnInit {
           };
           reader.readAsDataURL(file);
         }
-        // console.log(this.urls);
       }
     }
   }
@@ -162,7 +152,6 @@ export class RealCreateComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               this.downloadURLs = this.downloadURLs.concat([url]);
-              console.log(this.downloadURLs);
               this.confirm = true;
             });
           })
@@ -187,21 +176,6 @@ export class RealCreateComponent implements OnInit {
     return invalid;
   }
 
-  // async upload(index: number): Promise<any> {
-  //   const urlPath = this.selectFiles.item(index).name + new Date().getTime();
-  //   const fileRef = this.db.ref(urlPath);
-  //   this.db.upload(urlPath, this.selectFiles.item(index)).snapshotChanges().pipe(
-  //     finalize(
-  //       () => {
-  //         fileRef.getDownloadURL().subscribe((url) => {
-  //           this.uploadUrls.push(url);
-  //           console.log(url);
-  //         });
-  //       }
-  //     )
-  //   ).subscribe();
-  // }
-
   closeModal() {
     this.downloadURLs.forEach(url => {
       this.onDeleteAttachment(url);
@@ -219,13 +193,19 @@ export class RealCreateComponent implements OnInit {
     this.news = this.form.value;
     this.news.urls = urls;
     this.realService.save(this.news).subscribe(data => {
-      console.log(data);
+      this.successMess = true;
+      this.router.navigateByUrl('/home');
     }, error => {
       console.log(error);
+      this.errorMess = true;
     });
   }
 
   clearAll() {
     this.form.reset(this.initialValues);
+  }
+
+  confirmLast() {
+    this.router.navigateByUrl('/real-estate-new/');
   }
 }

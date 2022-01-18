@@ -13,26 +13,14 @@ import {RealEstateType} from '../model/real/real-estate-type';
 export class RealService {
   private API = 'http://localhost:8080/real-estate-new';
   private API_URL = ' http://localhost:8080/api/real-estate-new';
-  private API_URL_RELATED = 'http://localhost:8080/api/real-estate-related';
+  private API_URL_RELATED = 'http://localhost:8080/api/real-estate-new';
   private API_URL_HISTORY_POST = ' http://localhost:8080/api/real-estate-new/history-post';
   private API_URL_EMAIL = ' http://localhost:8080/api/real-estate-new/email';
 
   // khaipn
   private API_URL_LIST = 'http://localhost:8080/api/real-estate-new/search';
-  // khaipn
-  private API_URL_REAL_ESTATE_TYPE = 'http://localhost:8080/dealEstateType';
-  // khaipn
-  private API_URL_DIRECTION = 'http://localhost:8080/direction';
-  httpOptions: any;
 
   constructor(private http: HttpClient) {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      }),
-      'Access-Control-Allow-Origin': 'http://localhost:4200',
-      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
-    };
   }
 
   getAllDirection(): Observable<Direction[]> {
@@ -48,7 +36,7 @@ export class RealService {
   }
 
   findRealEstateNewById(id: string): Observable<RealEstateNew> {
-    return this.http.get<RealEstateNew>(this.API_URL + '/' + id);
+    return this.http.get<RealEstateNew>(this.API_URL + '/detail/' + id);
   }
 
   findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType): Observable<RealEstateNew[]> {
@@ -63,7 +51,7 @@ export class RealService {
 
   // khaiPN
   getAllRealEstates(): Observable<any> {
-    return this.http.get(this.API_URL_LIST, this.httpOptions);
+    return this.http.get(this.API_URL_LIST);
   }
 
   // KhaiPN
@@ -80,19 +68,10 @@ export class RealService {
       this.buildSearchParam('&page=', page);
 
     return this.http.get(this.API_URL_LIST +
-      stringParam, this.httpOptions
+      stringParam
     );
   }
 
-  // khaiPN
-  getAllRealEstateTypes(): Observable<any> {
-    return this.http.get(this.API_URL_REAL_ESTATE_TYPE);
-  }
-
-  // khaiPN
-  getAllDirections(): Observable<any> {
-    return this.http.get(this.API_URL_DIRECTION);
-  }
 
   // khaiPN
   private buildSearchParam(searchKey: string, value: string | number): string {

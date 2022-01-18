@@ -33,8 +33,8 @@ export class CustomerService {
 
   // thienlb
   findCustomer(page, customerName, customerPhone, customerEmail): Observable<any> {
-    return this.http.get(this.API + '/customer-list?page=' + page + '&name=' +
-      +'&phone=' + customerPhone + '&email=' + customerEmail);
+    return this.http.get(this.API + '/customer-list?page=' + page + '&name=' + customerName
+      + '&phone=' + customerPhone + '&email=' + customerEmail);
   }
 
   // thiện nhỏ

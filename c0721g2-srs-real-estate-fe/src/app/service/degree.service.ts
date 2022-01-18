@@ -7,7 +7,7 @@ import {Degree} from '../model/employee/degree';
   providedIn: 'root'
 })
 export class DegreeService {
-  private API_URL = 'http://localhost:8080/employee/degree';
+  private API_URL = 'http://localhost:8080/api/employee/degree';
 
   constructor(private httpClient: HttpClient) {
   }
