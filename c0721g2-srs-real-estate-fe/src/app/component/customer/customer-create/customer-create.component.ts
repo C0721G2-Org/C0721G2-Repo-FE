@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomerService} from '../../../service/customer.service';
 import {Router} from '@angular/router';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {LoginComponent} from "../../security/login/login.component";
+import {LoginComponent} from '../../security/login/login.component';
 
 
 @Component({
