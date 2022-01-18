@@ -52,7 +52,7 @@ export class RealListComponent implements OnInit {
     :
     void {
     // lay real estate type list
-    this.realService.getAllRealEstateTypes().subscribe(data => {
+    this.realService.getAllRealEstateType().subscribe(data => {
         this.realEstateTypeList = data;
         console.log(this.realEstateTypeList);
         console.log('page' + this.page);
@@ -60,7 +60,7 @@ export class RealListComponent implements OnInit {
       }
     );
     // lay real direction list
-    this.realService.getAllDirections().subscribe(data => {
+    this.realService.getAllDirection().subscribe(data => {
         this.directionList = data;
         console.log(this.directionList);
       }
@@ -118,7 +118,7 @@ export class RealListComponent implements OnInit {
         const {totalPages, content} = data;
         if (content?.length) {
           this.mess = '';
-          this.realEstateNews = [...this.mappingData([...content])];;
+          this.realEstateNews = [...this.mappingData([...content])];
           this.totalPages = totalPages;
         } else {
           this.realEstateNews = [];
@@ -178,8 +178,7 @@ export class RealListComponent implements OnInit {
     return content.map(item => {
       if (item.price / 1000000000 >= 1) {
         item.displayedPrice = Math.round(item.price) / 1000000000 + ' Tỷ';
-      }
-      else {
+      } else {
         item.displayedPrice = Math.round(item.price) / 1000000 + ' Triệu';
       }
       item = {...item, ...item.displayedPrice};

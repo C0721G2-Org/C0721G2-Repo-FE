@@ -8,6 +8,7 @@ import {AuthService} from '../../../service/auth.service';
 import {TokenStorageService} from '../../../service/token-storage.service';
 import {ResetPasswordComponent} from '../reset-password/reset-password.component';
 import {ShareService} from "../../../service/share.service";
+import {CustomerCreateComponent} from "../../customer/customer-create/customer-create.component";
 
 @Component({
   selector: 'app-login',
@@ -25,8 +26,8 @@ export class LoginComponent implements OnInit {
   userLogged: SocialUser;
 
   constructor(
-    public dialogRef: MatDialogRef<LoginComponent>,
-    public dialog: MatDialog,
+    private dialogRef: MatDialogRef<LoginComponent>,
+    private dialog: MatDialog,
     private fb: FormBuilder,
     private authService: AuthService,
     private tokenStorageService: TokenStorageService,
@@ -181,5 +182,17 @@ export class LoginComponent implements OnInit {
         this.authService.isLoggedIn = false;
       }
     );
+  }
+
+  openDialogRegister() {
+    this.dialogRef.close();
+    const dialogRegister = this.dialog.open(CustomerCreateComponent, {
+      width: '450px',
+      panelClass: 'custom-dialog-create-customer',
+      disableClose: true
+    });
+
+    dialogRegister.afterClosed().subscribe(result => {
+    });
   }
 }

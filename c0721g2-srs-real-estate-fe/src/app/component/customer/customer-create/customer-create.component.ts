@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CustomerService} from '../../../service/customer.service';
 import {Router} from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {LoginComponent} from "../../security/login/login.component";
 
 
 @Component({
@@ -17,10 +19,12 @@ export class CustomerCreateComponent implements OnInit {
   validateErrorUsername: string;
 
 
-
   constructor(private formBuilder: FormBuilder,
               private customerService: CustomerService,
-              private router: Router) {
+              private router: Router,
+              private dialogRef: MatDialogRef<CustomerCreateComponent>,
+              private dialog: MatDialog,
+  ) {
     this.createCustomer = formBuilder.group({
       name: ['', [Validators.required, Validators.pattern('^([^0-9]{2,100})$')]],
       email: ['', [Validators.required, Validators.email]],
@@ -31,7 +35,7 @@ export class CustomerCreateComponent implements OnInit {
       gender: [2, Validators.required],
       password: ['', [Validators.required, Validators.min(6), Validators.max(200)]],
       confirmPassword: ['', [Validators.required]],
-      userName:  ['', [Validators.required, Validators.min(2), Validators.max(100)]],
+      userName: ['', [Validators.required, Validators.min(2), Validators.max(100)]],
       // , Validators.pattern('^([0-9]{9})|([0-9]{12})$')
     }, {
       validator: this.checkPassword('passWord', 'confirmPassword')
@@ -39,9 +43,6 @@ export class CustomerCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.createCustomer = new FormGroup({
-    //   name: new FormControl(),
-    // });
   }
 
   submit() {
@@ -51,11 +52,11 @@ export class CustomerCreateComponent implements OnInit {
           console.log(data);
           alert('bạn đã đăng nhập thành công');
         }, error => {
-        console.log(error.error);
-        console.log(error);
-        this.validateErrorEmail = error.error.errorEmail;
-        this.validateErrorUsername = error.error.errorUsername;
-      }
+          console.log(error.error);
+          console.log(error);
+          this.validateErrorEmail = error.error.errorEmail;
+          this.validateErrorUsername = error.error.errorUsername;
+        }
       );
     }
   }
@@ -75,4 +76,19 @@ export class CustomerCreateComponent implements OnInit {
     };
   }
 
+  login() {
+    this.dialogRef.close();
+    const dialogLogin = this.dialog.open(LoginComponent, {
+      width: '450px',
+      panelClass: 'custom-dialog',
+      disableClose: true
+    });
+
+    dialogLogin.afterClosed().subscribe(result => {
+    });
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }
