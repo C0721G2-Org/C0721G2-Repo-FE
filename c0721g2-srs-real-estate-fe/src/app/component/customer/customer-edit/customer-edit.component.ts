@@ -27,9 +27,8 @@ export class CustomerEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFormEdit();
-    // this.id = this.activatedRoute.snapshot.params.id;
     this.id = this.tokenStorageService.getUser().idCustomer;
-    this.customerService.findById(this.id).subscribe(data => {
+    this.customerService.getCustomerById(this.id).subscribe(data => {
       console.log(data);
       this.customer = data;
       // this.imageForm.setValue(this.customer.image);

@@ -7,17 +7,18 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import {ReactiveFormsModule} from '@angular/forms';
 import { VerifyResetPasswordComponent } from './verify-reset-password/verify-reset-password.component';
 import { AccessDeniedComponent } from './access-denied/access-denied.component';
-import {ShareModule} from '../share/share.module';
+import { FocusInvalidInputDirective } from './custom-directive/focus-invalid-input.directive';
 
 
 
 
 @NgModule({
-  declarations: [LoginComponent, ResetPasswordComponent, VerifyResetPasswordComponent, AccessDeniedComponent],
-  imports: [
-    CommonModule,
-    SecurityRoutingModule,
-    ReactiveFormsModule]
+  declarations: [LoginComponent, ResetPasswordComponent, VerifyResetPasswordComponent, AccessDeniedComponent, FocusInvalidInputDirective],
+    imports: [
+        CommonModule,
+        SecurityRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class SecurityModule {
 }
