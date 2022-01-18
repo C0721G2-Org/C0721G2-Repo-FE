@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {LoginComponent} from '../../security/login/login.component';
 import {AuthService} from '../../../service/auth.service';
 import {ShareService} from '../../../service/share.service';
+import {CustomerCreateComponent} from "../../customer/customer-create/customer-create.component";
 
 @Component({
   selector: 'app-header',
@@ -60,5 +61,17 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/home']);
 
 
+  }
+
+  openDialogRegister() {
+    const dialogRef = this.dialog.open(CustomerCreateComponent, {
+      width: '450px',
+      maxHeight: '90%',
+      panelClass: 'custom-dialog-create-customer',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }
