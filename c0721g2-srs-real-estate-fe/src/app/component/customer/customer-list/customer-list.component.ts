@@ -18,7 +18,7 @@ export class CustomerListComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private dialog: MatDialog,
-    // private toastrService: ToastrServic
+    // private toastrService: ToastrService
   ) {
   }
 
