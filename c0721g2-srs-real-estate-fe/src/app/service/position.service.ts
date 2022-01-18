@@ -7,7 +7,7 @@ import {Positions} from '../model/employee/positions';
   providedIn: 'root'
 })
 export class PositionService {
-  private API_URL = 'http://localhost:8080/employee/position';
+  private API_URL = 'http://localhost:8080/api/employee/position';
 
   constructor( private httpClient: HttpClient) {
   }
