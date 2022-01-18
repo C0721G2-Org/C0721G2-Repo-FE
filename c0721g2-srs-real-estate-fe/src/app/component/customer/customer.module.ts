@@ -34,7 +34,6 @@ import {UpdatePasswordComponent} from './update-password/update-password.compone
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    BrowserAnimationsModule,
   ]
 })
 export class CustomerModule {
