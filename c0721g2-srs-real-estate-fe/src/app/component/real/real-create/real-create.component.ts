@@ -48,13 +48,13 @@ export class RealCreateComponent implements OnInit {
       approval: [],
       customer: [''],
       description: ['', Validators.maxLength(256)],
-      title: ['', [Validators.required, Validators.maxLength(256)]],
-      address: ['', [Validators.required, Validators.maxLength(256)]],
-      area: ['', [Validators.required, Validators.min(1), Validators.max(99999)]],
-      price: ['', [Validators.required, Validators.min(1), Validators.max(1999999999)]],
+      title: ['123', [Validators.required, Validators.maxLength(256)]],
+      address: ['123', [Validators.required, Validators.maxLength(256)]],
+      area: ['1', [Validators.required, Validators.min(1), Validators.max(99999)]],
+      price: ['1', [Validators.required, Validators.min(1), Validators.max(1999999999)]],
       kindOfNews: [1],
-      direction: [null],
-      status: [null],
+      direction: [null, [Validators.required]],
+      status: [null, [Validators.required]],
       realEstateType: [1],
       imageList: [],
       urls: [],
@@ -87,9 +87,9 @@ export class RealCreateComponent implements OnInit {
         console.log(error);
       }
     );
-
-    // this.customer.id = this.token.getUser().idCustomer
-    // this.form.controls['customer'].setValue(this.customer);
+    const id =  this.token.getUser().idCustomer;
+    const idTest = 'KH-0005';
+    this.form.controls['customer'].setValue(idTest);
   }
 
   ngOnInit(): void {
@@ -104,7 +104,6 @@ export class RealCreateComponent implements OnInit {
   detectFiles(event) {
     this.imgdetect = true;
     this.imgMess = null;
-    // console.log(event.target.files);
     if (this.urls.length !== 0) {
       this.urls = new Array<string>();
     }
@@ -119,7 +118,6 @@ export class RealCreateComponent implements OnInit {
     } else {
       const files = event.target.files;
       this.selectFiles = files;
-      console.log(this.selectFiles);
       if (files) {
         for (const file of files) {
           const reader = new FileReader();
@@ -128,7 +126,6 @@ export class RealCreateComponent implements OnInit {
           };
           reader.readAsDataURL(file);
         }
-        // console.log(this.urls);
       }
     }
   }
@@ -155,7 +152,6 @@ export class RealCreateComponent implements OnInit {
           finalize(() => {
             fileRef.getDownloadURL().subscribe((url) => {
               this.downloadURLs = this.downloadURLs.concat([url]);
-              console.log(this.downloadURLs);
               this.confirm = true;
             });
           })
@@ -198,7 +194,9 @@ export class RealCreateComponent implements OnInit {
     this.news.urls = urls;
     this.realService.save(this.news).subscribe(data => {
       this.successMess = true;
+      this.router.navigateByUrl('/home');
     }, error => {
+      console.log(error);
       this.errorMess = true;
     });
   }

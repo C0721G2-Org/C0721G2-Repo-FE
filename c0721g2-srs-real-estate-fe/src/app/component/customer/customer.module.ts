@@ -10,7 +10,6 @@ import {CustomerCreateComponent} from './customer-create/customer-create.compone
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UpdatePasswordComponent} from './update-password/update-password.component';
 
 
