@@ -16,8 +16,6 @@ export class CustomerCreateComponent implements OnInit {
   validateErrorEmail: string;
   validateErrorUsername: string;
 
-
-
   constructor(private formBuilder: FormBuilder,
               private customerService: CustomerService,
               private router: Router) {
@@ -27,14 +25,15 @@ export class CustomerCreateComponent implements OnInit {
       address: this.formBuilder.control('', Validators.required),
       idCard: ['', [Validators.required, Validators.pattern('^([0-9]{9,12})$')]],
       dateOfBirth: this.formBuilder.control('', Validators.required),
-      phoneNumber: ['', [Validators.required, Validators.pattern('^([0-9]{8,12})$')]],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{9,12}$')]],
       gender: [2, Validators.required],
-      password: ['', [Validators.required, Validators.min(6), Validators.max(200)]],
-      confirmPassword: ['', [Validators.required]],
-      userName:  ['', [Validators.required, Validators.min(2), Validators.max(100)]],
+      userName: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
+      // this.customerService.checkUsername.bind(this.customerService)],
       // , Validators.pattern('^([0-9]{9})|([0-9]{12})$')
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(200)]],
+      confirmPassword: ['', [Validators.required]],
     }, {
-      validator: this.checkPassword('passWord', 'confirmPassword')
+      validator: this.checkPassword('password', 'confirmPassword')
     });
   }
 
@@ -75,4 +74,6 @@ export class CustomerCreateComponent implements OnInit {
     };
   }
 
+  checkUsernameNotTaken(username: string) {
+  }
 }

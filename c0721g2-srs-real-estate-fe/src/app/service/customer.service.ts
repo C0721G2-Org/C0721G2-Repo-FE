@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Customer} from '../model/customer/customer';
 import {HttpClient} from '@angular/common/http';
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,15 @@ export class CustomerService {
 
 
   saveCustomer(customer: Customer): Observable<Customer> {
-    return this.httpClient.post<Customer>(this.API_URL + '/create' , customer);
+    return this.httpClient.post<Customer>(this.API_URL + '/create', customer);
   }
 
-  setId(id: string) {
-    this.id = id;
-  }
+  // checkUsername(username: string): Observable<boolean> {
+  //   return this.httpClient.get(this.API_URL).pipe(
+  //     map((usernameList: Array<any>) =>
+  //       usernameList.filter(user => user.userName === username)
+  //     ),
+  //     map(users => !users.length)
+  //   );
+  // }
 }
