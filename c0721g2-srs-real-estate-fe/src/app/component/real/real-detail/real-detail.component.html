@@ -9,42 +9,11 @@
                 <img src="{{img}}"
                      height="450px" class="d-block w-100" alt="...">
               </div>
-<!--<main class="container-fluid mt-3">-->
-<!--  <div class="row justify-content-center">-->
-<!--    <div class="col-md-9">-->
-<!--      <div class="row justify-content-center">-->
-<!--        <section class="col-md-9">-->
-<!--          <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">-->
-<!--            <div class="carousel-inner">-->
-<!--              <ng-template ngFor="">-->
-<!--                <div class="carousel-item active" data-bs-interval="2000">-->
-<!--                  <img src="https://afamilycdn.com/150157425591193600/2020/12/30/img8364-1609294761580567149569.jpg"-->
-<!--                       height="450px" class="d-block w-100" alt="...">-->
-<!--                  <div class="carousel-caption">-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </ng-template>-->
-<!--            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"-->
-<!--                    data-bs-slide="prev">-->
-<!--              <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--              <span class="visually-hidden">Previous</span>-->
-<!--            </button>-->
-<!--            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval"-->
-<!--                    data-bs-slide="next">-->
-<!--              <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--              <span class="visually-hidden">Next</span>-->
-<!--            </button>-->
-<!--          </div>-->
-<!--          <div class="mt-3">-->
-<!--            &lt;!&ndash;                        Title field&ndash;&gt;-->
-<!--            <h5 class="fw-bolder text-danger">-->
-<!--              {{realEstate.title}}-->
-<!--            </h5>-->
 
-                            <div class="carousel-item" data-bs-interval="2000" *ngFor="let item of imgList let i = index">
-                              <img src="{{item.url}}"
-                                   height="450px" class="d-block w-100" alt="...">
-                            </div>
+              <div class="carousel-item" data-bs-interval="2000" *ngFor="let item of imgList let i = index">
+                <img src="{{item.url}}"
+                     height="450px" class="d-block w-100" alt="...">
+              </div>
 
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval"
                       data-bs-slide="prev">
@@ -64,7 +33,7 @@
               </h5>
 
               <!--                        Address field-->
-              <p>Địa chỉ: {{realEstate.address}}</p>
+              <p class="me-2 ms-2">Địa chỉ: {{realEstate.address}}</p>
 
             </div>
             <div class="row ms-2">
@@ -72,18 +41,25 @@
                 <table>
                   <tr>
                     <!--                        Price field-->
-                    <td style="width: 15rem">Mức Giá</td>
+                    <td class="text-center" style="width: 15rem">Mức Giá</td>
                     <!--                        Area field-->
-                    <td style="width: 15rem">Diện tích</td>
+                    <td class="text-center" style="width: 15rem">Diện tích</td>
                     <!--                                    CHỉ hiển thị khi có Number of bedroom field-->
-                    <td style="width: 15rem">Hướng</td>
+                    <td class="text-center" style="width: 15rem">Hướng</td>
                   </tr>
                   <tr>
-                    <td class="fw-bolder">
-                      {{realEstate.price}}
+                    <td class="fw-bolder text-center">
+                     <span *ngIf="realEstate.price/1000000000 >=1"
+                           class=" fs-5 text-danger">{{realEstate.price / 1000000000 | number: '1.0-0' }}
+                       tỷ
+                    </span>
+                      <span *ngIf="realEstate.price/1000000000 <1 && realEstate.price/1000000 >=1  "
+                            class="fs-5 text-danger">{{realEstate.price / 1000000| number: '1.0-0' }}
+                        triệu
+                    </span>
                     </td>
-                    <td class="fw-bolder">{{realEstate.area}} m²</td>
-                    <td class="fw-bolder">{{realEstate.direction.name}}</td>
+                    <td class="fw-bolder text-center">{{realEstate.area}} m²</td>
+                    <td class="fw-bolder text-center">{{realEstate.direction.name}}</td>
                   </tr>
                 </table>
               </div>
@@ -110,7 +86,7 @@
             </div>
             <div class="mt-3">
               <h5 class="fw-bolder">Thông tin mô tả</h5>
-              <p class="mt-3 mb-3" align="justify">
+              <p class="mt-2 mb-2 me-2 ms-2" align="justify">
                 {{realEstate.description}}
               </p>
 
@@ -119,31 +95,38 @@
               <h5 class="fw-bolder">Đặc điểm bất động sản</h5>
 
             </div>
-            <div class="mt-3">
-              <table class="table-light">
+            <div class="mt-2">
+              <table class="table-light ms-2 me-2">
                 <tr>
-                  <th style="width: 15rem">Loại tin đăng</th>
+                  <td style="width: 15rem">Loại tin đăng</td>
                   <td>{{realEstate.realEstateType.name}}</td>
                 </tr>
                 <tr>
-                  <th>Địa chỉ</th>
+                  <td>Địa chỉ</td>
                   <td>{{realEstate.address}}</td>
                 </tr>
                 <tr>
-                  <th>Giá tiền</th>
-                  <td>{{realEstate.price}}</td>
+                  <td>Giá tiền</td>
+                  <td>
+                  <span *ngIf="realEstate.price/1000000000 >=1"
+                        class="fs-6">{{realEstate.price / 1000000000 | number: '1.0-0' }} tỷ
+                    </span>
+                    <span *ngIf="realEstate.price/1000000000 <1 && realEstate.price/1000000 >=1  "
+                          class=" fs-6">{{realEstate.price / 1000000| number: '1.0-0' }} triệu
+                    </span>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Hướng</th>
+                  <td>Hướng</td>
                   <td>{{realEstate.direction.name}}</td>
                 </tr>
                 <tr>
-                  <th>Diện tích</th>
+                  <td>Diện tích</td>
                   <td>{{realEstate.area}} m²</td>
                 </tr>
                 <tr>
-                  <th>Tình trạng</th>
-                  <td >
+                  <td>Tình trạng</td>
+                  <td>
                     <span *ngIf="realEstate.status == '1'"> Có sẳn</span>
                     <span *ngIf="realEstate.status == '0'"> Không có sẳn</span>
                   </td>
@@ -155,12 +138,12 @@
         <aside class="col-md-3">
           <div class="card" style="width: 15rem;">
             <div class="text-center mt-4">
-              <span *ngIf="realEstate.customer.gender === 1">
+              <span *ngIf="realEstate.customer.gender == '1'">
                  <img class="rounded-circle" width="100" height="100"
                       src="https://cdn.vectorstock.com/i/thumb-large/20/76/man-avatar-profile-vector-21372076.webp"
                       data-holder-rendered="true">
               </span>
-              <span *ngIf="realEstate.customer.gender === 0">
+              <span *ngIf="realEstate.customer.gender == '0'">
                  <img class="rounded-circle" width="100" height="100"
                       src="https://cdn.vectorstock.com/i/thumb-large/20/74/woman-avatar-profile-vector-21372074.webp"
                       data-holder-rendered="true">
@@ -186,8 +169,9 @@
             </div>
             <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4" (click)="openDialog()"> Email</button>
             <button class="btn btn-outline-warning btn-lg  ms-3 me-3 mb-4"> Yêu cầu liên hệ lại</button>
-<!--            Modal notice send mail successfully-->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!--            Modal notice send mail successfully-->
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -240,9 +224,11 @@
               <p>Bảo Ngọc - 0986868686</p>
             </div>
           </div>
+
         </aside>
       </div>
     </div>
+
   </div>
 </main>
 

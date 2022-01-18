@@ -28,6 +28,15 @@ $srs-real-estate-theme: mat-light-theme($srs-real-estate-primary, $srs-real-esta
 
 @import "~bootstrap/dist/css/bootstrap.css";
 
+//style này của Tài
+.custom-dialog-tai .mat-dialog-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border-radius: 40px;
+  background: none;
+  box-shadow: none;
+}
 
 //style nay cua Hien
 .custom-dialog .mat-dialog-container {
