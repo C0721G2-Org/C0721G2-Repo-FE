@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Employee} from '../model/employee/employee';
 
@@ -7,7 +7,7 @@ import {Employee} from '../model/employee/employee';
   providedIn: 'root'
 })
 export class EmployeeService {
-  public API = 'http://localhost:8080/employee';
+  public API = 'http://localhost:8080/api/employee';
 
   constructor(private http: HttpClient) {
   }
@@ -17,7 +17,8 @@ export class EmployeeService {
   }
 
   search(page: number, name: string, email: string, positon: string): Observable<any> {
-    return this.http.get(this.API + '/search?name=' + name + '&email=' + email + '&position_id=' + positon + '&page=' + page);
+    return this.http.get(this.API + '/search?name=' + name + '&email=' + email +
+      '&position_id=' + positon + '&page=' + page);
   }
 
   deleteEmployeeById(id: string): Observable<any> {
