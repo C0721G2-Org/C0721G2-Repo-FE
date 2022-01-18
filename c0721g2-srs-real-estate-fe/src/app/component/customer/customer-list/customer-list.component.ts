@@ -83,8 +83,10 @@ export class CustomerListComponent implements OnInit {
         this.message = '';
         console.log(this.message);
       } else {
-        this.message = 'Not found !!!';
+        this.message = 'Không tìm thấy';
         console.log(this.message);
+        this.customers = [];
+        this.totalPages = 0;
       }
     });
   }
