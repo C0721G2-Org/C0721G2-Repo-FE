@@ -7,10 +7,10 @@ import {EmployeeDeleteComponent} from './employee-delete/employee-delete.compone
 
 
 const routes: Routes = [
-  {path: 'employee/list', component: EmployeeListComponent},
+  {path: 'list', component: EmployeeListComponent},
   {path: 'create', component: EmployeeCreateComponent},
   {path: 'edit/:id', component: EmployeeEditComponent},
-  {path: 'employee/delete/:id', component: EmployeeDeleteComponent},
+  {path: 'delete/:id', component: EmployeeDeleteComponent},
 ];
 
 @NgModule({
