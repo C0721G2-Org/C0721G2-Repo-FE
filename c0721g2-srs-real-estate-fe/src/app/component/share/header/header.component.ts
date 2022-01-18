@@ -58,7 +58,5 @@ export class HeaderComponent implements OnInit {
     this.tokenStorageService.signOut();
     this.loadHeader();
     this.router.navigate(['/home']);
-
-
   }
 }

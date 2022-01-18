@@ -39,9 +39,6 @@ export class CustomerCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.createCustomer = new FormGroup({
-    //   name: new FormControl(),
-    // });
   }
 
   submit() {
@@ -49,7 +46,6 @@ export class CustomerCreateComponent implements OnInit {
       this.customerService.saveCustomer(this.createCustomer.value).subscribe(
         data => {
           console.log(data);
-          alert('bạn đã đăng nhập thành công');
         }, error => {
         console.log(error.error);
         console.log(error);
