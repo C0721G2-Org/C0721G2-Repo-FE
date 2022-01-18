@@ -6,15 +6,29 @@ import {CustomerCreateComponent} from './customer-create/customer-create.compone
 import {CustomerEditComponent} from './customer-edit/customer-edit.component';
 import {CustomerDetailComponent} from './customer-detail/customer-detail.component';
 import {UpdatePasswordComponent} from './update-password/update-password.component';
+import {AuthGuard} from '../../helpers/auth.guard';
 
 
 const routes: Routes = [
-  {path: 'list', component: CustomerListComponent},
-  {path: 'detail/:id', component: CustomerDetailComponent},
-  {path: 'delete', component: CustomerDeleteComponent},
-  {path: 'create', component: CustomerCreateComponent},
-  {path: 'edit', component: CustomerEditComponent},
-  {path: 'change-password', component: UpdatePasswordComponent}
+  {
+    path: 'list', component: CustomerListComponent, canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
+  },
+  {path: 'detail/:id', component: CustomerDetailComponent, canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE', 'ROLE_CUSTOMER']}
+  },
+  {path: 'delete', component: CustomerDeleteComponent, canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE']}
+  },
+  {path: 'create', component: CustomerCreateComponent
+  },
+  {path: 'edit', component: CustomerEditComponent
+    // , canActivate: [AuthGuard],
+    // data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE', 'ROLE_CUSTOMER']}
+  },
+  {path: 'change-password', component: UpdatePasswordComponent, canActivate: [AuthGuard],
+    data: {expectedRole: ['ROLE_ADMIN', 'ROLE_EMPLOYEE', 'ROLE_CUSTOMER']}
+  },
 ];
 
 @NgModule({

@@ -1,9 +1,9 @@
 <!--<div class="container-fluid">-->
 <!-- Brand and toggle get grouped for better mobile display -->
-<nav class="navbar navbar-expand-lg navbar-light fs-6 pb-3 pt-3 main-bg sbt">
+<nav class="navbar navbar-expand-lg navbar-light fs-6 pb-3 pt-3 main-bg sbt ">
   <div class="container-fluid">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " href="asset/img/Untitled-2.png">
-      <img class="navbar-brand" width="90%" src="asset/img/final1.png" alt="">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " [routerLink]="['/home']">
+      <img class="navbar-brand" width="90%" src="/assets/img/final1.png" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -45,17 +45,59 @@
           </ul>
         </li>
       </ul>
-      <ul class="d-flex navbar-nav  mb-2 mb-lg-0 fw-bold">
-        <li class="nav-item d-flex ">
-          <a class="navbar-brand hvr-float" href="#">Đăng nhập</a>
-        </li>
-        <li class="nav-item d-flex fw-bold">
-          <a class="navbar-brand hvr-float " href="#">Đăng ký</a>
-        </li>
+      <div *ngIf="this.isLoggedIn then right else wrong"></div>
+      <ul class="d-flex navbar-nav mb-2 mb-lg-0 fw-bold ">
+        <ng-template #right>
+          <li class="nav-item dropdown" style="list-style: none">
+            <a class="navbar-brand trans-nav" href="#" id="user" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              <div *ngIf="this.urlImg then is"></div>
+              <ng-template #is>
+                <img class="rounded-circle" width="40px" height="40px" [src]="this.urlImg">
+              </ng-template>
+              <span class="mx-2" style="font-size: 80%">{{this.username}}</span>
+            </a>
+            <ul class="dropdown-menu main-bg border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
+              <li>
+                <a class="dropdown-item hvr-float " [routerLink]="['/real-estate-new/post-history', this.idCustomer ]">
+                  <i class="fas fa-bars me-2"></i>
+                  <span style="font-size: 85%">Quản lý đăng tin</span>
+                </a>
+              </li>
+
+              <li>
+                <a class="dropdown-item hvr-float " [routerLink]="['/customer/edit']">
+                  <i class="fas fa-user me-2"></i>
+                  <span style="font-size: 85%">Thông tin cá nhân</span>
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item hvr-float " [routerLink]="['/customer/change-password']">
+                  <i class="fas fa-lock me-2"></i>
+                  <span style="font-size: 85%" >Thay đổi mật khẩu</span>
+                </a>
+              </li>
+              <li >
+                <a class="dropdown-item hvr-float " (click)="logout()" >
+                <i class="fas fa-sign-out-alt me-2 "></i>
+                <span style="font-size: 85%" >Đăng xuất</span>
+              </a>
+              </li>
+            </ul>
+          </li>
+          <a class="navbar-brand btn btn-success text-white d-flex" [routerLink]="['/real-estate-new/create']">Đăng tin</a>
+        </ng-template>
+        <ng-template #wrong>
+          <li class="nav-item d-flex ">
+            <a class="navbar-brand hvr-float " style="cursor: pointer" (click)="openDialog()">Đăng nhập</a>
+          </li>
+          <span class="reline me-3"></span>
+          <li class="nav-item d-flex">
+            <a class="navbar-brand hvr-float " (click)="openDialogRegister()">Đăng ký</a>
+          </li>
+        </ng-template>
       </ul>
-      <form class="d-flex">
-        <button class=" navbar-brand btn btn-success text-white" type="submit">Đăng tin</button>
-      </form>
+
     </div>
   </div>
 </nav>

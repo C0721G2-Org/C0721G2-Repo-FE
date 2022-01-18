@@ -1,1 +1,101 @@
-<p>history-post works!</p>
+<div class="container-fluid mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h4 class="fw-bolder"> Lịch sử bài đăng của bạn </h4>
+      <div class="row mt-3 row justify-content-center">
+        <div class="col-md-12">
+          <div class="row ">
+            <form class="" [formGroup]="formSearch" #searchInfo (ngSubmit)="onSearch()">
+              <div class="row ">
+                <div class="col-md-3">
+                  <select class="border-warning form-select" aria-label="Default select example" name="kindOfNew"
+                          formControlName="kindOfNew">
+                    <option value="" selected>Loại tin</option>
+                    <option value="1">Tin Bán</option>
+                    <option value="2">Tin cho thuê</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="border-warning form-select" aria-label="Default select example" name="realNewType"
+                          formControlName="realNewType">
+                    <option selected value="">Loại BĐS</option>
+                    <option value="1">Đất</option>
+                    <option value="2">Nhà ở</option>
+                  </select>
+                </div>
+                <div class="col-md-5">
+                  <input class="border-warning form-control  me-2" type="search" name="title" formControlName="title"
+                         placeholder="Tìm theo tiêu đề">
+                </div>
+                <div class="col-md-1">
+                  <button class="btn btn-success text-light fs-6 float-end" type="submit"
+                  >Tìm
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex text-decoration-none mt-3">
+        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="showAll()">Hiển thị tất cả bài đăng</button>
+      </div>
+      <div class="card-group mt-3">
+        <div class="row">
+          <div class="card mb-3" *ngFor="let item of realEstateNews let i = index">
+            <div class="row no-gutters">
+              <div class="col-md-3 m-auto">
+                <div *ngIf="item.imageList.length != 0">
+                  <img src="{{item.imageList[0].url}}"
+                       style="height: 90%" class="card-img" alt="...">
+                </div>
+                <div *ngIf="item.imageList.length ==0">
+                  <img src="https://staticfile.batdongsan.com.vn/images/avatar/no-image-default.png"
+                       style="height: 90%" class="card-img" alt="...">
+                </div>
+              </div>
+              <div class="col-md-9">
+                <div class="card-body">
+                  <div class="">
+                    <h5 class="fw-bolder">{{item.title | uppercase}}</h5>
+                    <p class="">{{item.description}}</p>
+                    <span *ngIf="item.price/1000000000 >=1"
+                          class=" text-danger fw-bolder fs-4"> Giá: {{item.price/1000000000 | number: '1.0-0' }} tỷ
+                    </span>
+                    <span *ngIf="item.price/1000000000 <1 && item.price/1000000 >=1  "
+                          class=" text-danger fw-bolder fs-4"> Giá: {{item.price/1000000| number: '1.0-0' }} triệu
+                    </span>
+                    <span *ngIf="item.kindOfNews == 2">
+                    / tháng.
+                  </span>
+                    <span
+                      class="">Diện tích: {{item.area}}²
+                    </span>
+                    <div class="float-end">
+                      <a class="fs-6 btn btn-sm btn-warning text-white" href="real-estate-new/detail/{{item.id}}"
+                         style="background-color: #FE9900">
+                        Xem chi tiết
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="pagination pagination-sm justify-content-end ">
+        <li class="page-item" *ngIf="this.page != 0 ">
+          <button class="page-link" (click)="previousClick(1)">Trước đó
+          </button>
+        </li>
+        <li class="page-item"><a class="page-link text-danger" type="button">{{this.page + 1}}</a></li>
+        <li class="page-item"><a class="page-link" type="button">/</a></li>
+        <li class="page-item"><a class="page-link" type="button">{{totalPages}}</a></li>
+        <li class="page-item" *ngIf="this.page  < (this.totalPages-1)">
+          <button (click)="nextClick(1)" class="page-link">Tiếp theo</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

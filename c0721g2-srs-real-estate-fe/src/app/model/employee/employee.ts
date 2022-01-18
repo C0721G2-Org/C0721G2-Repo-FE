@@ -14,6 +14,7 @@ export interface Employee {
   gender: number;
   degree: Degree;
   position: Positions;
+  role: number;
   appUser: AppUser;
   image: Image;
 }

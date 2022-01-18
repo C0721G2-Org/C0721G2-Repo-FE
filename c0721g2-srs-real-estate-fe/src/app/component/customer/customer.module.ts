@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { CustomerRoutingModule } from './customer-routing.module';
-import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import {CustomerRoutingModule} from './customer-routing.module';
+import {CustomerEditComponent} from './customer-edit/customer-edit.component';
 import {CustomerListComponent} from './customer-list/customer-list.component';
 import {CustomerDetailComponent} from './customer-detail/customer-detail.component';
 import {CustomerDeleteComponent} from './customer-delete/customer-delete.component';
 import {CustomerCreateComponent} from './customer-create/customer-create.component';
-import {ReactiveFormsModule} from "@angular/forms";
-import { UpdatePasswordComponent } from './update-password/update-password.component';
+
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import {UpdatePasswordComponent} from './update-password/update-password.component';
+
+
 
 @NgModule({
   declarations: [CustomerEditComponent,
@@ -16,12 +20,20 @@ import { UpdatePasswordComponent } from './update-password/update-password.compo
     CustomerDetailComponent,
     CustomerDeleteComponent,
     CustomerCreateComponent,
-    UpdatePasswordComponent,
+    UpdatePasswordComponent
   ],
-    imports: [
-        CommonModule,
-        CustomerRoutingModule,
-        ReactiveFormsModule
-    ]
+    exports: [
+        CustomerListComponent,
+        CustomerDetailComponent,
+        CustomerCreateComponent
+    ],
+  imports: [
+    CommonModule,
+    CustomerRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+  ]
 })
-export class CustomerModule { }
+export class CustomerModule {
+}
