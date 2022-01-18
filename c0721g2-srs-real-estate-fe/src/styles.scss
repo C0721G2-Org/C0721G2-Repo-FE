@@ -28,6 +28,15 @@ $srs-real-estate-theme: mat-light-theme($srs-real-estate-primary, $srs-real-esta
 
 @import "~bootstrap/dist/css/bootstrap.css";
 
+//style này của Tài
+.custom-dialog-tai .mat-dialog-container {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  border-radius: 40px;
+  background: none;
+  box-shadow: none;
+}
 
 //style nay cua Hien
 .custom-dialog .mat-dialog-container {
@@ -46,5 +55,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 40px;
   background: none;
   box-shadow: none;
+}
+
+.custom-dialog-create-customer .mat-dialog-container {
+  position: relative;
+  top: 20px;
+  padding: 0;
+  overflow: visible;
+  border-radius: 10px;
+
 }
 

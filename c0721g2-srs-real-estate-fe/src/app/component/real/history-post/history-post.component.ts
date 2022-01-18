@@ -106,26 +106,6 @@ export class HistoryPostComponent implements OnInit {
       this.flag = false;
     }
   }
-
-  // showHouse() {
-  //   // this.element = 2;
-  //   // this.size = 2;
-  //   this.realService.findHistoryPostBySearchFieldId(this.pageNumber, this.customerId, '', '', 2).subscribe(data => {
-  //     this.realEstateNews = data['content'];
-  //     this.totalPages = data['totalPages'];
-  //     console.log(this.realEstateNews);
-  //   });
-  // }
-  //
-  // showLand() {
-  //   // this.element = 2;
-  //   // this.size = 2;
-  //   this.realService.findHistoryPostBySearchFieldId(this.pageNumber, this.customerId, '', '', 1).subscribe(data => {
-  //     this.realEstateNews = data['content'];
-  //     this.totalPages = data['totalPages'];
-  //     console.log(this.realEstateNews);
-  //   });
-  // }
   previousClick(index) {
     if (this.page > 0) {
       this.pageNumber = this.pageNumber - index;

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomerService} from '../../../service/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Customer} from '../../../model/customer/customer';
+import {TokenStorageService} from "../../../service/token-storage.service";
 // import {MatSnackBar} from '@angular/material/snack-bar';
 // import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -17,18 +18,17 @@ export class CustomerEditComponent implements OnInit {
   id: string;
   customer: Customer;
   message = '';
+
   constructor(private customerService: CustomerService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
     this.initFormEdit();
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.id = params['id'];
-    });
-    console.log(this.id);
     // this.id = this.activatedRoute.snapshot.params.id;
+    this.id = this.tokenStorageService.getUser().idCustomer;
     this.customerService.findById(this.id).subscribe(data => {
       console.log(data);
       this.customer = data;
@@ -44,11 +44,11 @@ export class CustomerEditComponent implements OnInit {
 
   updateCustomer(): void {
     this.customerService.update(this.id, this.customerForm.value).subscribe(value => {
-      this.message = 'đã thay đổi thông tin thành công';
-    },
-        error => {
-      this.message = 'Xảy ra lỗi, không thể thay đổi thông tin';
-    });
+        this.message = 'đã thay đổi thông tin thành công';
+      },
+      error => {
+        this.message = 'Xảy ra lỗi, không thể thay đổi thông tin';
+      });
   }
 
 
@@ -58,8 +58,8 @@ export class CustomerEditComponent implements OnInit {
       id: new FormControl('', [Validators.required, Validators.pattern('^KH-\\d{4}$')]),
       name: new FormControl('', [Validators.required,
         Validators.pattern('^[a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼ" +\n' +
-        '            "ÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở" +\n' +
-        '            "ỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
+          '            "ÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+(\\\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợở" +\n' +
+          '            "ỡùúụủũưừứựửữỳýỵỷỹđÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ]+)*$')]),
       dateOfBirth: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
       idCard: new FormControl('', [Validators.required, Validators.pattern(/^\d{9}|\d{12}$/)]),

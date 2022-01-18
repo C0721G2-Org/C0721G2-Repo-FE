@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {LoginComponent} from '../../security/login/login.component';
 import {AuthService} from '../../../service/auth.service';
 import {ShareService} from '../../../service/share.service';
+import {CustomerCreateComponent} from "../../customer/customer-create/customer-create.component";
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   role: string;
   urlImg: string;
   isLoggedIn: boolean;
+  idCustomer: string;
 
   constructor(public dialog: MatDialog,
               private tokenStorageService: TokenStorageService,
@@ -35,10 +37,12 @@ export class HeaderComponent implements OnInit {
       this.role = this.tokenStorageService.getUser().roles[0];
       this.username = this.tokenStorageService.getUser().username;
       this.urlImg = this.tokenStorageService.getUser().urlImg;
+      this.idCustomer = this.tokenStorageService.getUser().idCustomer;
     } else {
       this.role = null;
       this.username = null;
       this.urlImg = null;
+      this.idCustomer = null;
     }
     this.isLoggedIn = this.username != null;
   }
@@ -60,5 +64,17 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/home']);
 
 
+  }
+
+  openDialogRegister() {
+    const dialogRef = this.dialog.open(CustomerCreateComponent, {
+      width: '450px',
+      maxHeight: '90%',
+      panelClass: 'custom-dialog-create-customer',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }
