@@ -30,9 +30,9 @@ export class DetailPostApprovalComponent implements OnInit {
     this.realEstateNews = this.data.approveData;
   }
 
-  deleteMedical() {
-    this.subscription = this.medicalService.approve(this.realEstateNews.id).subscribe(data => {
-      this.dialogRef.close();
-    });
-  }
+  // deleteMedical() {
+  //   this.subscription = this.medicalService.approve(this.realEstateNews.id).subscribe(data => {
+  //     this.dialogRef.close();
+  //   });
+  // }
 }
