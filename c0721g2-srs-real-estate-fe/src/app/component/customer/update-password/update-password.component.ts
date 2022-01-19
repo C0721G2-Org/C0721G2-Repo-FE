@@ -32,13 +32,12 @@ export class UpdatePasswordComponent implements OnInit {
   ngOnInit(): void {
     this.usernameChange = this.tokenStorageService.getUser().username;
     this.initFormEdit();
-    console.log(this.usernameChange);
   }
 
   updatePassword(): void {
     this.customerService.changePassword(this.appUserForm.value).subscribe(value => {
         this.message = 'đã thay đổi mật khẩu thành công';
-          },
+      },
       error => {
         this.message = 'Cập nhật thất bại';
       });
