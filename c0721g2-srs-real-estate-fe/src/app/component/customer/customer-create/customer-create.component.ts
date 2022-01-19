@@ -81,7 +81,6 @@ export class CustomerCreateComponent implements OnInit {
       panelClass: 'custom-dialog',
       disableClose: true
     });
-
     dialogLogin.afterClosed().subscribe(result => {
     });
   }
