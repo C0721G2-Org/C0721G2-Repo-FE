@@ -110,7 +110,7 @@ export class RealService {
     return this.http.get<RealEstateType[]>(this.API_URL_RELATED + '/realEstateType');
   }
 
-// 5.7.1 DoanhNV
+// TRAN
   save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
     return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
   }

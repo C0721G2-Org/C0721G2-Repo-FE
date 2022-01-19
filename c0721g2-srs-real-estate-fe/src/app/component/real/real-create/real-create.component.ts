@@ -11,6 +11,7 @@ import {RealEstateNew} from '../../../model/real/real-estate-new';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../service/token-storage.service';
 import {Customer} from '../../../model/customer/customer';
+import {CurrencyPipe} from '@angular/common';
 
 
 @Component({
@@ -41,6 +42,7 @@ export class RealCreateComponent implements OnInit {
 
   errorMess = false;
   successMess = false;
+  priceShow;
 
   form: FormGroup = this.formBuilder.group(
     {
@@ -89,10 +91,13 @@ export class RealCreateComponent implements OnInit {
     );
     const id =  this.token.getUser().idCustomer;
     // const idTest = 'KH-0005';
-    this.form.controls['customer'].setValue(id);
+    this.form.controls.customer.setValue(id);
   }
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe( form => {
+      this.priceShow = form.price;
+    });
   }
 
   send(mess: string) {
