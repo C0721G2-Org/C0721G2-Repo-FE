@@ -33,7 +33,9 @@ import {RealCreateComponent} from './real-create/real-create.component';
     DetailPostApprovalComponent,
     DeletePostApprovalComponent,
     ListPostApprovalComponent,
-    RealCreateComponent],
+    RealCreateComponent,
+    RealListComponent
+  ],
   imports: [
     CommonModule,
     RealRoutingModule,

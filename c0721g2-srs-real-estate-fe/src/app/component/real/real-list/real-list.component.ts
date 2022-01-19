@@ -55,8 +55,6 @@ export class RealListComponent implements OnInit {
     this.realService.getAllRealEstateType().subscribe(data => {
         this.realEstateTypeList = data;
         console.log(this.realEstateTypeList);
-        console.log('page' + this.page);
-        console.log('total page' + this.totalPages);
       }
     );
     // lay real direction list
@@ -94,6 +92,7 @@ export class RealListComponent implements OnInit {
         } else {
           this.realEstateNews = [];
         }
+        console.log(this.realEstateNews);
       }
     );
     // lay message gui tu page khac ve

@@ -18,4 +18,5 @@ export interface RealEstateNew {
   realEstateType: RealEstateType;
   imageList: Image[];
   urls: string;
+  postDate: string;
 }

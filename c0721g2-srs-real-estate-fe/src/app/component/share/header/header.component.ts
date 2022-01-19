@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
   urlImg: string;
   isLoggedIn: boolean;
   idCustomer: string;
-
   constructor(public dialog: MatDialog,
               private tokenStorageService: TokenStorageService,
               private router: Router,
