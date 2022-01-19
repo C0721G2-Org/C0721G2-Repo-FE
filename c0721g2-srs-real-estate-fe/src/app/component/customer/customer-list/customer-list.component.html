@@ -30,11 +30,8 @@
         <h4  class="text-danger fst-italic alert-danger">{{message}}</h4>
       </div>
     </div>
-
     <div class="row mt-5 fs-5">
-
     </div>
-
     <div class="">
       <div class="row me-2 mt-2 fs-5 ">
       </div>
@@ -72,8 +69,6 @@
               <button class="btn btn-success text-center" [routerLink]="['/customer-detail/' + item.id]"> Chi tiết</button>
             </td>
           </tr>
-
-
           </tbody>
         </table>
       </div>
@@ -94,11 +89,8 @@
                      (change)="findPaginnation($event.target.value)">
           </li>
           <li class="page-item ">
-
               <span class="input-group-text page-link" >{{page + 1}}/{{totalPages}}</span>
-
           </li>
-
           <div *ngIf="this.page  < this.totalPages-1 then nexts "></div>
           <ng-template #nexts>
             <li class="page-item">
@@ -114,3 +106,4 @@
 
   </main>
 </div>
+

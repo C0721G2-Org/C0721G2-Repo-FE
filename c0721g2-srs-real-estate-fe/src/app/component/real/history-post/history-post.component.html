@@ -28,8 +28,8 @@
                          placeholder="Tìm theo tiêu đề">
                 </div>
                 <div class="col-md-1">
-                  <button class="btn btn-outline-warning text-light fs-6 float-end" type="submit"
-                          style="background-color: #FE9900">Tìm
+                  <button class="btn btn-success text-light fs-6 float-end" type="submit"
+                  >Tìm
                   </button>
                 </div>
               </div>
@@ -38,15 +38,13 @@
         </div>
       </div>
       <div class="d-flex text-decoration-none mt-3">
-        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="showAll()">Tất cả</button>
-        <!--        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="showHouse()">Nhà ở</button>-->
-        <!--        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="showLand()">Đất</button>-->
+        <button class="btn btn-light me-3 text-decoration-none text-dark" (click)="showAll()">Hiển thị tất cả bài đăng</button>
       </div>
       <div class="card-group mt-3">
         <div class="row">
           <div class="card mb-3" *ngFor="let item of realEstateNews let i = index">
             <div class="row no-gutters">
-              <div class="col-md-3 mt-3">
+              <div class="col-md-3 m-auto">
                 <div *ngIf="item.imageList.length != 0">
                   <img src="{{item.imageList[0].url}}"
                        style="height: 90%" class="card-img" alt="...">
@@ -61,15 +59,21 @@
                   <div class="">
                     <h5 class="fw-bolder">{{item.title | uppercase}}</h5>
                     <p class="">{{item.description}}</p>
-                    <span
-                      class=" text-danger fw-bolder fs-4"> Giá: {{item.price}}
+                    <span *ngIf="item.price/1000000000 >=1"
+                          class=" text-danger fw-bolder fs-4"> Giá: {{item.price/1000000000 | number: '1.0-0' }} tỷ
                     </span>
+                    <span *ngIf="item.price/1000000000 <1 && item.price/1000000 >=1  "
+                          class=" text-danger fw-bolder fs-4"> Giá: {{item.price/1000000| number: '1.0-0' }} triệu
+                    </span>
+                    <span *ngIf="item.kindOfNews == 2">
+                    / tháng.
+                  </span>
                     <span
                       class="">Diện tích: {{item.area}}²
                     </span>
                     <div class="float-end">
                       <a class="fs-6 btn btn-sm btn-warning text-white" href="real-estate-new/detail/{{item.id}}"
-                       style="background-color: #FE9900">
+                         style="background-color: #FE9900">
                         Xem chi tiết
                       </a>
                     </div>
@@ -81,7 +85,7 @@
         </div>
       </div>
       <ul class="pagination pagination-sm justify-content-end ">
-             <li class="page-item" *ngIf="this.page != 0 ">
+        <li class="page-item" *ngIf="this.page != 0 ">
           <button class="page-link" (click)="previousClick(1)">Trước đó
           </button>
         </li>
@@ -95,4 +99,3 @@
     </div>
   </div>
 </div>
-

@@ -12,8 +12,7 @@ import {AppUser} from '../model/user/app-user';
 export class CustomerService {
   // API - Thien
   private API = 'http://localhost:8080/api/customers';
-  private API1 = 'http://localhost:8080/customerInformation/';
-  private API2 = 'http://localhost:8080/account/';
+  private API2 = 'http://localhost:8080/api/public/';
   private API_URL = 'http://localhost:8080/api/customers';
 
   constructor(
@@ -39,15 +38,15 @@ export class CustomerService {
 
   // thiện nhỏ
   findById(id: string): Observable<Customer> {
-    return this.http.get<Customer>(this.API1 + `id/` + id);
+    return this.http.get<Customer>(this.API + `/id/` + id);
   }
 
   update(id: string, customer: Customer): Observable<Customer> {
-    return this.http.patch<Customer>(this.API1 + `update/` + id, customer);
+    return this.http.patch<Customer>(this.API + `/edit-customer/` + id, customer);
   }
 
   changePassword(user: any): Observable<any> {
-    return this.http.patch(this.API2 + `password/`, user);
+    return this.http.patch(this.API2 + `password`, user);
   }
 
   finduserbyusername(username: string): Observable<AppUser> {
