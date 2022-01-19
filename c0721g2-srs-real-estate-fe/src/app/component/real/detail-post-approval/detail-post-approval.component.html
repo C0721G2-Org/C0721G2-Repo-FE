@@ -1,27 +1,20 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <p class="modal-title fs-4 text-center text-success">Bạn có muốn xóa nhân viên</p>
-    </div>
-    <div class="modal-body fs-6 fw-bold text-danger">
-      <table class="table">
-        <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Tên: </td>
-          <td>{{realEstateNews.id}}</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Chứng minh nhân dân: </td>
-          <td>{{realEstateNews.address}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)=" onNoClick()">Thoát</button>
-      <button type="button" class="btn btn-danger" (click)="deleteMedical()">Xoá</button>
-    </div>
+<div class="modal-content">
+  <div class="modal-header bg-success text-light">
+    <h5 class="modal-title" id="exampleModalLabel">Duyệt bài đăng thành công. </h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formInfo" (ngSubmit)="onSubmit()">
+      <div class="row mb-3 justify-content-center">
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <input hidden type="text" class="form-control" name="customerEmail" formControlName="customerEmail" [ngModel]="customerEmail">
+      </div>
+      <div class="modal-footer">
+<!--        <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >OK</button>-->
+        <button class="btn btn-success me-3 text-center  justify-content-end"
+                                  (click)="acceptApproval(id)">Duyệt
+                          </button>
+      </div>
+    </form>
   </div>
 </div>
