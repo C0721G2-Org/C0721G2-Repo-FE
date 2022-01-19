@@ -90,6 +90,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     JwtHelperService, {provide: APP_BASE_HREF, useValue: '/'},
   CurrencyPipe],
   entryComponents: [BottomSheetNotifyComponent],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

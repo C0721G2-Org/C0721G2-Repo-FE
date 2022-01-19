@@ -58,11 +58,22 @@
               <span class="mx-2" style="font-size: 80%">{{this.username}}</span>
             </a>
             <ul class="dropdown-menu border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
+              <div *ngIf="this.role === 'ROLE_ADMIN' then admin else customer"></div>
+
               <li>
-                <a class="dropdown-item  " [routerLink]="['/real-estate-new/post-history', this.idCustomer ]">
-                  <i class="fas fa-bars me-2"></i>
-                  <span style="font-size: 85%">Quản lý đăng tin</span>
-                </a>
+                <ng-template #customer>
+                  <a class="dropdown-item" [routerLink]="['/real-estate-new/post-history', this.idCustomer ]">
+                    <i class="fas fa-bars me-2"></i>
+                    <span style="font-size: 85%">Quản lý đăng tin</span>
+                  </a>
+                </ng-template>
+                <ng-template #admin>
+                  <a class="dropdown-item" [routerLink]="['/employee/list']">
+                    <i class="fas fa-bars me-2"></i>
+                    <span style="font-size: 85%">Quản lý nhân viên</span>
+                  </a>
+                </ng-template>
+
               </li>
               <li>
                 <a class="dropdown-item   " [routerLink]="['/customer/edit']">
@@ -73,18 +84,19 @@
               <li>
                 <a class="dropdown-item  " [routerLink]="['/customer/change-password']">
                   <i class="fas fa-lock me-2"></i>
-                  <span style="font-size: 85%" >Thay đổi mật khẩu</span>
+                  <span style="font-size: 85%">Thay đổi mật khẩu</span>
                 </a>
               </li>
-              <li >
-                <a class="dropdown-item  " (click)="logout()" >
-                <i class="fas fa-sign-out-alt me-2 "></i>
-                <span style="font-size: 85%" >Đăng xuất</span>
-              </a>
+              <li>
+                <a class="dropdown-item  " (click)="logout()">
+                  <i class="fas fa-sign-out-alt me-2 "></i>
+                  <span style="font-size: 85%">Đăng xuất</span>
+                </a>
               </li>
             </ul>
           </li>
-          <a class="navbar-brand btn btn-success text-white d-flex" [routerLink]="['/real-estate-new/create']">Đăng tin</a>
+          <a class="navbar-brand btn btn-success text-white d-flex" [routerLink]="['/real-estate-new/create']">Đăng
+            tin</a>
         </ng-template>
         <ng-template #wrong>
           <li class="nav-item d-flex ">

@@ -7,8 +7,8 @@ import {FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login'
 import {AuthService} from '../../../service/auth.service';
 import {TokenStorageService} from '../../../service/token-storage.service';
 import {ResetPasswordComponent} from '../reset-password/reset-password.component';
-import {ShareService} from "../../../service/share.service";
-import {CustomerCreateComponent} from "../../customer/customer-create/customer-create.component";
+import {ShareService} from '../../../service/share.service';
+import {CustomerCreateComponent} from '../../customer/customer-create/customer-create.component';
 
 @Component({
   selector: 'app-login',

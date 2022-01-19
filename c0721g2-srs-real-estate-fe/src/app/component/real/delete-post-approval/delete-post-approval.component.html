@@ -1,14 +1,21 @@
-<div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title">Confirmation Dialog</h5>
-    </div>
-    <div class="modal-body">
-      <p>Are you sure you want to delete <span style="color:red;">{{name}}</span>?</p>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="cancel()">No Thanks</button>
-<!--      <button type="button" class="btn btn-primary" (click)="delete()">Delete</button>-->
-    </div>
+<div class="modal-content">
+  <div class="modal-header bg-success text-light">
+    <h5 class="modal-title" id="exampleModalLabel">Nhập thông tin liên hệ của bạn </h5>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="formInfo" (ngSubmit)="onSubmit()">
+      <div class="row mb-3 justify-content-center">
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <div class="col-md-11">
+          <input type="text" class="form-control" name="reason" formControlName="reason">
+        </div>
+        <input hidden type="text" class="form-control" name="customerEmail" formControlName="customerEmail" [ngModel]="customerEmail">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=" onNoClick()">Đóng</button>
+        <button type="submit" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Gửi</button>
+      </div>
+    </form>
   </div>
 </div>
