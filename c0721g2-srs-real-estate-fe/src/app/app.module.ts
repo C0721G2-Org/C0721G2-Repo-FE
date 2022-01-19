@@ -30,7 +30,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {BottomSheetNotifyComponent} from './component/util/bottom-sheet-notify/bottom-sheet-notify.component';
 import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {APP_BASE_HREF, CurrencyPipe} from '@angular/common';
+import {APP_BASE_HREF} from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
@@ -87,8 +87,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     } as SocialAuthServiceConfig,
   }, authInterceptorProviders,
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
-    JwtHelperService, {provide: APP_BASE_HREF, useValue: '/'},
-  CurrencyPipe],
+    JwtHelperService, {provide: APP_BASE_HREF, useValue: '/'}],
   entryComponents: [BottomSheetNotifyComponent],
   exports: [
   ],

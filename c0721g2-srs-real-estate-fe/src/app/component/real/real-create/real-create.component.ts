@@ -42,6 +42,7 @@ export class RealCreateComponent implements OnInit {
 
   errorMess = false;
   successMess = false;
+  priceShow;
 
   form: FormGroup = this.formBuilder.group(
     {
@@ -63,7 +64,7 @@ export class RealCreateComponent implements OnInit {
   );
   private initialValues: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private realService: RealService, private router: Router, private currency: CurrencyPipe,
+  constructor(private formBuilder: FormBuilder, private realService: RealService, private router: Router,
               private db: AngularFireStorage, private notify: AngularFireDatabase, private token: TokenStorageService) {
     const items: AngularFireList<any> = notify.list('/notifies');
     this.initialValues = this.form.value;
@@ -95,12 +96,7 @@ export class RealCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.valueChanges.subscribe( form => {
-      if (form.price){
-        this.form.patchValue({
-          price: this.currency.transform(form.price.replace(/\D/g, '')
-            .replace(/^0+/, ''), 'USD', 'symbol', '1.0-0')
-        });
-      }
+      this.priceShow = form.price;
     });
   }
 
