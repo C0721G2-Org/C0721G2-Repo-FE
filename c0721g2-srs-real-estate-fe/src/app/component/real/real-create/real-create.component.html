@@ -82,11 +82,9 @@
                 class="fst-italic" style="color: red">Diện tích không được để trống</small>
               <small *ngIf="form.controls.area.errors?.min && (form.controls.area.touched || form.controls.area.dirty) "
                      class="fst-italic" style="color: red">Nhập giá trị lớn hơn 0</small>
-              <small *ngIf="form.controls.area.errors?.max && (form.controls.area.touched || form.controls.area.dirty) "
-                     class="fst-italic" style="color: red">Tối đa 99999 m2</small>
             </div>
             <div class="col-md-6 position-relative">
-              <label for="price" class="form-label">Giá (vnd/m2) <span
+              <label for="price" class="form-label">Giá (vnd) <span
                 style="color: red">(*)</span></label>
               <input type="number" class="form-control" id="price"
                      placeholder="1000000 vnd/m2" formControlName="price">
@@ -96,9 +94,6 @@
               <small
                 *ngIf="form.controls.price.errors?.min && (form.controls.price.touched || form.controls.price.dirty) "
                 class="fst-italic" style="color: red">Nhập giá trị lớn hơn 0</small>
-              <small
-                *ngIf="form.controls.price.errors?.max && (form.controls.price.touched || form.controls.price.dirty) "
-                class="fst-italic" style="color: red">Tối đa 1999999999 vnd/m2</small>
             </div>
             <div class="col-md-12 position-relative">
               <label for="note" class="form-label">Ghi chú</label>

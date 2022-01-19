@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 import {AppUser} from '../../../model/user/app-user';
 import {CustomerService} from '../../../service/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {TokenStorageService} from '../../../service/token-storage.service';
 
 export function checkPasswordAndRePassword(c: AbstractControl) {
   const v = c.value;
@@ -19,36 +20,37 @@ export function checkPasswordAndRePassword(c: AbstractControl) {
 })
 export class UpdatePasswordComponent implements OnInit {
   appUserForm: FormGroup;
-  username = 'admin';
+  usernameChange: string;
   message = '';
 
   constructor(private customerService: CustomerService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private tokenStorageService: TokenStorageService) {
   }
 
   ngOnInit(): void {
+    this.usernameChange = this.tokenStorageService.getUser().username;
     this.initFormEdit();
+    console.log(this.usernameChange);
   }
 
   updatePassword(): void {
-    console.log(this.appUserForm.value.reNewPassword);
     this.customerService.changePassword(this.appUserForm.value).subscribe(value => {
         this.message = 'đã thay đổi mật khẩu thành công';
-        // this.router.navigateByUrl('customer');
-      },
+          },
       error => {
-        this.message = 'Mật khẩu cũ sai';
+        this.message = 'Cập nhật thất bại';
       });
   }
 
+  onClick() {
+    this.appUserForm.reset();
+  }
   initFormEdit() {
     this.appUserForm = new FormGroup({
-      // id: new FormControl(''),
-      // id: new FormControl('', [Validators.required]),
-      username: new FormControl(this.username, [Validators.required]),
-      // isEnabled: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
+      usernameChange: new FormControl(this.usernameChange, [Validators.required]),
+      password: new FormControl('', [Validators.required]),
       newPassword: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
       reNewPassword: new FormControl('', [Validators.required])
     }, {validators: checkPasswordAndRePassword});

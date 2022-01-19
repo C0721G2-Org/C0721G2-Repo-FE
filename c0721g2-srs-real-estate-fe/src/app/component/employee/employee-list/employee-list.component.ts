@@ -63,7 +63,7 @@ export class EmployeeListComponent implements OnInit {
             this.page = data.pageable.pageNumber;
             this.message = '';
           } else {
-            this.message = 'Not found !!!';
+            this.message = 'Không tìm thấy !!!';
           }
           this.flag = true;
         });

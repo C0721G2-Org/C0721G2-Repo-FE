@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12">
         <div class=" col-3">
-          <button class="btn btn btn-secondary fw-bold ms-3 mt-3 mb-3 ">Trở về</button>
+          <button class="btn btn btn-secondary fw-bold ms-3 mt-3 mb-3 " [routerLink]="['/home']" >Trở về</button>
         </div>
         <div class="card mb-4">
           <div class="card-header pb-0">
@@ -12,11 +12,13 @@
             <p class="text-success"></p>
           </div>
           <form class="row g-3 needs-validation m-3" method="post" [formGroup]="customerForm" (ngSubmit)="updateCustomer()">
+            <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                   placeholder="Nhập tên" hidden>
             <div class="col-md-6 position-relative">
               <label for="name" class="form-label">Họ và tên<span
                 style="color: red">(*)</span></label>
               <input type="text" class="form-control" id="name" name="name" formControlName="name"
-                     placeholder="Nhập tên nhân viên">
+                     placeholder="Nhập tên">
               <small style="color: red"
                      *ngIf="customerForm.controls.name.dirty &&customerForm.controls.name.hasError('required')">Tên không được để
                 trống.</small>
@@ -109,11 +111,11 @@
             <div class=" btn-toolbar mb-3 d-flex flex-row-reverse bd-highlight" role="toolbar"
                  aria-label="Toolbar with button groups">
               <div class="btn-group me-2">
-                <button class="btn btn-primary" type="submit" >Lưu
-                </button>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal"
+                [disabled]="customerForm.invalid">Lưu</button>
               </div>
               <div class="btn-group me-2">
-                <a class="btn btn-danger" [routerLink]="customer">Trở về</a>
+                <a class="btn btn-secondary" (click)="onClick()">Xóa</a>
               </div>
             </div>
           </form>
@@ -122,3 +124,20 @@
     </div>
   </div>
 </main>
+<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Bạn có muốn cập nhập?
+      </div>
+      <div class="modal-footer">
+        <!--        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>-->
+        <button type="button" class="btn btn-primary" (click)="updateCustomer()" data-bs-dismiss="modal">Xác nhận</button>
+      </div>
+    </div>
+  </div>
+</div>

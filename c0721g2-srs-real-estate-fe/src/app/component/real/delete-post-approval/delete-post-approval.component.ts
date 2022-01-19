@@ -60,3 +60,5 @@ export class DeletePostApprovalComponent implements OnInit {
     this.ngOnInit();
   }
 }
+
+
