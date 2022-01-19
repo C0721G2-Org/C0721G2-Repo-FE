@@ -138,4 +138,7 @@ export class EmployeeEditComponent implements OnInit {
   onClick() {
     this.employeeForm.reset();
   }
+  submitModal() {
+    this.router.navigate(['/employee/list']);
+  }
 }

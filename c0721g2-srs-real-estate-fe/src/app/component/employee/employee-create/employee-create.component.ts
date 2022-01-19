@@ -128,7 +128,7 @@ export class EmployeeCreateComponent implements OnInit {
       console.log(this.employeeForm.value);
       this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
           // console.log(this.customer);
-          this.router.navigate(['/employee/list']);
+          // this.router.navigate(['/employee/list']);
         }
         , error => {
           this.validateErrorEmail = error.error.errorEmail;
@@ -139,6 +139,10 @@ export class EmployeeCreateComponent implements OnInit {
 
   onClear() {
     this.employeeForm.reset();
+  }
+
+  submitModal() {
+    this.router.navigate(['/employee/list']);
   }
 
 }
