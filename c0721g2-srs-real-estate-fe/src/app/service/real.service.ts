@@ -78,7 +78,7 @@ export class RealService {
 // DOANH
   // 5.7.1 DoanhNV
   search(page: number, kindOfNews: string, direction: string, realEstateType: string): Observable<any> {
-    return this.http.get<RealEstateNew[]>(this.API_URL + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
+    return this.http.get<RealEstateNew[]>(this.API_URL + '/search-approval-list?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
   }
 
   // 5.7.1 DoanhNV
