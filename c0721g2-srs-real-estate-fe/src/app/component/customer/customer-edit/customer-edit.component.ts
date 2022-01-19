@@ -3,7 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CustomerService} from '../../../service/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Customer} from '../../../model/customer/customer';
-import {TokenStorageService} from "../../../service/token-storage.service";
+import {TokenStorageService} from '../../../service/token-storage.service';
 // import {MatSnackBar} from '@angular/material/snack-bar';
 // import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -27,21 +27,13 @@ export class CustomerEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.initFormEdit();
-    // this.id = this.activatedRoute.snapshot.params.id;
     this.id = this.tokenStorageService.getUser().idCustomer;
     console.log(this.id);
     this.customerService.getCustomerById(this.id).subscribe(data => {
       this.customer = data;
-      console.log(data);
-      // this.imageForm.setValue(this.customer.image);
-      // console.log(this.imageForm);
       this.customerForm.setValue(this.customer);
     });
   }
-
-  // findCustomerByid(): void {
-  //   this.customerService.findById(this.customerForm.value);
-  // }
 
   updateCustomer(): void {
     this.customerService.update(this.id, this.customerForm.value).subscribe(value => {
@@ -69,12 +61,6 @@ export class CustomerEditComponent implements OnInit {
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/^(0|(\\(84\\)\\+))+([9][0-1][0-9]{7})$/)]),
       email: new FormControl('', [Validators.required, Validators.email]),
       address: new FormControl('', [Validators.required]),
-      // appUserId: new FormControl('', [Validators.required])
-      // image: new FormGroup({
-      //   url: new FormControl(''),
-      //   id: new FormControl('')
-      // })
-      // có nó nên không show infor dc
     });
   }
 }

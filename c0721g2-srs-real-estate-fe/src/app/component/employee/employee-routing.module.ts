@@ -6,7 +6,6 @@ import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
 import {EmployeeDeleteComponent} from './employee-delete/employee-delete.component';
 import {AuthGuard} from '../../helpers/auth.guard';
 
-
 const routes: Routes = [
   {
     path: 'list',

@@ -19,6 +19,7 @@ const routes: Routes = [
     path: 'security',
     loadChildren: () => import('./component/security/security.module').then(module => module.SecurityModule)
   },
+
 ];
 
 @NgModule({
