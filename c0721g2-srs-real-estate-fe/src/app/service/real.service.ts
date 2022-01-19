@@ -64,11 +64,15 @@ export class RealService {
       return searchKey + '';
     }
     return searchKey + value.toString();
+  }
 
+  // TranNN
+  save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
+    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
   }
 
   getAllListPostApproval(): Observable<any> {
-    return this.http.get(this.API_URL + '/list');
+    return this.http.get(this.API_URL + '/list-post-approval');
   }
 
   approve(id: string): Observable<any> {
@@ -110,10 +114,10 @@ export class RealService {
     return this.http.get<RealEstateType[]>(this.API_URL_RELATED + '/realEstateType');
   }
 
-// TRAN
-  save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
-    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
-  }
+// // 5.7.1 DoanhNV
+//   save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
+//     return this.http.post<RealEstateNew>(this.API_URL + '/', realEstateNew);
+//   }
 
 
 // 5.7.1 DoanhNV
