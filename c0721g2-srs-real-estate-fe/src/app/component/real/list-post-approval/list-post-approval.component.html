@@ -21,30 +21,26 @@
 
           <li class="nav-item">
             <a class="nav-link text-dark hvr-sweep-to-right pleft0"
-               href="/employee/list">
-              <i class="fas fa-users fa-fw"></i>
-              Quản lý nhân viên
+               [routerLink]="['/employee/list']">
+              <i class=" fas fa-users fa-fw"></i>
+            Quản lý nhân viên
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-dark hvr-sweep-to-right pleft0"
-               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+               [routerLink]="['/customer/list']">
               <i class="fas fa-user-tie fa-fw"></i>
-              Thông tin khách hàng
+              Quản lý khách hàng
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link text-dark hvr-sweep-to-right pleft0"
-               href="https://getbootstrap.com/docs/5.1/examples/dashboard/#">
+               [routerLink]="['/real-estate-new/list-post-approval']">
               <i class="fas fa-city fa-fw"></i>
-              Thông tin BĐS
+              Quản lý bài đăng
             </a>
           </li>
           <li>
-            <a href="#news" data-bs-toggle="collapse"
-               class="nav-link px-0 align-middle text-dark hvr-sweep-to-right">
-              <i class="fas fa-vote-yea"></i> <span
-              data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Quản lý tin đăng</span></a>
             <ul class="collapse nav flex-column ms-1" id="news" data-bs-parent="#menu">
               <li class="nav-item">
                 <a class="nav-link text-dark hvr-sweep-to-right"
