@@ -3,9 +3,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {TokenStorageService} from '../../../service/token-storage.service';
 import {Router} from '@angular/router';
 import {LoginComponent} from '../../security/login/login.component';
-import {AuthService} from '../../../service/auth.service';
 import {ShareService} from '../../../service/share.service';
-import {CustomerCreateComponent} from "../../customer/customer-create/customer-create.component";
+import {CustomerCreateComponent} from '../../customer/customer-create/customer-create.component';
 
 @Component({
   selector: 'app-header',
@@ -62,14 +61,12 @@ export class HeaderComponent implements OnInit {
     this.tokenStorageService.signOut();
     this.loadHeader();
     this.router.navigate(['/home']);
-
-
   }
 
   openDialogRegister() {
     const dialogRef = this.dialog.open(CustomerCreateComponent, {
-      width: '450px',
-      maxHeight: '90%',
+      width: '550px',
+      maxHeight: '100%',
       panelClass: 'custom-dialog-create-customer',
       disableClose: true
     });
@@ -78,3 +75,11 @@ export class HeaderComponent implements OnInit {
     });
   }
 }
+// login() {
+//   this.dialogRef.close();
+//   const dialogLogin = this.dialog.open(LoginComponent, {
+//     width: '450px',
+//     panelClass: 'custom-dialog',
+//     disableClose: true
+//   });
+//
