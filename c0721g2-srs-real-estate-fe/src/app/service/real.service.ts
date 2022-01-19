@@ -85,10 +85,12 @@ export class RealService {
   acceptApprove(realEstateNew: RealEstateNew, id: string): Observable<any> {
     return this.http.post(this.API_URL + '/approve/' + id, realEstateNew);
   }
+
 // 5.7.1 DoanhNV
   dontAcceptApprove(realEstateNew: RealEstateNew, id: string): Observable<any> {
     return this.http.post(this.API_URL + '/approval/' + id, realEstateNew);
   }
+
 // 5.7.1 DoanhNV
   sendApprovalMail(email): Observable<ApprovalMail> {
     return this.http.post<ApprovalMail>(this.API_URL + '/approval-email', email);
@@ -107,10 +109,12 @@ export class RealService {
   getAllRealEstateType(): Observable<RealEstateType[]> {
     return this.http.get<RealEstateType[]>(this.API_URL_RELATED + '/realEstateType');
   }
+
 // 5.7.1 DoanhNV
   save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
-    return this.http.post<RealEstateNew>(this.API_URL, realEstateNew);
+    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
   }
+
 
 // 5.7.1 DoanhNV
   findRealEstateNewById(id: string): Observable<RealEstateNew> {
