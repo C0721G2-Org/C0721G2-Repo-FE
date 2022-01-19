@@ -2,7 +2,7 @@
 <!-- Brand and toggle get grouped for better mobile display -->
 <nav class="navbar navbar-expand-lg navbar-light fs-6 pb-3 pt-3 main-bg sbt ">
   <div class="container-fluid">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " [routerLink]="['/home']">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 " [routerLink]="['/real-estate-new/home', 0]">
       <img class="navbar-brand" width="80%" src="/assets/img/Untitled-5.jpg" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -18,8 +18,8 @@
             Nhà đất bán
           </a>
           <ul class="dropdown-menu dropdown-menu-khai main-bg border-0 pb-0 fw-bold" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán nhà </a></li>
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán đất nền dự án</a></li>
+            <li><a class="dropdown-item hvr-float fw-bold"  [routerLink]="['/real-estate-new/home', 1]" >Bán nhà </a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" [routerLink]="['/real-estate-new/home', 2]" >Bán đất nền dự án</a></li>
             <li><a class="dropdown-item hvr-float fw-bold" href="#">Bán loại bất động sản khác</a></li>
           </ul>
         </li>
@@ -29,8 +29,8 @@
             Nhà đất cho thuê
           </a>
           <ul class="dropdown-menu dropdown-menu-khai main-bg border-0 pb-0 " aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê nhà</a></li>
-            <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê đất nền</a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" [routerLink]="['/real-estate-new/home', 3]">Cho thuê nhà</a></li>
+            <li><a class="dropdown-item hvr-float fw-bold" [routerLink]="['/real-estate-new/home', 4]">Cho thuê đất nền</a></li>
             <li><a class="dropdown-item hvr-float fw-bold" href="#">Cho thuê loại bất động sản khác</a></li>
           </ul>
         </li>

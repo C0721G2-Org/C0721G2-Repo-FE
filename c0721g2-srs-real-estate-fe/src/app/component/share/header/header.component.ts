@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   urlImg: string;
   isLoggedIn: boolean;
   idCustomer: string;
+
   constructor(public dialog: MatDialog,
               private tokenStorageService: TokenStorageService,
               private router: Router,
@@ -74,6 +75,7 @@ export class HeaderComponent implements OnInit {
     });
   }
 }
+
 // login() {
 //   this.dialogRef.close();
 //   const dialogLogin = this.dialog.open(LoginComponent, {
