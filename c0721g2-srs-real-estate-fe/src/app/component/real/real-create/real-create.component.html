@@ -87,7 +87,7 @@
               <label for="price" class="form-label">Giá (vnd) <span
                 style="color: red">(*)</span></label>
               <input type="number" class="form-control" id="price"
-                     placeholder="1000000 vnd/m2" formControlName="price">
+                     placeholder="1.000.000.000 vnd" formControlName="price">
               <small
                 *ngIf="form.controls.price.errors?.required && (form.controls.price.touched || form.controls.price.dirty) "
                 class="fst-italic" style="color: red">Giá không được để trống</small>
@@ -149,39 +149,3 @@
     </div>
   </div>
 </div>
-<!--<ng-container *ngIf="successMess">-->
-<!--  <div class="modal fade" id="ModalSuccess" tabindex="-1" aria-labelledby="exampleModalLabel">-->
-<!--    <div class="modal-dialog">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title">Thông báo</h5>-->
-<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--          Bài đăng thành công-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-primary" (click)="confirmLast()">Xác nhận</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</ng-container>-->
-<!--<ng-container *ngIf="errorMess">-->
-<!--  <div class="modal fade" id="ModalError" tabindex="-1" aria-labelledby="exampleModalLabel">-->
-<!--    <div class="modal-dialog">-->
-<!--      <div class="modal-content">-->
-<!--        <div class="modal-header">-->
-<!--          <h5 class="modal-title">Thông báo</h5>-->
-<!--          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--          Có lỗi xảy ra trong hệ thống, vui lòng quay lại sau-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--          <button type="button" class="btn btn-primary" (click)="confirmLast()">Xác nhận</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</ng-container>-->

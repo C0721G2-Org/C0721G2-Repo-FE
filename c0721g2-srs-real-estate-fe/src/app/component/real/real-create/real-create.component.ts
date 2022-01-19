@@ -11,6 +11,7 @@ import {RealEstateNew} from '../../../model/real/real-estate-new';
 import {Router} from '@angular/router';
 import {TokenStorageService} from '../../../service/token-storage.service';
 import {Customer} from '../../../model/customer/customer';
+import {CurrencyPipe} from '@angular/common';
 
 
 @Component({
@@ -62,7 +63,7 @@ export class RealCreateComponent implements OnInit {
   );
   private initialValues: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private realService: RealService, private router: Router,
+  constructor(private formBuilder: FormBuilder, private realService: RealService, private router: Router, private currency: CurrencyPipe,
               private db: AngularFireStorage, private notify: AngularFireDatabase, private token: TokenStorageService) {
     const items: AngularFireList<any> = notify.list('/notifies');
     this.initialValues = this.form.value;
@@ -89,10 +90,18 @@ export class RealCreateComponent implements OnInit {
     );
     const id =  this.token.getUser().idCustomer;
     // const idTest = 'KH-0005';
-    this.form.controls['customer'].setValue(id);
+    this.form.controls.customer.setValue(id);
   }
 
   ngOnInit(): void {
+    this.form.valueChanges.subscribe( form => {
+      if (form.price){
+        this.form.patchValue({
+          price: this.currency.transform(form.price.replace(/\D/g, '')
+            .replace(/^0+/, ''), 'USD', 'symbol', '1.0-0')
+        });
+      }
+    });
   }
 
   send(mess: string) {
