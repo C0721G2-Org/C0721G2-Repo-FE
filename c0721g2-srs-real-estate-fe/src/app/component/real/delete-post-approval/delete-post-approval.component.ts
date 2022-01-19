@@ -49,7 +49,6 @@ export class DeletePostApprovalComponent implements OnInit {
     console.log(this.formInfo.value);
   }
 
-
   onSubmit() {
     console.log(this.formInfo.value);
     this.subscription = this.realService.dontAcceptApprove(this.realEstate, this.id).subscribe(data => {
