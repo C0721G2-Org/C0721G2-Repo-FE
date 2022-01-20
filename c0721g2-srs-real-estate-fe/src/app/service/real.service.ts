@@ -42,9 +42,10 @@ export class RealService {
 
   // KhaiPN
 
-  getAllRealEstatesSearch(address: string, realEstateType: any, direction: any,
+  getAllRealEstatesSearch(address: string, kindOfNews: any, realEstateType: any, direction: any,
                           minArea: any, maxArea: any, minPrice: string, maxPrice: string, page: number = 0): Observable<any> {
     const stringParam = this.buildSearchParam('?address=', address) +
+      this.buildSearchParam('&kindOfNews=', kindOfNews) +
       this.buildSearchParam('&realEstateType=', realEstateType) +
       this.buildSearchParam('&direction=', direction) +
       this.buildSearchParam('&minArea=', minArea) +
