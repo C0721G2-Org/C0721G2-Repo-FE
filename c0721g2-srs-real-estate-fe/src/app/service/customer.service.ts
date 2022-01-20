@@ -36,11 +36,6 @@ export class CustomerService {
       + '&phone=' + customerPhone + '&email=' + customerEmail);
   }
 
-  // thiện nhỏ
-  findById(id: string): Observable<Customer> {
-    return this.http.get<Customer>(this.API + `/id/` + id);
-  }
-
   update(id: string, customer: Customer): Observable<Customer> {
     return this.http.patch<Customer>(this.API + `/edit-customer/` + id, customer);
   }

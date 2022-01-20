@@ -127,8 +127,9 @@ export class EmployeeEditComponent implements OnInit {
   onSubmit() {
     // if (this.employeeForm.valid) {
     this.subscription = this.employeeService.updateEmployee(this.id, this.employeeForm.value).subscribe(data => {
-      alert('Chỉnh sửa thông tin thành công');
-      this.router.navigate(['/employee/list']);
+      // alert('Chỉnh sửa thông tin thành công');
+      //this.router.navigate(['/employee/list']);
+      console.log(this.employeeForm);
     }, error => {
       console.log('có lỗi đại ca ơi');
     });
@@ -138,6 +139,7 @@ export class EmployeeEditComponent implements OnInit {
   onClick() {
     this.employeeForm.reset();
   }
+
   submitModal() {
     this.router.navigate(['/employee/list']);
   }

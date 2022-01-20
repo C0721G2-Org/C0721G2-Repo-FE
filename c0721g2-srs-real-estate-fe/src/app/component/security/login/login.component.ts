@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
       } else {
         this.router.navigate(['employee/list']);
         this.shareService.sendClickEvent();
-
       }
     }, error => {
       console.log(error);
@@ -126,7 +125,7 @@ export class LoginComponent implements OnInit {
             console.log('token:' + this.tokenStorageService.getToken());
             this.authService.isLoggedIn = true;
             this.dialogRef.close();
-            this.router.navigate(['/home']);
+            this.router.navigate(['/customer/edit']);
             this.shareService.sendClickEvent();
 
           },
@@ -158,7 +157,7 @@ export class LoginComponent implements OnInit {
             console.log('token:' + this.tokenStorageService.getToken());
             this.authService.isLoggedIn = true;
             this.dialogRef.close();
-            this.router.navigate(['/home']);
+            this.router.navigate(['/customer/edit']);
             this.shareService.sendClickEvent();
 
           },
