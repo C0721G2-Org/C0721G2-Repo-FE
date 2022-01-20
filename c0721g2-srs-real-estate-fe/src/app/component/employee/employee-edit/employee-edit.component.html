@@ -40,7 +40,7 @@
               <label for="area" class="form-label">Email<span
                 style="color: red">(*)</span></label>
               <input type="text" class="form-control" id="area" name="email" formControlName="email"
-                     placeholder="Nhập email" readonly>
+                     placeholder="Nhập email" >
               <small style="color: red"
                      *ngIf="email.hasError('required') && (email.dirty || email.touched)">Email không được để
                 trống.</small><br>
