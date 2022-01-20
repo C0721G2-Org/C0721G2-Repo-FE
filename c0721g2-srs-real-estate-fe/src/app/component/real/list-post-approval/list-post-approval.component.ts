@@ -2,9 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
 import {RealService} from '../../../service/real.service';
 import {MatDialog} from '@angular/material/dialog';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {DetailPostApprovalComponent} from "../detail-post-approval/detail-post-approval.component";
+import {ApprovalMail} from '../../../model/real/approval-mail';
+import {Router} from '@angular/router';
+import {DeletePostApprovalComponent} from '../delete-post-approval/delete-post-approval.component';
+import {DetailPostApprovalComponent} from '../detail-post-approval/detail-post-approval.component';
+
 
 @Component({
   selector: 'app-list-post-approval',
@@ -13,7 +17,9 @@ import {DetailPostApprovalComponent} from "../detail-post-approval/detail-post-a
 })
 export class ListPostApprovalComponent implements OnInit {
   realEstateNews: RealEstateNew[];
+  realEstateNew: RealEstateNew;
   realForm: FormGroup;
+  emailForm: FormGroup;
 
   private subscription: Subscription | undefined;
 
@@ -26,7 +32,9 @@ export class ListPostApprovalComponent implements OnInit {
   size = 0;
   flag = false;
   message: string;
-
+  id: string;
+  approvalMail: ApprovalMail;
+  customerEmail: string;
 
 
   kindOfNewsList = [{id: 1, name: 'Bán'}, {id: 2, name: 'Cho thuê'}];
@@ -38,7 +46,7 @@ export class ListPostApprovalComponent implements OnInit {
 
   realEstateTypeList = [{id: 1, name: 'Đất'}, {id: 2, name: 'Nhà ở'}];
 
-  constructor(private realService: RealService, public dialog: MatDialog) {
+  constructor(private realService: RealService, public dialog: MatDialog, private router: Router, private form: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -58,7 +66,9 @@ export class ListPostApprovalComponent implements OnInit {
           this.page = data.pageable.pageNumber;
           this.message = '';
         } else {
-          this.message = 'Not found !!!';
+          this.message = 'Không tìm thấy';
+          this.realEstateNews = [];
+          this.totalPages = 0;
         }
       });
     } else {
@@ -73,7 +83,9 @@ export class ListPostApprovalComponent implements OnInit {
             this.page = data.pageable.pageNumber;
             this.message = '';
           } else {
-            this.message = 'Not found !!!';
+            this.message = 'Không tìm thấy';
+            this.realEstateNews = [];
+            this.totalPages = 0;
           }
           this.flag = true;
         });
@@ -86,9 +98,11 @@ export class ListPostApprovalComponent implements OnInit {
             this.size = data.size;
             this.page = data.pageable.pageNumber;
             this.message = '';
-            console.log(this.message);
+            // console.log(this.message);
           } else {
-            this.message = 'Not found !!!';
+            this.message = 'Không tìm thấy';
+            this.realEstateNews = [];
+            this.totalPages = 0;
           }
           this.flag = true;
         });
@@ -118,18 +132,84 @@ export class ListPostApprovalComponent implements OnInit {
     this.search();
   }
 
-  openDialog(id: string) {
-    this.realService.getById(id).subscribe(approveData => {
-      const dialogRef = this.dialog.open(DetailPostApprovalComponent, {
-        width: '500px',
-        panelClass: 'custom-dialog-tai',
-        data: {approveData},
-        disableClose: true
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        this.ngOnInit();
-      });
+  // 5.7.1 Duyệt/Xóa bài đăng..Method Duyệt bài đăng
+  // acceptApproval(id) {
+  //   this.realService.findRealEstateNewById(id).subscribe(data => {
+  //     console.log(id);
+  //     this.realEstateNew = data;
+  //     console.log(this.realEstateNew.customer.email);
+  //     this.customerEmail = this.realEstateNew.customer.email;
+  //     this.emailForm = new FormGroup({
+  //       status: new FormControl('Đã được duyệt'),
+  //       reason: new FormControl(''),
+  //       customerEmail: new FormControl(this.customerEmail)
+  //     });
+  //     // this.approvalMail.customerEmail = this.realEstateNew.customer.email;
+  //     this.realService.acceptApprove(this.realEstateNew, id).subscribe(dataApproval => {
+  //       console.log(this.emailForm.value);
+  //       this.realService.sendApprovalMail(this.emailForm.value).subscribe();
+  //       this.ngOnInit();
+  //       alert('Duyệt bài thành công');
+  //     });
+  //   });
+  // }
+
+  // 5.7.1 Duyệt/Xóa bài đăng..Method Không Duyệt bài đăng
+  // dontAcceptApproval(id) {
+  //   this.realService.findRealEstateNewById(id).subscribe(data => {
+  //     console.log(id);
+  //     this.realEstateNew = data;
+  //     console.log(this.realEstateNew.customer.email);
+  //     this.customerEmail = this.realEstateNew.customer.email;
+  //     this.emailForm = this.form.group({
+  //       status: new FormControl('Không được duyệt'),
+  //       reason: new FormControl(''),
+  //       customerEmail: new FormControl(this.customerEmail)
+  //     });
+  //     // this.approvalMail.customerEmail = this.realEstateNew.customer.email;
+  //     this.realService.dontAcceptApprove(this.approvalMail).subscribe(dataApproval => {
+  //       console.log(this.emailForm.value);
+  //       this.realService.sendApprovalMail(this.emailForm.value).subscribe();
+  //       this.ngOnInit();
+  //     });
+  //   });
+  // }
+
+  getInfo() {
+    this.realService.sendApprovalMail(this.emailForm.value).subscribe();
+  }
+
+  // 5.7.1 DoanhNV - Dialog nay goi khi Duyet
+  openDialogAccept(id) {
+    console.log(id);
+    const dialogRef = this.dialog.open(DetailPostApprovalComponent, {
+      data: {id},
+      width: '600px',
+      panelClass: 'custom-dialog-tai',
+      // Khi bấm ra ngoài dialog khong bi mat di
+      disableClose: true
+    });
+    console.log('abc');
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.ngOnInit();
+    });
+  }
+
+  // 5.7.1 DoanhNV - Dialog nay duoc goi khi Khong duyet bai dang
+  openDialog(id) {
+    console.log(id);
+    const dialogRef = this.dialog.open(DeletePostApprovalComponent, {
+      data: {id},
+      width: '600px',
+      panelClass: 'custom-dialog-tai',
+      // Khi bấm ra ngoài dialog khong bi mat di
+      disableClose: true
+    });
+    console.log('abc');
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.ngOnInit();
     });
   }
 }

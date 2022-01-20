@@ -13,6 +13,7 @@ import {ListPostApprovalComponent} from './list-post-approval/list-post-approval
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {EmailComponent} from './email/email.component';
 import {RealCreateComponent} from './real-create/real-create.component';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -34,11 +35,13 @@ import {RealCreateComponent} from './real-create/real-create.component';
     DeletePostApprovalComponent,
     ListPostApprovalComponent,
     RealCreateComponent],
-  imports: [
-    CommonModule,
-    RealRoutingModule,
-    FormsModule,
-    ReactiveFormsModule]
+    imports: [
+        CommonModule,
+        RealRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatInputModule
+    ]
 })
 
 export class RealModule {

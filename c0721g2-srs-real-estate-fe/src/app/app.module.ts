@@ -89,6 +89,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
     JwtHelperService, {provide: APP_BASE_HREF, useValue: '/'}],
   entryComponents: [BottomSheetNotifyComponent],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -9,7 +9,7 @@
         <h3 class="fw-bold text-gradient text-head-login ">Đăng nhập!</h3>
       </div>
     </div>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="row" >
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" appFocusInvalidInput class="row" >
       <div class="col-12">
         <i class="far fa-user user-icon"></i>
         <input type="email" class="form-control input-height" id="username" formControlName="username" placeholder="Tên đăng nhập/Email">

@@ -1,3 +1,4 @@
+// @ts-ignore
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -5,13 +6,13 @@ import {RealEstateNew} from '../model/real/real-estate-new';
 import {Email} from '../model/real/email';
 import {Direction} from '../model/real/direction';
 import {RealEstateType} from '../model/real/real-estate-type';
+import {ApprovalMail} from '../model/real/approval-mail';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+// @ts-ignore
+@Injectable({  providedIn: 'root' })
 export class RealService {
-  private API = 'http://localhost:8080/real-estate-new';
+  // private API = 'http://localhost:8080/real-estate-new';
   private API_URL = ' http://localhost:8080/api/real-estate-new';
   private API_URL_RELATED = 'http://localhost:8080/api/real-estate-new';
   private API_URL_HISTORY_POST = ' http://localhost:8080/api/real-estate-new/history-post';
@@ -23,26 +24,11 @@ export class RealService {
   constructor(private http: HttpClient) {
   }
 
-  getAllDirection(): Observable<Direction[]> {
-    return this.http.get<Direction[]>(this.API_URL_RELATED + '/direction');
-  }
-
-  getAllRealEstateType(): Observable<RealEstateType[]> {
-    return this.http.get<RealEstateType[]>(this.API_URL_RELATED + '/realEstateType');
-  }
-
-  save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
-    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
-  }
-
-  findRealEstateNewById(id: string): Observable<RealEstateNew> {
-    return this.http.get<RealEstateNew>(this.API_URL + '/detail/' + id);
-  }
-
-  findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType): Observable<RealEstateNew[]> {
+// Tai
+  findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType, approval): Observable<RealEstateNew[]> {
     return this.http.get<any>
     (this.API_URL_HISTORY_POST + '?page=' + page + '&customerId=' + customerId +
-      '&title=' + title + '&kindOfNew=' + kindOfNew + '&realNewType=' + realNewType);
+      '&title=' + title + '&kindOfNew=' + kindOfNew + '&realNewType=' + realNewType + '&approval=' + approval);
   }
 
   sendMail(email): Observable<Email> {
@@ -79,23 +65,67 @@ export class RealService {
       return searchKey + '';
     }
     return searchKey + value.toString();
+  }
 
+  // TranNN
+  save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
+    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
   }
 
   getAllListPostApproval(): Observable<any> {
-    return this.http.get(this.API + '/list');
-  }
-
-  search(page: number, kindOfNews: string, direction: string, realEstateType: string): Observable<any> {
-    return this.http.get<RealEstateNew[]>(this.API + '/search?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
+    return this.http.get(this.API_URL + '/list-post-approval');
   }
 
   approve(id: string): Observable<any> {
-    return this.http.delete(this.API + '/approve' + id);
+    return this.http.delete(this.API_URL + '/approve' + id);
   }
 
-  getById(id): Observable<RealEstateNew[]> {
-    return this.http.get<RealEstateNew[]>(this.API + '/' + id).pipe();
+// DOANH
+  // 5.7.1 DoanhNV
+  search(page: number, kindOfNews: string, direction: string, realEstateType: string): Observable<any> {
+    return this.http.get<RealEstateNew[]>(this.API_URL + '/search-approval-list?kind_of_news=' + kindOfNews + '&direction_id=' + direction + '&real_estate_type_id=' + realEstateType + '&page=' + page);
   }
+
+  // 5.7.1 DoanhNV
+  acceptApprove(realEstateNew: RealEstateNew, id: string): Observable<any> {
+    return this.http.post(this.API_URL + '/approve/' + id, realEstateNew);
+  }
+
+// 5.7.1 DoanhNV
+  dontAcceptApprove(realEstateNew: RealEstateNew, id: string): Observable<any> {
+    return this.http.post(this.API_URL + '/approval/' + id, realEstateNew);
+  }
+
+// 5.7.1 DoanhNV
+  sendApprovalMail(email): Observable<ApprovalMail> {
+    return this.http.post<ApprovalMail>(this.API_URL + '/approval-email', email);
+  }
+
+
+  getById(id): Observable<RealEstateNew[]> {
+    return this.http.get<RealEstateNew[]>(this.API_URL + '/' + id).pipe();
+  }
+
+
+  getAllDirection(): Observable<Direction[]> {
+    return this.http.get<Direction[]>(this.API_URL_RELATED + '/direction');
+  }
+
+  getAllRealEstateType(): Observable<RealEstateType[]> {
+    return this.http.get<RealEstateType[]>(this.API_URL_RELATED + '/realEstateType');
+  }
+
+// // 5.7.1 DoanhNV
+//   save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
+//     return this.http.post<RealEstateNew>(this.API_URL + '/', realEstateNew);
+//   }
+
+
+// 5.7.1 DoanhNV
+  findRealEstateNewById(id: string): Observable<RealEstateNew> {
+    return this.http.get<RealEstateNew>(this.API_URL + '/detail/' + id);
+  }
+
+// DOANH
 }
 
