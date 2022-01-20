@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {RealEstateNew} from '../../../model/real/real-estate-new';
 import {RealEstateType} from '../../../model/real/real-estate-type';
 import {Direction} from '../../../model/real/direction';
-
+import {isElementScrolledOutsideView} from "@angular/cdk/overlay/position/scroll-clip";
 
 @Component({
   selector: 'app-real-list',
@@ -21,7 +21,14 @@ export class RealListComponent implements OnInit {
   directionList: Direction[];
   page = 0;
   totalPages = null;
-
+  temp: string;
+  realType: any;
+  kindType: string;
+  item: string;
+  kindOfNewList = [
+    {id: 1, name: 'Tin bán'},
+    {id: 2, name: 'Tin cho thuê'}]
+  ;
   priceRangeList = [
     {id: 1, minPrice: '0', maxPrice: '100000000', name: '0-100 triệu'},
     {id: 2, minPrice: '100000000', maxPrice: '500000000', name: '100-500 triệu'},
@@ -54,9 +61,6 @@ export class RealListComponent implements OnInit {
     // lay real estate type list
     this.realService.getAllRealEstateType().subscribe(data => {
         this.realEstateTypeList = data;
-        console.log(this.realEstateTypeList);
-        console.log('page' + this.page);
-        console.log('total page' + this.totalPages);
       }
     );
     // lay real direction list
@@ -68,6 +72,7 @@ export class RealListComponent implements OnInit {
     // tao form search
     this.formSearch = new FormGroup({
       address: new FormControl(''),
+      kindOfNews: new FormControl(''),
       realEstateType: new FormControl(''),
       direction: new FormControl(''),
       priceRange: new FormControl(''),
@@ -78,7 +83,11 @@ export class RealListComponent implements OnInit {
       maxPrice: new FormControl(''),
     });
     // lay real estate list ban dau khi load trang
-    this.realService.getAllRealEstates().subscribe(data => {
+    this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+      this.temp = paramMap.get('temp');
+      this.page = 0;
+      this.totalPages = null;
+      this.searchEstates(this.page).subscribe(data => {
         if (!data) {
           this.mess = 'Không có dữ liệu';
           return;
@@ -94,16 +103,28 @@ export class RealListComponent implements OnInit {
         } else {
           this.realEstateNews = [];
         }
-      }
-    );
+        console.log(this.realEstateNews);
+      });
+    });
+
     // lay message gui tu page khac ve
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.mess = paramMap.get('mess');
     });
   }
 
+  private getTypeOfList(temp: string) {
+    console.log(this.realEstateTypeList);
+    // if (temp === '1') {
+    //   this.formSearch.value.realEstateType = this.realEstateTypeList[0];
+    // } else {
+    //   this.formSearch.value.realEstateType.id = this.realEstateTypeList[1];
+    // }
+  }
+
 // method khi an button search
   onSearch() {
+    this.temp = '0';
     this.page = 0;
     this.totalPages = null;
     this.searchEstates(this.page)
@@ -124,6 +145,7 @@ export class RealListComponent implements OnInit {
           this.realEstateNews = [];
         }
       });
+    console.log(this.realEstateNews);
   }
 
 // method khi an "xem them+"
@@ -158,9 +180,29 @@ export class RealListComponent implements OnInit {
 
 // method tuong tac voi service
   private searchEstates(page: number): Observable<any> {
+    switch (this.temp) {
+      case '1':
+        this.realType = '1';
+        break;
+      case '2':
+        this.realType = '2';
+        break;
+      case '3':
+        this.kindType = '1';
+        break;
+      case '4':
+        this.kindType = '2';
+        break;
+      default:
+        this.realType = this.formSearch.value.realEstateType.id;
+        this.kindType = this.formSearch.value.kindOfNews.id;
+    }
+    console.log('loại bds: ' + this.realType);
+    console.log('loại tin: ' + this.kindType);
     return this.realService.getAllRealEstatesSearch(
       this.formSearch.value.address,
-      this.formSearch.value.realEstateType.id,
+      this.kindType,
+      this.realType,
       this.formSearch.value.direction.id,
       this.formSearch.value.areaRange.minArea,
       this.formSearch.value.areaRange.maxArea,
