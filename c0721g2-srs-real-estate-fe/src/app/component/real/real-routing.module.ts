@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'detail/:id', component: RealDetailComponent},
   {path: 'list', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home/:temp', component: RealListComponent},
+  {path: 'home', component: RealListComponent},
   {path: 'delete', component: RealDeleteComponent},
   {path: 'post-history/:id', component: HistoryPostComponent},
   {path: 'list-post-approval', component: ListPostApprovalComponent},
