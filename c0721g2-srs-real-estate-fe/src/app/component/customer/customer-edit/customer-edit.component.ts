@@ -31,6 +31,7 @@ export class CustomerEditComponent implements OnInit {
     console.log(this.id);
     this.customerService.getCustomerById(this.id).subscribe(data => {
       this.customer = data;
+      console.log(this.customer);
       this.customerForm.setValue(this.customer);
     });
   }

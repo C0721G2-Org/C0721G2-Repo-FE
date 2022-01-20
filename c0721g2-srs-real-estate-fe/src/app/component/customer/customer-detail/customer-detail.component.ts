@@ -22,7 +22,7 @@ export class CustomerDetailComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => {
       this.id = params.get('id');
       console.log(this.id);
-      this.customerService.findCustomerById(this.id).subscribe(
+      this.customerService.getCustomerById(this.id).subscribe(
         data => {
           console.log(data);
           this.customer = data;

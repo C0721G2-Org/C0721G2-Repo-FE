@@ -36,11 +36,6 @@ export class CustomerService {
       + '&phone=' + customerPhone + '&email=' + customerEmail);
   }
 
-  // thiện nhỏ
-  findById(id: string): Observable<Customer> {
-    return this.http.get<Customer>(this.API + `/id/` + id);
-  }
-
   update(id: string, customer: Customer): Observable<Customer> {
     return this.http.patch<Customer>(this.API + `/edit-customer/` + id, customer);
   }
@@ -56,9 +51,5 @@ export class CustomerService {
   // Tung
   saveCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.API_URL + '/create', customer);
-  }
-  // Tung
-  findCustomerById(id: string): Observable<any> {
-    return this.http.get(this.API + '/detail/' + id);
   }
 }
