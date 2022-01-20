@@ -8,6 +8,7 @@ import {EmployeeEditComponent} from './employee-edit/employee-edit.component';
 import {EmployeeListComponent} from './employee-list/employee-list.component';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
     EmployeeDeleteComponent,
     EmployeeEditComponent,
     EmployeeListComponent,
+
   ],
   exports: [
     EmployeeCreateComponent,
@@ -26,7 +28,8 @@ import {HttpClientModule} from '@angular/common/http';
     EmployeeRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ]
 })
 export class EmployeeModule {

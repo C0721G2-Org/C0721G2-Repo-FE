@@ -57,4 +57,8 @@ export class CustomerService {
   saveCustomer(customer: Customer): Observable<Customer> {
     return this.http.post<Customer>(this.API_URL + '/create', customer);
   }
+  // Tung
+  findCustomerById(id: string): Observable<any> {
+    return this.http.get(this.API + '/detail/' + id);
+  }
 }

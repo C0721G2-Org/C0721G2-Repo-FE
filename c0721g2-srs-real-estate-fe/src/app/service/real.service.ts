@@ -1,3 +1,4 @@
+// @ts-ignore
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -8,9 +9,8 @@ import {RealEstateType} from '../model/real/real-estate-type';
 import {ApprovalMail} from '../model/real/approval-mail';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+// @ts-ignore
+@Injectable({  providedIn: 'root' })
 export class RealService {
   // private API = 'http://localhost:8080/real-estate-new';
   private API_URL = ' http://localhost:8080/api/real-estate-new';
@@ -24,10 +24,11 @@ export class RealService {
   constructor(private http: HttpClient) {
   }
 
-  findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType): Observable<RealEstateNew[]> {
+// Tai
+  findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType, approval): Observable<RealEstateNew[]> {
     return this.http.get<any>
     (this.API_URL_HISTORY_POST + '?page=' + page + '&customerId=' + customerId +
-      '&title=' + title + '&kindOfNew=' + kindOfNew + '&realNewType=' + realNewType);
+      '&title=' + title + '&kindOfNew=' + kindOfNew + '&realNewType=' + realNewType + '&approval=' + approval);
   }
 
   sendMail(email): Observable<Email> {
@@ -41,9 +42,10 @@ export class RealService {
 
   // KhaiPN
 
-  getAllRealEstatesSearch(address: string, realEstateType: any, direction: any,
+  getAllRealEstatesSearch(address: string, kindOfNews: any, realEstateType: any, direction: any,
                           minArea: any, maxArea: any, minPrice: string, maxPrice: string, page: number = 0): Observable<any> {
     const stringParam = this.buildSearchParam('?address=', address) +
+      this.buildSearchParam('&kindOfNews=', kindOfNews) +
       this.buildSearchParam('&realEstateType=', realEstateType) +
       this.buildSearchParam('&direction=', direction) +
       this.buildSearchParam('&minArea=', minArea) +
@@ -64,11 +66,15 @@ export class RealService {
       return searchKey + '';
     }
     return searchKey + value.toString();
+  }
 
+  // TranNN
+  save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
+    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
   }
 
   getAllListPostApproval(): Observable<any> {
-    return this.http.get(this.API_URL + '/list');
+    return this.http.get(this.API_URL + '/list-post-approval');
   }
 
   approve(id: string): Observable<any> {
@@ -110,10 +116,10 @@ export class RealService {
     return this.http.get<RealEstateType[]>(this.API_URL_RELATED + '/realEstateType');
   }
 
-// 5.7.1 DoanhNV
-  save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
-    return this.http.post<RealEstateNew>(this.API_URL + '/post', realEstateNew);
-  }
+// // 5.7.1 DoanhNV
+//   save(realEstateNew: RealEstateNew): Observable<RealEstateNew> {
+//     return this.http.post<RealEstateNew>(this.API_URL + '/', realEstateNew);
+//   }
 
 
 // 5.7.1 DoanhNV

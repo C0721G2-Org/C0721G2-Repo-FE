@@ -85,7 +85,6 @@ export class LoginComponent implements OnInit {
       } else {
         this.router.navigate(['employee/list']);
         this.shareService.sendClickEvent();
-
       }
     }, error => {
       console.log(error);

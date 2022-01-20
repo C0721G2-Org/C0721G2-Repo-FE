@@ -49,6 +49,8 @@ export class CustomerCreateComponent implements OnInit {
       this.customerService.saveCustomer(this.createCustomer.value).subscribe(
         data => {
           console.log(data);
+          this.dialogRef.close();
+          this.router.navigateByUrl('/home');
         }, error => {
           console.log(error.error);
           console.log(error);

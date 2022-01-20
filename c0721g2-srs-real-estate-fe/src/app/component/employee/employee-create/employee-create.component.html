@@ -20,7 +20,8 @@
                      *ngIf="name.hasError('required') && (name.dirty || name.touched)">Họ và tên không được để
                 trống.</small>
               <small style="color: red"
-                     *ngIf="name.hasError('pattern')&& (name.dirty || name.touched)">Họ và tên không đúng định dạng.</small>
+                     *ngIf="name.hasError('pattern')&& (name.dirty || name.touched)">Họ và tên không đúng định
+                dạng.</small>
               <small style="color: red"
                      *ngIf="name.hasError('minlength')&& (name.dirty || name.touched)">Họ và tên phải từ 6 đến 40 ký
                 tự.</small>
@@ -50,8 +51,7 @@
               <small style="color: red"
                      *ngIf="email.hasError('pattern') && (email.dirty || email.touched)">Email không đúng định
                 dạng.</small>
-              <small style="color: red"
-                     *ngIf="validateErrorEmail && (email.dirty || email.touched)">Email đã có người sử dụng</small>
+
             </div>
 
             <div class="col-md-4 col-sm-12 position-relative">
@@ -104,7 +104,8 @@
                      *ngIf="idCard.hasError('required') && (idCard.dirty || idCard.touched)">Số CMND/CCCD không được để
                 trống.</small> <br>
               <small style="color: red"
-                     *ngIf="idCard.hasError('pattern') && (idCard.dirty || idCard.touched)">Số CMND phải có định dạng 9 số và CCCD phải có định dạng 12 số.</small>
+                     *ngIf="idCard.hasError('pattern') && (idCard.dirty || idCard.touched)">Số CMND phải có định dạng 9
+                số và CCCD phải có định dạng 12 số.</small>
             </div>
 
 
@@ -167,25 +168,33 @@
       </div>
     </div>
   </div>
-</main>
-<body>
-<!--Modal của thịnh-->
-<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Thêm mới nhân viên thành công
-      </div>
-      <div class="modal-footer">
 
-        <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="submitModal()">Xác nhận</button>
-      </div>
-    </div>
-  </div>
-</div>
-</body>
+</main>
+
+<div *ngIf="validateErrorEmail!==''" class="text-center row col-12 fs-5">
+  <h4 class="text-danger fst-italic ">{{validateErrorEmail}}</h4>
+
+<!--<small style="color: red"-->
+<!--       *ngIf="validateErrorEmail && (email.dirty || email.touched)">Email đã có người sử dụng</small>-->
+
+<!--<body>-->
+<!--&lt;!&ndash;Modal của thịnh&ndash;&gt;-->
+<!--<div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--  <div class="modal-dialog">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>-->
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        Thêm mới nhân viên thành công-->
+<!--      </div>-->
+<!--      <div class="modal-footer">-->
+<!--        &lt;!&ndash;        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="closeModal()">Đóng</button>&ndash;&gt;-->
+<!--        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitModal()">Xác nhận</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
 

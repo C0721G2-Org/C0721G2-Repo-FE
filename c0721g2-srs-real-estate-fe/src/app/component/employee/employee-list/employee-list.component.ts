@@ -3,7 +3,9 @@ import {Employee} from '../../../model/employee/employee';
 import {EmployeeService} from '../../../service/employee.service';
 import {EmployeeDeleteComponent} from '../employee-delete/employee-delete.component';
 import {MatDialog} from '@angular/material/dialog';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {PositionService} from '../../../service/position.service';
+import {Positions} from '../../../model/employee/positions';
 
 @Component({
   selector: 'app-employee-list',
@@ -22,16 +24,19 @@ export class EmployeeListComponent implements OnInit {
   size = 0;
   flag = false;
   message: string;
-
-  positionList = [{id: 1, name: 'Nhân Viên'}, {id: 2, name: 'Kế Toán'}, {id: 3, name: 'Chuyên Viên'},
-    {id: 4, name: 'Trưởng Phòng'}, {id: 5, name: 'Giám Đốc'}]
-  ;
+  positionList1: Observable<Positions[]>;
+  positionList: Positions[];
 
   constructor(private employeeService: EmployeeService,
-              private dialogDelete: MatDialog) {
+              private dialogDelete: MatDialog,
+              private positionService: PositionService) {
   }
 
   ngOnInit(): void {
+    this.positionList1 = this.positionService.getAllPosition();
+    this.positionList1.subscribe(data => {
+      this.positionList = data;
+    });
     this.search();
   }
 
@@ -48,7 +53,9 @@ export class EmployeeListComponent implements OnInit {
           this.page = data.pageable.pageNumber;
           this.message = '';
         } else {
-          this.message = 'Not found !!!';
+          this.message = 'Không tìm thấy';
+          this.employees = [];
+          this.totalPages = 0;
         }
       });
     } else {
@@ -63,7 +70,9 @@ export class EmployeeListComponent implements OnInit {
             this.page = data.pageable.pageNumber;
             this.message = '';
           } else {
-            this.message = 'Không tìm thấy !!!';
+            this.message = 'Không tìm thấy';
+            this.employees = [];
+            this.totalPages = 0;
           }
           this.flag = true;
         });
@@ -78,7 +87,9 @@ export class EmployeeListComponent implements OnInit {
             this.message = '';
             console.log(this.message);
           } else {
-            this.message = 'Not found !!!';
+            this.message = 'Không tìm thấy';
+            this.employees = [];
+            this.totalPages = 0;
           }
           this.flag = true;
         });
