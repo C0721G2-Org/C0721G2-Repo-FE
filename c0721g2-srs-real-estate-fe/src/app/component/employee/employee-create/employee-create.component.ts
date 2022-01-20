@@ -10,6 +10,7 @@ import {AppUser} from '../../../model/user/app-user';
 import {PositionService} from '../../../service/position.service';
 import {DegreeService} from '../../../service/degree.service';
 import {EmployeeDTO} from '../../../model/employee/employee-dto';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-employee-create',
@@ -45,7 +46,9 @@ export class EmployeeCreateComponent implements OnInit {
   constructor(private employeeService: EmployeeService,
               private router: Router,
               private positionService: PositionService,
-              private degreeService: DegreeService) {
+              private degreeService: DegreeService,
+              private dialog: MatDialog
+  ) {
   }
 
   ngOnInit(): void {
@@ -127,12 +130,14 @@ export class EmployeeCreateComponent implements OnInit {
 
       console.log(this.employeeForm.value);
       this.subscription = this.employeeService.save(this.employeeForm.value).subscribe(data => {
-          // console.log(this.customer);
-          // this.router.navigate(['/employee/list']);
+          console.log(this.employee);
+          this.router.navigate(['/employee/list']);
+
         }
         , error => {
           this.validateErrorEmail = error.error.errorEmail;
           console.log('Not found');
+          this.validateErrorEmail = 'Email bạn nhập đã được sử dụng';
         });
     }
   }
@@ -141,8 +146,16 @@ export class EmployeeCreateComponent implements OnInit {
     this.employeeForm.reset();
   }
 
-  submitModal() {
-    this.router.navigate(['/employee/list']);
-  }
-
+  //
+  // openAlertDialog() {
+  //   const dialogRef = this.dialog.open(SuccessComponent, {
+  //     data: {
+  //       message: 'Thêm mới nhân viên thành công',
+  //       buttonText: {
+  //         cancel: 'Xác nhận'
+  //       }
+  //     },
+  //   });
+  //   this.router.navigate(['/employee/list']);
+  // }
 }
