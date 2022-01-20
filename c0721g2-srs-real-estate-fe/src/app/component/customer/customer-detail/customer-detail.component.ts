@@ -19,16 +19,28 @@ export class CustomerDetailComponent implements OnInit {
               private activatedRoute: ActivatedRoute) {
   }
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(params => {
-      this.id = params.id;
+    this.activatedRoute.paramMap.subscribe(params => {
+      this.id = params.get('id');
       console.log(this.id);
-      this.customerService.getCustomerById(this.id).subscribe(
+      this.customerService.findCustomerById(this.id).subscribe(
         data => {
+          console.log(data);
           this.customer = data;
         }, error => {
           console.log('error');
         }
       );
     });
+    // this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
+    //   this.id = paramMap.get('id');
+    //   console.log(this.id);
+    // });
+    // this.customerService.findCustomerById(this.id).subscribe(data => {
+    //   console.log(this.id);
+    //   this.customer = data;
+    //   console.log(this.customer);
+    // }, error => {
+    //   console.log(error);
+    // });
   }
 }
