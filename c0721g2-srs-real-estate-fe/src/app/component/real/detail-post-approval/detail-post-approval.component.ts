@@ -57,9 +57,7 @@ export class DetailPostApprovalComponent implements OnInit {
 
   onSubmit() {
     console.log(this.formInfo.value);
-    this.subscription = this.realService.dontAcceptApprove(this.realEstate, this.id).subscribe(data => {
-    });
-    this.subscription = this.realService.sendApprovalMail(this.formInfo.value).subscribe(data => {
+    this.subscription = this.realService.acceptApprove(this.realEstate, this.id).subscribe(data => {
     });
     this.dialogRef.close();
     this.ngOnInit();
