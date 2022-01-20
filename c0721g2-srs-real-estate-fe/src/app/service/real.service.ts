@@ -1,3 +1,4 @@
+// @ts-ignore
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -8,9 +9,8 @@ import {RealEstateType} from '../model/real/real-estate-type';
 import {ApprovalMail} from '../model/real/approval-mail';
 
 
-@Injectable({
-  providedIn: 'root'
-})
+// @ts-ignore
+@Injectable({  providedIn: 'root' })
 export class RealService {
   // private API = 'http://localhost:8080/real-estate-new';
   private API_URL = ' http://localhost:8080/api/real-estate-new';
@@ -24,10 +24,11 @@ export class RealService {
   constructor(private http: HttpClient) {
   }
 
-  findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType): Observable<RealEstateNew[]> {
+// Tai
+  findHistoryPostBySearchFieldId(page, customerId, title, kindOfNew, realNewType, approval): Observable<RealEstateNew[]> {
     return this.http.get<any>
     (this.API_URL_HISTORY_POST + '?page=' + page + '&customerId=' + customerId +
-      '&title=' + title + '&kindOfNew=' + kindOfNew + '&realNewType=' + realNewType);
+      '&title=' + title + '&kindOfNew=' + kindOfNew + '&realNewType=' + realNewType + '&approval=' + approval);
   }
 
   sendMail(email): Observable<Email> {
