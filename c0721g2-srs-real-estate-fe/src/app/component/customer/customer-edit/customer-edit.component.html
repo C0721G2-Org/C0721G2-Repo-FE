@@ -26,7 +26,7 @@
                 trống.</small>
               <small style="color: red"
                      *ngIf="customerForm.controls.name.dirty &&customerForm.controls.name.hasError('pattern')">Tên
-                không đúng định dạng.</small>
+                không được có số và kí tự đặc biệt.</small>
             </div>
             <div class="col-md-6 position-relative">
               <label for="date" class="form-label">Ngày sinh<span
@@ -55,29 +55,27 @@
             <div class="col-md-6 col-sm-3 position-relative">
               <label for="price" class="form-label">Số điện thoại<span
                 style="color: red">(*)</span></label>
-              <input type="text" class="form-control" id="price" name="phoneNumber" formControlName="phoneNumber"
+              <input type="number" class="form-control" id="price" name="phoneNumber" formControlName="phoneNumber"
                      placeholder="Nhập số điện thoại">
               <span style="color: red"
                     *ngIf="customerForm.controls.phoneNumber.dirty &&customerForm.controls.phoneNumber.hasError('required')">Số điện
                 thoại không được để trống.</span> <br>
               <span style="color: red"
                     *ngIf="customerForm.controls.phoneNumber.dirty &&customerForm.controls.phoneNumber.hasError('pattern')">Số điện thoại
-                không đúng định
-                dạng.</span>
+                phải có 10 số và bắt đầu từ 09xx.</span>
             </div>
 
             <div class="col-md-6 col-sm-3 position-relative">
               <label for="price" class="form-label">Căn cước công dân<span
                 style="color: red">(*)</span></label>
-              <input type="text" class="form-control" id="IdCard" name="idCard" formControlName="idCard"
+              <input type="number" class="form-control" id="IdCard" name="idCard" formControlName="idCard"
                      placeholder="Nhập số Chứng minh">
               <span style="color: red"
                     *ngIf="customerForm.controls.idCard.dirty &&customerForm.controls.idCard.hasError('required')">Số chứng minh
                 không được để trống.</span> <br>
               <span style="color: red"
                     *ngIf="customerForm.controls.idCard.dirty &&customerForm.controls.idCard.hasError('pattern')">Số chứng minh
-                không đúng định
-                dạng.</span>
+                phải có 9 hoặc 12 số, không được có kí tự.</span>
             </div>
 
             <!--            <div class="col-md-3 col-sm-3 position-relative">-->

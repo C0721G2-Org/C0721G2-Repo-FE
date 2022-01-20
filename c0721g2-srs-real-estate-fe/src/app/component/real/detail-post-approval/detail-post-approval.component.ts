@@ -1,9 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
-import {RealService} from "../../../service/real.service";
-import {RealDetailComponent} from "../real-detail/real-detail.component";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {RealEstateNew} from "../../../model/real/real-estate-new";
+import {ApprovalMail} from '../../../model/real/approval-mail';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {RealEstateNew} from '../../../model/real/real-estate-new';
+import {RealService} from '../../../service/real.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-detail-post-approval',
@@ -11,14 +14,21 @@ import {RealEstateNew} from "../../../model/real/real-estate-new";
   styleUrls: ['./detail-post-approval.component.scss']
 })
 export class DetailPostApprovalComponent implements OnInit {
-  id: number;
-  realEstateNews: RealEstateNew;
+  realEstateNews: RealEstateNew[];
+  realEstateNew: RealEstateNew;
+  realForm: FormGroup;
+  emailForm: FormGroup;
+  customerEmail: string;
+  approvalMail: ApprovalMail;
+  public formInfo: FormGroup;
   private subscription: Subscription;
+  private realEstate: RealEstateNew;
+  id: string;
 
   constructor(
-    private medicalService: RealService,
-    public dialogRef: MatDialogRef<RealDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+              private realService: RealService,
+              public dialogRef: MatDialogRef<DetailPostApprovalComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
   }
 
@@ -27,12 +37,54 @@ export class DetailPostApprovalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.realEstateNews = this.data.approveData;
+    console.log(this.data.id);
+    this.id = this.data.id;
+    this.subscription = this.realService.findRealEstateNewById(this.data.id).subscribe(dataRealEstate => {
+      console.log(dataRealEstate);
+      this.realEstate = dataRealEstate;
+      this.customerEmail = dataRealEstate.customer.email;
+    });
+    console.log(this.data);
+    this.realEstate = this.data;
+    this.formInfo = new FormGroup({
+      status: new FormControl('Không được duyệt vì lý do : '),
+      reason: new FormControl(''),
+      customerEmail: new FormControl(this.customerEmail)
+    });
+    console.log(this.formInfo.value);
   }
 
-  deleteMedical() {
-    this.subscription = this.medicalService.approve(this.realEstateNews.id).subscribe(data => {
-      this.dialogRef.close();
+
+  onSubmit() {
+    console.log(this.formInfo.value);
+    this.subscription = this.realService.dontAcceptApprove(this.realEstate, this.id).subscribe(data => {
+    });
+    this.subscription = this.realService.sendApprovalMail(this.formInfo.value).subscribe(data => {
+    });
+    this.dialogRef.close();
+    this.ngOnInit();
+  }
+
+  // 5.7.1 Duyệt/Xóa bài đăng..Method Duyệt bài đăng
+  acceptApproval(id) {
+    this.realService.findRealEstateNewById(id).subscribe(data => {
+      console.log(id);
+      this.realEstateNew = data;
+      console.log(this.realEstateNew.customer.email);
+      this.customerEmail = this.realEstateNew.customer.email;
+      this.emailForm = new FormGroup({
+        status: new FormControl('Đã được duyệt'),
+        reason: new FormControl(''),
+        customerEmail: new FormControl(this.customerEmail)
+      });
+      // this.approvalMail.customerEmail = this.realEstateNew.customer.email;
+      this.realService.acceptApprove(this.realEstateNew, id).subscribe(dataApproval => {
+        console.log(this.emailForm.value);
+        this.realService.sendApprovalMail(this.emailForm.value).subscribe();
+        this.dialogRef.close();
+        this.ngOnInit();
+      });
     });
   }
+
 }

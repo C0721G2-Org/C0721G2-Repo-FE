@@ -23,7 +23,7 @@
             <a class="nav-link text-dark hvr-sweep-to-right pleft0"
                [routerLink]="['/employee/list']">
               <i class=" fas fa-users fa-fw"></i>
-            Quản lý nhân viên
+              Quản lý nhân viên
             </a>
           </li>
           <li class="nav-item">
@@ -298,13 +298,14 @@
               <td>{{realOfNew.direction.name}}</td>
               <td style="text-align: right">{{realOfNew.area}}</td>
               <td style="text-align: right">
-                <!--                <button type="button" class="btn btn-primary" [routerLink]="['real-estate-new/detail,id']">Chi tiết</button>-->
                 <a role="button" class="btn btn-primary me-3  justify-content-end "
                    href="real-estate-new/detail/{{realOfNew.id}}">Chi tiết</a>
-                <button class="btn btn-success me-3 text-center  justify-content-end"
-                        (click)="acceptApproval(realOfNew.id)">Duyệt
+                <!--                <button class="btn btn-success me-3 text-center  justify-content-end"-->
+                <!--                        (click)="acceptApproval(realOfNew.id)">Duyệt-->
+                <!--                </button>-->
+                <button class="btn btn-success me-3 text-center  justify-content-end" (click)="openDialogAccept(realOfNew.id)">
+                  Duyệt
                 </button>
-                <!--                <button class="btn btn-danger text-center  justify-content-end"(click)="dontAcceptApproval(realOfNew.id)">Không duyệt</button>-->
                 <button class="btn btn-danger me-3 text-center  justify-content-end" (click)="openDialog(realOfNew.id)">
                   Không duyệt
                 </button>
@@ -313,24 +314,6 @@
             </tr>
             </tbody>
           </table>
-          <!--            Modal notice send mail successfully-->
-          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-               tabindex="-1"
-               aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Thông báo</h5>
-                </div>
-                <div class="modal-body">
-                  Bạn đã gửi mail thành công!
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
           <div *ngIf="message!==''" class=" row fs-5">
             <h4 class="text-danger fst-italic text-center">{{message}}</h4>
           </div>

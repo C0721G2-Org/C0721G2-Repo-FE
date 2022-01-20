@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs';
 import {ApprovalMail} from '../../../model/real/approval-mail';
 import {Router} from '@angular/router';
 import {DeletePostApprovalComponent} from '../delete-post-approval/delete-post-approval.component';
+import {DetailPostApprovalComponent} from '../detail-post-approval/detail-post-approval.component';
 
 
 @Component({
@@ -132,27 +133,26 @@ export class ListPostApprovalComponent implements OnInit {
   }
 
   // 5.7.1 Duyệt/Xóa bài đăng..Method Duyệt bài đăng
-  acceptApproval(id) {
-    this.realService.findRealEstateNewById(id).subscribe(data => {
-      console.log(id);
-      this.realEstateNew = data;
-      console.log(this.realEstateNew.customer.email);
-      this.customerEmail = this.realEstateNew.customer.email;
-      this.emailForm = new FormGroup({
-        status: new FormControl('Đã được duyệt'),
-        // tslint:disable-next-line:max-line-length
-        reason: new FormControl(''),
-        customerEmail: new FormControl(this.customerEmail)
-      });
-      // this.approvalMail.customerEmail = this.realEstateNew.customer.email;
-      this.realService.acceptApprove(this.realEstateNew, id).subscribe(dataApproval => {
-        console.log(this.emailForm.value);
-        this.realService.sendApprovalMail(this.emailForm.value).subscribe();
-        this.ngOnInit();
-        alert('Duyệt bài thành công');
-      });
-    });
-  }
+  // acceptApproval(id) {
+  //   this.realService.findRealEstateNewById(id).subscribe(data => {
+  //     console.log(id);
+  //     this.realEstateNew = data;
+  //     console.log(this.realEstateNew.customer.email);
+  //     this.customerEmail = this.realEstateNew.customer.email;
+  //     this.emailForm = new FormGroup({
+  //       status: new FormControl('Đã được duyệt'),
+  //       reason: new FormControl(''),
+  //       customerEmail: new FormControl(this.customerEmail)
+  //     });
+  //     // this.approvalMail.customerEmail = this.realEstateNew.customer.email;
+  //     this.realService.acceptApprove(this.realEstateNew, id).subscribe(dataApproval => {
+  //       console.log(this.emailForm.value);
+  //       this.realService.sendApprovalMail(this.emailForm.value).subscribe();
+  //       this.ngOnInit();
+  //       alert('Duyệt bài thành công');
+  //     });
+  //   });
+  // }
 
   // 5.7.1 Duyệt/Xóa bài đăng..Method Không Duyệt bài đăng
   // dontAcceptApproval(id) {
@@ -179,6 +179,24 @@ export class ListPostApprovalComponent implements OnInit {
     this.realService.sendApprovalMail(this.emailForm.value).subscribe();
   }
 
+  // 5.7.1 DoanhNV - Dialog nay goi khi Duyet
+  openDialogAccept(id) {
+    console.log(id);
+    const dialogRef = this.dialog.open(DetailPostApprovalComponent, {
+      data: {id},
+      width: '600px',
+      panelClass: 'custom-dialog-tai',
+      // Khi bấm ra ngoài dialog khong bi mat di
+      disableClose: true
+    });
+    console.log('abc');
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.ngOnInit();
+    });
+  }
+
+  // 5.7.1 DoanhNV - Dialog nay duoc goi khi Khong duyet bai dang
   openDialog(id) {
     console.log(id);
     const dialogRef = this.dialog.open(DeletePostApprovalComponent, {
@@ -191,6 +209,7 @@ export class ListPostApprovalComponent implements OnInit {
     console.log('abc');
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.ngOnInit();
     });
   }
 }
