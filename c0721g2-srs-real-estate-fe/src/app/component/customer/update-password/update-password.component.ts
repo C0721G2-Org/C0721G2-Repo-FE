@@ -49,7 +49,7 @@ export class UpdatePasswordComponent implements OnInit {
   initFormEdit() {
     this.appUserForm = new FormGroup({
       usernameChange: new FormControl(this.usernameChange, [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
       newPassword: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
       reNewPassword: new FormControl('', [Validators.required])
     }, {validators: checkPasswordAndRePassword});
